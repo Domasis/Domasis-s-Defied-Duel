@@ -14,7 +14,6 @@ public class EnemyAI : MonoBehaviour, TakesDamage
 
     Color damageOne;
 
-
     //Get and Set originalColor
     public Color GetOriginalColor()
     {
@@ -66,8 +65,8 @@ public class EnemyAI : MonoBehaviour, TakesDamage
     //create timer for flashing when enemy is hit
     IEnumerator flashHit()
     {
-        model.material.color = damageOne; //set material to damage color
+        model.material.color = GetDamageOneColor(); //get material to damage color
         yield return new WaitForSeconds(0.1f); //timer 
-        model.material.color = colorOriginal; //reset color to original color
+        model.material.color = GetOriginalColor(); //reset color to original color
     }
 }
