@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    //CODY JANDES CREATED THIS SCRIPT 
+
     //Look sensitivity
     [SerializeField] int sensitivity;
 

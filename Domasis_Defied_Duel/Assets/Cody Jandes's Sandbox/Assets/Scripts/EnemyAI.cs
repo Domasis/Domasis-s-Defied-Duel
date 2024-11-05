@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour, TakesDamage
 {
+
+    //CODY JANDES CREATED THIS SCRIPT 
+
     [SerializeField] Renderer model;
 
     [SerializeField] int enemyHP;

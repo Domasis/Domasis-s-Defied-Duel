@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //CODY JANDES CREATED THIS SCRIPT 
+
     //Initiale character controller into script
     [SerializeField] CharacterController controller;
 
@@ -137,7 +139,7 @@ public class PlayerController : MonoBehaviour
             //if it does return it can take damage, apply damage
             if (damage != null)
             {
-                damage.takeDamage(shootDamage);
+                damage.TakeSomeDamage(shootDamage);
             }
         }
 
