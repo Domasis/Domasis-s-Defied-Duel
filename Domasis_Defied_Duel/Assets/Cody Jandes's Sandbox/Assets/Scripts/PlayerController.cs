@@ -5,6 +5,9 @@ public class PlayerController : MonoBehaviour
 {
     //CODY JANDES CREATED THIS SCRIPT 
 
+    //ignore player mask 
+    [SerializeField] LayerMask ignoreMask;
+
     //Initiale character controller into script
     [SerializeField] CharacterController controller;
 
@@ -128,7 +131,7 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
 
         //Raycast from camera position, to the forward direction, optional hit to return info, how far it goes
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDistance))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDistance, ~ignoreMask))
         {
             //Whenever we hit something, it will tell us what we hit
             Debug.Log(hit.collider.name);
@@ -142,7 +145,7 @@ public class PlayerController : MonoBehaviour
                 damage.TakeSomeDamage(shootDamage);
             }
         }
-
+        //Wait for shoot to finish 
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
