@@ -61,12 +61,21 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.25f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\HeyCharMovePls.cs" />
+    <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\Interfaces\GetHitSon.cs" />
+    <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\HeyCamMovePls.cs" />
     <Compile Include="Assets\Cody Jandes&apos;s Sandbox\Assets\Scripts\EnemyAI.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\DamageDealer.cs" />
+    <Compile Include="Assets\Movement.cs" />
+    <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\EnemyController.cs" />
     <Compile Include="Assets\Cody Jandes&apos;s Sandbox\Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Cody Jandes&apos;s Sandbox\Assets\Scripts\Interfaces\TakesDamage.cs" />
-    <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\UwU.cs" />
+    <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\PlayerLocator.cs" />
     <Compile Include="Assets\Cody Jandes&apos;s Sandbox\Assets\Scripts\PlayerController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Yoander Ferrer&apos;s Sandbox\Unity Store DLs\ToonSoldiers_WW2_demo\ToonSoldiers_WW2_demo_README.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
