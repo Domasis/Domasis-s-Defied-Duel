@@ -62,6 +62,8 @@ MonoBehaviour:
   shootDamage: 1
   shootRate: 0.5
   shootDistance: 15
+  bullet: {fileID: 6604961131242589871, guid: 38ba56e540a08a146abdabd5c6f2adf4, type: 3}
+  shootPos: {fileID: 0}
 --- !u!143 &5116277474354410553
 CharacterController:
   m_ObjectHideFlags: 0

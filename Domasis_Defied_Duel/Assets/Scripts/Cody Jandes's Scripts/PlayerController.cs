@@ -4,6 +4,8 @@ using UnityEngine;
 
 //CODY JANDES CREATED THIS SCRIPT 
 
+// Small modification made by Yoander Ferrer to support projectile shooting.
+
 public class PlayerController : MonoBehaviour, TakesDamage
 {
     //CODY JANDES CREATED THIS SCRIPT 
@@ -57,6 +59,12 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
     //CHANGE THIS TO GETTER
     int HPOriginal;
+
+    // Editor exposed variable that stores the bullet that the player will fire. - Yoander
+    [SerializeField] GameObject bullet;
+
+    // Editor exposed variable that stores the postion the bullet will fire from. - Yoander
+    [SerializeField] Transform shootPos;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -139,23 +147,27 @@ public class PlayerController : MonoBehaviour, TakesDamage
         isShooting = true;
 
         //what the raycast collided with
-        RaycastHit hit;
+        //RaycastHit hit;
 
-        //Raycast from camera position, to the forward direction, optional hit to return info, how far it goes
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDistance, ~ignoreMask))
-        {
-            //Whenever we hit something, it will tell us what we hit
-            Debug.Log(hit.collider.name);
+        ////Raycast from camera position, to the forward direction, optional hit to return info, how far it goes
+        //if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDistance, ~ignoreMask))
+        //{
+        //    //Whenever we hit something, it will tell us what we hit
+        //    Debug.Log(hit.collider.name);
 
-            //temp variable to return if it can take damage
-            TakesDamage damage = hit.collider.GetComponent<TakesDamage>();
+        //    //temp variable to return if it can take damage
+        //    TakesDamage damage = hit.collider.GetComponent<TakesDamage>();
 
-            //if it does return it can take damage, apply damage
-            if (damage != null)
-            {
-                damage.TakeSomeDamage(shootDamage);
-            }
-        }
+        //    //if it does return it can take damage, apply damage
+        //    if (damage != null)
+        //    {
+        //        damage.TakeSomeDamage(shootDamage);
+        //    }
+        //}
+
+        // Instead of using a raycast, this allows us to fire a projectile right at where our camera is aimed, based on a determined shootPos! - Yoander
+        Instantiate(bullet, shootPos.position, Camera.main.transform.rotation);
+
         //Wait for shoot to finish 
         yield return new WaitForSeconds(shootRate);
         isShooting = false;

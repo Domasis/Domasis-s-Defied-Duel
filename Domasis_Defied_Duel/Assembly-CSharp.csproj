@@ -65,6 +65,7 @@
     <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\HeyCharMovePls.cs" />
     <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\Interfaces\GetHitSon.cs" />
     <Compile Include="Assets\Cody Jandes&apos;s Sandbox\Assets\Scripts\ButtonFunctions.cs" />
+    <Compile Include="Assets\Scripts\Yoander Ferrer&apos;s Scripts\PlayerDamage.cs" />
     <Compile Include="Assets\Scripts\Sheldon Sharp&apos;s Scripts\GameManagerone.cs" />
     <Compile Include="Assets\Scripts\Yoander Ferrer&apos;s Scripts\DestructibleObstacle.cs" />
     <Compile Include="Assets\Scripts\Cody Jandes&apos;s Scripts\PlayerController.cs" />
