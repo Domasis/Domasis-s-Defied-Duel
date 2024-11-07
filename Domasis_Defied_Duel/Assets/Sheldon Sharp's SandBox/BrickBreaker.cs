@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 //Sheldon Sharp/Cody
-public class brickBreaker : MonoBehaviour, ITakesDamage
+public class brickBreaker : MonoBehaviour, IDamage1
 {
 
 
@@ -47,7 +47,7 @@ public class brickBreaker : MonoBehaviour, ITakesDamage
 
     }
 
-    public void TakeSomeDamage(int amount)
+    public void ITakesDamage(int amount)
     {
         //take HP from enemy 
         enemyHP -= amount;

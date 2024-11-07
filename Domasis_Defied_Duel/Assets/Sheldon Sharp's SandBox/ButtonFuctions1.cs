@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 //Sheldon Sharp
-public class ButtonFunctions : MonoBehaviour
+public class ButtonFunctions1 : MonoBehaviour
 {
     // Private fields for the buttons
     [SerializeField] private Button resumeButton;
@@ -57,13 +57,13 @@ public class ButtonFunctions : MonoBehaviour
 
     public void Resume()
     {
-        GameManager.Instance.StateUnpause();
+        GameManager1.instance.StateUnpause();
     }
 
     public void Restart()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
-        GameManager.Instance.StateUnpause();
+        GameManager1.instance.StateUnpause();
     }
 
     public void Quit()

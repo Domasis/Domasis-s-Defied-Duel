@@ -1,6 +1,6 @@
-public interface IDamage
+public interface IDamage1
     //Sheldon Sharp
 {
-    void TakeDamage(int amount);
+    void ITakesDamage(int amount);
 
 }

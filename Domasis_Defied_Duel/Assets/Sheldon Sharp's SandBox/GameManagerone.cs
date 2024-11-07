@@ -5,9 +5,9 @@ using UnityEngine.UI;
 using TMPro;
 //Sheldon Sharp
 
-public class GameManager : MonoBehaviour
+public class GameManager1 : MonoBehaviour
 {
-    public static GameManager Instance; // Singleton Class
+    public static GameManager1 instance; // Singleton Class
 
     [SerializeField] GameObject menuActive, menuPause, menuWin, menuLose;
     [SerializeField] TMP_Text enemyCountText;
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        instance = this;
         timeScaleOrig = Time.timeScale;
         player = GameObject.FindWithTag("Player");
 
