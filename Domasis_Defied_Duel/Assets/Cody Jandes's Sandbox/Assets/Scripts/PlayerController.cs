@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, TakesDamage
 {
     //CODY JANDES CREATED THIS SCRIPT 
 
@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour
 
     //Initiale character controller into script
     [SerializeField] CharacterController controller;
+
+    //Player HP
+    [SerializeField] int HP;
 
     //Player speed
     [SerializeField] int speed;
@@ -49,9 +52,14 @@ public class PlayerController : MonoBehaviour
     //Jump counter
     int jumpCount;
 
+    //CHANGE THIS TO GETTER
+    int HPOriginal;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        HPOriginal = HP;
+        updatePlayerUI();
         
     }
 
@@ -149,6 +157,28 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
-       
- 
+
+    public void TakeSomeDamage(int amount)
+    {
+        HP -= amount;
+
+
+        //I am Dead
+        if (HP <= 0)
+        {
+            GameManager.instance.youLose();
+        }
+    }
+
+    public void updatePlayerUI()
+    {
+        GameManager.instance.playerHPBar.fillAmount = (float)HP / HPOriginal;
+    }
+
+    IEnumerator flashDamage()
+    {
+        GameManager.instance.playerDamageScreen.SetActive(true);
+        yield return new WaitForSeconds(.1f);
+        GameManager.instance.playerDamageScreen.SetActive(false);
+    }
 }

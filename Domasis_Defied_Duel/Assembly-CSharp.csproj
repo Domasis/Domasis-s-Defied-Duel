@@ -71,6 +71,7 @@
     <Compile Include="Assets\Movement.cs" />
     <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\EnemyController.cs" />
     <Compile Include="Assets\Cody Jandes&apos;s Sandbox\Assets\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Cody Jandes&apos;s Sandbox\Assets\Scripts\ThisIsDamage.cs" />
     <Compile Include="Assets\Cody Jandes&apos;s Sandbox\Assets\Scripts\Interfaces\TakesDamage.cs" />
     <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\PlayerLocator.cs" />
     <Compile Include="Assets\Cody Jandes&apos;s Sandbox\Assets\Scripts\GameManager.cs" />

@@ -39,6 +39,7 @@ public class EnemyAI : MonoBehaviour, TakesDamage
     {
         SetOriginalColor(model.material.color);
         SetDamageOneColor(Color.red);
+        GameManager.instance.updateGameGoal(1);
         
     }
 
@@ -58,6 +59,8 @@ public class EnemyAI : MonoBehaviour, TakesDamage
 
         if(enemyHP <= 0)
         {
+            //Update instanc when enemy dies
+            GameManager.instance.updateGameGoal(-1);
             Destroy(gameObject);
         }
     }

@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,13 +10,31 @@ public class GameManager : MonoBehaviour
     //Close down whichever menu is open
     [SerializeField] GameObject menuActive;
 
-    //Pause menu 
-    [SerializeField] GameObject menuPause;
+    //Pause menu , win/lose menu
+    [SerializeField] GameObject menuPause, menuWin, menuLose;
+
+    //Count for enemy 
+    [SerializeField] TMP_Text enemyCountText;
+
+    //Control Health bar
+    public Image playerHPBar;
+
+    //Take damage screen
+    public GameObject playerDamageScreen;
+
+    //Player call
+    public GameObject player;
+
+    //Player script
+    public PlayerController playerScript;
 
     //use getters and setters normally
     public bool isPaused;
 
     float timeScaleOriginal; //use getter and setter here
+
+    //Keep track of enemy count
+    int enemyCount;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -22,6 +42,9 @@ public class GameManager : MonoBehaviour
         //single instance of singleton 
         instance = this;
         timeScaleOriginal = Time.timeScale; //use getter and setter here
+        player = GameObject.FindWithTag("Player"); //allows us to find player
+        playerScript = player.GetComponent<PlayerController>(); //pull player controller after located
+
     }
 
     // Update is called once per frame
@@ -60,7 +83,28 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false; //don't see cursor when paused
         Cursor.lockState = CursorLockMode.Locked; //relock cursor
 
-        menuActive.SetActive(false);
+        menuActive.SetActive(false); //deactivate menu
         menuActive = null; //unassign the active menu
+    }
+
+    public void updateGameGoal (int amount)
+    {
+        enemyCount += amount;
+        enemyCountText.text = enemyCount.ToString("F0");
+
+        if (enemyCount <= 0)
+        {
+            //Pause and pull win menu
+            statePause();
+            menuActive = menuWin;
+            menuActive.SetActive(true);
+        }
+    }
+
+    public void youLose()
+    {
+        statePause();
+        menuActive = menuLose;
+        menuActive.SetActive(true);
     }
 }
