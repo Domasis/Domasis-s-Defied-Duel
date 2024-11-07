@@ -57,10 +57,10 @@ public class DamageDealer : MonoBehaviour
         }
 
         // We create an IDamage instance based on the collider's IDamage component.
-        GetHitSon dmg = other.GetComponent<GetHitSon>();
+        TakesDamage dmg = other.GetComponent<TakesDamage>();
 
         // If this was successful, we call that component's TakeDamage method.
-        dmg?.GetThwacked(damage);
+        dmg?.TakeSomeDamage(damage);
 
 
         // Finally, if the object that triggered this was a bullet, we destroy the game object.

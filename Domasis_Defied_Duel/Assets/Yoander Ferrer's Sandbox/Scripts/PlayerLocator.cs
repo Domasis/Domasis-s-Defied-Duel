@@ -26,12 +26,6 @@ public class PlayerLocator : MonoBehaviour
         PlayerController = Player.GetComponent<PlayerController>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void UpdateEnemyCount(int count)
     {
         EnemyCount += count;
