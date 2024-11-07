@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyController : MonoBehaviour, GetHitSon
+public class EnemyController : MonoBehaviour, TakesDamage
 {
     // Editor exposed variable that stores the enemy HP.
     [SerializeField] int hp;
@@ -77,10 +77,10 @@ public class EnemyController : MonoBehaviour, GetHitSon
     void Start()
     {
         // We set origColor to the model's color.
-        origColor = model.material.color;
+        origColor = Model.material.color;
 
         // We then update the EnemyCount of our PlayerLocator accordingly.
-        PlayerLocator.Instance.UpdateEnemyCount(1);
+        GameManager.instance.updateGameGoal(1);
 
     }
 
@@ -116,7 +116,7 @@ public class EnemyController : MonoBehaviour, GetHitSon
 
 
     // Required interface method that must be implemented as a part of the IDamage interface. Adjusts enemyAI HP, and destroys it if it falls to or below 0.
-    public void GetThwacked(int amt)
+    public void TakeSomeDamage(int amt)
     {
 
         hp -= amt;
@@ -125,7 +125,7 @@ public class EnemyController : MonoBehaviour, GetHitSon
 
         if (hp <= 0)
         {
-            PlayerLocator.Instance.UpdateEnemyCount(-1);
+            GameManager.instance.updateGameGoal(-1);
             Destroy(gameObject);
 
         }    
@@ -169,10 +169,10 @@ public class EnemyController : MonoBehaviour, GetHitSon
         if (playerInRange)
         {
             // We set our playerDir to the Player's transform position, subtracted by the headPos position to get the player's actual location.
-            playerDir = PlayerLocator.Instance.Player.transform.position - headPos.position;
+            playerDir = GameManager.instance.player.transform.position - headPos.position;
 
             // We then set the NavMeshAgent's destination to the player's transform position.
-            agent.SetDestination(PlayerLocator.Instance.Player.transform.position);
+            agent.SetDestination(GameManager.instance.player.transform.position);
 
             // If the agent is within stopping distance:
             if (agent.remainingDistance <= agent.stoppingDistance)
