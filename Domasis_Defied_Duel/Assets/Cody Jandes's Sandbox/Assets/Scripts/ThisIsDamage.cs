@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class damage : MonoBehaviour
+public class ThisIsDamage : MonoBehaviour
 {
     //Create enum for bullet type
     enum damageType { bullet, stationary }
