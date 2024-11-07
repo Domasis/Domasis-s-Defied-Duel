@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//CODY JANDES CREATED THIS SCRIPT 
 public class ThisIsDamage : MonoBehaviour
 {
     //Create enum for bullet type

@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//CODY JANDES CREATED THIS SCRIPT 
+
 public class ButtonFunctions : MonoBehaviour
 {
    public void resume()

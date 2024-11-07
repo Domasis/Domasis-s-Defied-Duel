@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+//CODY JANDES CREATED THIS SCRIPT 
 public class EnemyAI : MonoBehaviour, TakesDamage
 {
 

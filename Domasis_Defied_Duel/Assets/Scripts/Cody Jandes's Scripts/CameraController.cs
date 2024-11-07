@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//CODY JANDES CREATED THIS SCRIPT 
 public class CameraController : MonoBehaviour
 {
     //CODY JANDES CREATED THIS SCRIPT 
