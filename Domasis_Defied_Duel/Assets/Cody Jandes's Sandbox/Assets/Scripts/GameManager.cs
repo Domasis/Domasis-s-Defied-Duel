@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     float timeScaleOriginal; //use getter and setter here
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         //single instance of singleton 
         instance = this;
