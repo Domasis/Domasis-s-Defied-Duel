@@ -19,14 +19,14 @@ public class DamageDealer : MonoBehaviour
     [SerializeField] float speed;
 
     // Editor exposed variable that tracks the life of the projectile before it is destroyed.
-    [SerializeField] int timeTilDestruction;
+    [SerializeField] float timeTilDestruction;
 
     // Properties for each of the above member variables.
     private DamageType Type { get => type; set => type = value; }
     public Rigidbody Rb { get => rb; set => rb = value; }
     public int Damage { get => damage; set => damage = value; }
     public float Speed { get => speed; set => speed = value; }
-    public int TimeTilDestruction { get => timeTilDestruction; set => timeTilDestruction = value; }
+    public float TimeTilDestruction { get => timeTilDestruction; set => timeTilDestruction = value; }
 
 
 
@@ -50,7 +50,7 @@ public class DamageDealer : MonoBehaviour
     // Private method called when the player enters the sphere collision radius.
     private void OnTriggerEnter(Collider other)
     {
-        // If the object that collided with it is also a trigger, we exit early to avoid triggers setting off other triggers.
+        // If the object that collided with it is also a trigger, or is a player, we exit early to avoid triggers setting off other triggers.
         if (other.isTrigger)
         {
             return;
@@ -58,6 +58,8 @@ public class DamageDealer : MonoBehaviour
 
         // We create an IDamage instance based on the collider's IDamage component.
         TakesDamage dmg = other.GetComponent<TakesDamage>();
+
+        Debug.Log(other.gameObject);
 
         // If this was successful, we call that component's TakeDamage method.
         dmg?.TakeSomeDamage(damage);

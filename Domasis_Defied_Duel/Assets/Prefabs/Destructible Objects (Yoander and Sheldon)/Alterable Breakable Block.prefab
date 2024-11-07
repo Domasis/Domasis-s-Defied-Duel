@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4090165434175489804}
   - component: {fileID: 4112087430428902826}
   - component: {fileID: 1228498763241017559}
-  - component: {fileID: 8381653117696912175}
+  - component: {fileID: -422632172081321129}
   - component: {fileID: 3688393671414565466}
   m_Layer: 0
   m_Name: Alterable Breakable Block
@@ -88,8 +88,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8381653117696912175
-MeshCollider:
+--- !u!65 &-422632172081321129
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -106,10 +106,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: fb1d5bb32bee53b4b9bcd4c417e5bdc0, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0.000000074505806, y: 0, z: -0.000000044703484}
 --- !u!114 &3688393671414565466
 MonoBehaviour:
   m_ObjectHideFlags: 0
