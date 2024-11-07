@@ -164,6 +164,8 @@ public class PlayerController : MonoBehaviour, TakesDamage
     public void TakeSomeDamage(int amount)
     {
         HP -= amount;
+        updatePlayerUI();
+        StartCoroutine(flashDamage());
 
 
         //I am Dead
