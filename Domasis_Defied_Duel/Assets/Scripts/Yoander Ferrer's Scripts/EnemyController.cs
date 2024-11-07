@@ -29,6 +29,9 @@ public class EnemyController : MonoBehaviour, TakesDamage
     // Editor exposed GameObject that contains our bullet, which our AI will fire.
     [SerializeField] GameObject bullet;
 
+    // Editor exposed variable that stores the maximum angle at which the AI can "see" our player.
+    [SerializeField] int enemyViewAngle;
+
     // Color instance that represents the original model color of our AI.
     Color origColor;
 
@@ -43,6 +46,9 @@ public class EnemyController : MonoBehaviour, TakesDamage
 
     // Vector3 that stores the player's position in world space.
     Vector3 playerDir;
+
+    // Float that tracks the angle from the AI to the player.
+    float angleToPlayer;
 
     // Properties for the above data members and their respective getters and setters.
     public int Hp { get => hp; set => hp = value; }
@@ -70,7 +76,9 @@ public class EnemyController : MonoBehaviour, TakesDamage
     public bool PlayerInRange { get => playerInRange; set => playerInRange = value; }
 
     public Vector3 PlayerDir { get => playerDir; set => playerDir = value; }
-    
+    public int EnemyViewAngle { get => enemyViewAngle; set => enemyViewAngle = value; }
+    public float AngleToPlayer { get => angleToPlayer; set => angleToPlayer = value; }
+
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -87,9 +95,46 @@ public class EnemyController : MonoBehaviour, TakesDamage
     // Update is called once per frame
     void Update()
     {
+        // If our player is in range of the AI, and the AI can see the player:
+        if (playerInRange && CanSeePlayer())
+        {
 
-        AttackThePlayer();
+        }
 
+
+    }
+
+    bool CanSeePlayer()
+    {
+        // We initialize a local bool that will be returned at the end of the function call.
+        bool playerIsVisible = false;
+
+        // We set our playerDir to the Player's transform position, subtracted by the headPos position to get the player's actual location.
+        playerDir = GameManager.instance.player.transform.position - headPos.position;
+
+        // We set our angle to the player to be the angle between the player's vector3 and the model's forward transform.
+        AngleToPlayer = Vector3.Angle(playerDir, transform.forward);
+
+        // We then initialize a RaycastHit which will store the object it hits.
+        RaycastHit hit;
+
+        // If our raycast hits something:
+        if (Physics.Raycast(headPos.position, playerDir, out hit))
+        {
+            // If the object it hit was a player, and the player is within the AI's view angle:
+            if (hit.collider.CompareTag("Player") && AngleToPlayer <= EnemyViewAngle)
+            {
+                // We attack the player.
+                AttackThePlayer();
+
+                // We then also set playerIsVisible to true.
+                playerIsVisible = true;
+            }
+            
+        }
+
+        // Finally, regardless of the flow of execution, we return our boolean here.
+        return playerIsVisible;
     }
 
     // Private method called when the player enters the sphere collider. Sets our PlayerInRange to true for our AttackThePlayer method.
@@ -165,29 +210,23 @@ public class EnemyController : MonoBehaviour, TakesDamage
     // Method that is called in Update. Locates the player and fires at them if the AI is not shooting them already.
     void AttackThePlayer()
     {
-        // If our player is in range of the enemy's sphere collider:
-        if (playerInRange)
+
+        // We then set the NavMeshAgent's destination to the player's transform position.
+        agent.SetDestination(GameManager.instance.player.transform.position);
+
+        // If the agent is within stopping distance:
+        if (agent.remainingDistance <= agent.stoppingDistance)
         {
-            // We set our playerDir to the Player's transform position, subtracted by the headPos position to get the player's actual location.
-            playerDir = GameManager.instance.player.transform.position - headPos.position;
-
-            // We then set the NavMeshAgent's destination to the player's transform position.
-            agent.SetDestination(GameManager.instance.player.transform.position);
-
-            // If the agent is within stopping distance:
-            if (agent.remainingDistance <= agent.stoppingDistance)
-            {
-                // The AI will continuously turn towards the player in order to shoot them.
-                FaceTarget();
-            }
-
-            // Finally, if the AI isn't shooting, it will call the Shoot() coroutine.
-            if (!IsShooting)
-            {
-                StartCoroutine(Shoot());
-            }
-
-
+            // The AI will continuously turn towards the player in order to shoot them.
+            FaceTarget();
         }
+
+        // Finally, if the AI isn't shooting, it will call the Shoot() coroutine.
+        if (!IsShooting)
+        {
+            StartCoroutine(Shoot());
+        }
+
+
     }
 }

@@ -931,6 +931,7 @@ MonoBehaviour:
   faceTargetSpeed: 5
   shootRate: 1
   bullet: {fileID: 1539372099888597233, guid: a88233b53cfd82c4bbd516ea070ad9be, type: 3}
+  enemyViewAngle: 90
 --- !u!95 &6825333558746993963
 Animator:
   serializedVersion: 7

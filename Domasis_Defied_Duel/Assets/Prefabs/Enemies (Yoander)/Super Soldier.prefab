@@ -177,6 +177,7 @@ MonoBehaviour:
   faceTargetSpeed: 15
   shootRate: 0.4
   bullet: {fileID: 1539372099888597233, guid: a88233b53cfd82c4bbd516ea070ad9be, type: 3}
+  enemyViewAngle: 110
 --- !u!195 &6015695260962877148
 NavMeshAgent:
   m_ObjectHideFlags: 0
