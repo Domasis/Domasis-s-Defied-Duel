@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+//CODY JANDES CREATED THIS SCRIPT 
 public class GameManager : MonoBehaviour
 {
     //Singleton

@@ -1,5 +1,7 @@
 using UnityEngine;
 
+//CODY JANDES CREATED THIS SCRIPT 
+
 public interface TakesDamage 
 {
     //CODY JANDES CREATED THIS SCRIPT 
