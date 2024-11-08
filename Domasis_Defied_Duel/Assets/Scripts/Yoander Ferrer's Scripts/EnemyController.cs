@@ -168,6 +168,8 @@ public class EnemyController : MonoBehaviour, TakesDamage
 
         StartCoroutine(FlashRed());
 
+        agent.SetDestination(GameManager.instance.player.transform.position);
+
         if (hp <= 0)
         {
             GameManager.instance.updateGameGoal(-1);
