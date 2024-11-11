@@ -50,6 +50,12 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
     // Float that tracks the angle from the AI to the player.
     float angleToPlayer;
 
+    // Vector 3 that tracks the original position that the object spawned in at.
+    Vector3 origLocation;
+
+    // Boolean that tracks whether the AI is currently investing a sound.
+    bool isInvestigating;
+
     // Properties for the above data members and their respective getters and setters.
     public int Hp { get => hp; set => hp = value; }
 
@@ -76,8 +82,14 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
     public bool PlayerInRange { get => playerInRange; set => playerInRange = value; }
 
     public Vector3 PlayerDir { get => playerDir; set => playerDir = value; }
+
     public int EnemyViewAngle { get => enemyViewAngle; set => enemyViewAngle = value; }
+
     public float AngleToPlayer { get => angleToPlayer; set => angleToPlayer = value; }
+
+    public Vector3 OrigLocation { get => origLocation; set => origLocation = value; }
+
+    public bool IsInvestigating { get => isInvestigating; set => isInvestigating = value; }
 
 
 
@@ -90,18 +102,20 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
         // We then update the EnemyCount of our PlayerLocator accordingly.
         GameManager.instance.updateGameGoal(1);
 
+        // We set OrigLocation to the original location the object spawned in at.
+        OrigLocation = transform.position;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        // If our player is in range of the AI, and the AI can see the player:
-        if (playerInRange && CanSeePlayer())
-        {
+            // If our player is in range of the AI, and the AI can see the player:
+            if (playerInRange && CanSeePlayer())
+            {
 
-        }
-
-
+            }
+            
     }
 
     bool CanSeePlayer()
@@ -232,10 +246,25 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
 
     }
 
+    IEnumerator GoBack()
+    {
+
+        yield return new WaitForSeconds(5.0f);
+
+        agent.SetDestination(OrigLocation);
+
+    }
+
     public void InvestigateSound(Vector3 invokingLocation)
     {
 
+        IsInvestigating = true;
+
         agent.SetDestination(invokingLocation);
+
+        StartCoroutine(GoBack());
+
+        IsInvestigating = false;
 
     }
 }

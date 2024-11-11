@@ -98,20 +98,22 @@ public class DestructibleObstacle : MonoBehaviour, TakesDamage, MakesSound
 
     public IEnumerator MakeSomeNoise()
     {
-        float currentRadius = SoundSphere.radius;
 
         SoundClip.Play();
 
-        while (soundSphere.radius < sphereMaxRadius)
-        {
-            currentRadius += SphereExpansionRate * Time.deltaTime;
+        Collider[] hitObjects = Physics.OverlapSphere(transform.position, sphereMaxRadius, 7);
 
-            soundSphere.radius = currentRadius;
+        foreach (Collider collider in hitObjects)
+        {
+            Debug.Log(collider.name);
+
+            IHearSounds hearSounds = collider.gameObject.GetComponent<IHearSounds>();
+
+            hearSounds?.InvestigateSound(transform.position);
+
         }
 
         yield return new WaitForSeconds(0.5f);
-
-        SoundSphere.radius = OriginalSphereRadius;
 
     }
 }
