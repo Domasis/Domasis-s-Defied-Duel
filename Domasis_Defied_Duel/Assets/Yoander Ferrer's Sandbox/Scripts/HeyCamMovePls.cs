@@ -11,6 +11,8 @@ public class HeyCamMovePls : MonoBehaviour
     // Editor exposed variable that tracks whether our Y axis should be inverted.
     [SerializeField] bool invertY;
 
+    [SerializeField] AudioListener listener;
+
     // Variable that stores the amount that our camera should be rotated by on the x-axis.
     float rotX;
 

@@ -61,6 +61,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.25f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\MiniMapController.cs" />
     <Compile Include="Assets\Scripts\Sheldon Sharp&apos;s Scripts\BrickBreaker.cs" />
     <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\HeyCharMovePls.cs" />
     <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\Interfaces\GetHitSon.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Assets\Scripts\Yoander Ferrer&apos;s Scripts\PlayerDamage.cs" />
     <Compile Include="Assets\Scripts\Sheldon Sharp&apos;s Scripts\GameManagerone.cs" />
     <Compile Include="Assets\Scripts\Yoander Ferrer&apos;s Scripts\DestructibleObstacle.cs" />
+    <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\ThrowableDistraction.cs" />
     <Compile Include="Assets\Scripts\Cody Jandes&apos;s Scripts\PlayerController.cs" />
     <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\HeyCamMovePls.cs" />
     <Compile Include="Assets\Cody Jandes&apos;s Sandbox\Assets\Scripts\EnemyAI.cs" />
@@ -79,10 +81,13 @@
     <Compile Include="Assets\Scripts\Sheldon Sharp&apos;s Scripts\IDamage1.cs" />
     <Compile Include="Assets\Cody Jandes&apos;s Sandbox\Assets\Scripts\ThisIsDamage.cs" />
     <Compile Include="Assets\Cody Jandes&apos;s Sandbox\Assets\Scripts\Interfaces\TakesDamage.cs" />
+    <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\IHearSounds.cs" />
+    <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\MakesSound.cs" />
     <Compile Include="Assets\Scripts\Cody Jandes&apos;s Scripts\GameManager.cs" />
     <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\PlayerLocator.cs" />
     <Compile Include="Assets\Scripts\Cody Jandes&apos;s Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\Yoander Ferrer&apos;s Scripts\EnemyController.cs" />
+    <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\IterativeEnemyController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
