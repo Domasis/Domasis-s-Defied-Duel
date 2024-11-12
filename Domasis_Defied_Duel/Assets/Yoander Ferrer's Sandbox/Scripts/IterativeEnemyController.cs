@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
@@ -56,6 +57,14 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
     // Boolean that tracks whether the AI is currently investing a sound.
     bool isInvestigating;
 
+    // Boolean that tracks whether the AI is currently on high alert and seeking the player directly.
+    bool isOnHighAlert;
+
+    // Integer that tracks the stopping distance of the AI.
+    float origStoppingDistance;
+
+    bool isGoingBack;
+
     // Properties for the above data members and their respective getters and setters.
     public int Hp { get => hp; set => hp = value; }
 
@@ -91,6 +100,11 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
 
     public bool IsInvestigating { get => isInvestigating; set => isInvestigating = value; }
 
+    public bool IsOnHighAlert { get => isOnHighAlert; set => isOnHighAlert = value; }
+
+    public float OrigStoppingDistance { get => origStoppingDistance; set => origStoppingDistance = value; }
+    public bool IsGoingBack { get => isGoingBack; set => isGoingBack = value; }
+
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -105,16 +119,23 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
         // We set OrigLocation to the original location the object spawned in at.
         OrigLocation = transform.position;
 
+        OrigStoppingDistance = agent.stoppingDistance;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-            // If our player is in range of the AI, and the AI can see the player:
-            if (playerInRange && CanSeePlayer())
-            {
 
-            }
+        if (IsOnHighAlert)
+        {
+            AttackThePlayer();
+        }
+            // If our player is in range of the AI, and the AI can see the player:
+        else if (playerInRange && CanSeePlayer())
+        {
+
+        }
             
     }
 
@@ -248,10 +269,33 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
 
     IEnumerator GoBack()
     {
+        if (!IsGoingBack)
+        {
 
-        yield return new WaitForSeconds(5.0f);
+            IsGoingBack = true;
 
-        agent.SetDestination(OrigLocation);
+            yield return new WaitForSeconds(5.0f);
+
+            agent.speed *= 2;
+
+            agent.SetDestination(OrigLocation);
+
+            
+
+            while (agent.pathPending)
+            {
+                agent.stoppingDistance = 0;
+
+                yield return null;
+
+            }
+
+            agent.speed /= 2;
+
+            IsGoingBack = false;
+
+        }
+        
 
     }
 
@@ -260,11 +304,13 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
 
         IsInvestigating = true;
 
+        agent.stoppingDistance /= 2;
+            
+        agent.stoppingDistance = Mathf.Clamp(agent.stoppingDistance, 4.0f, OrigStoppingDistance);
+
         agent.SetDestination(invokingLocation);
 
         StartCoroutine(GoBack());
-
-        IsInvestigating = false;
 
     }
 }
