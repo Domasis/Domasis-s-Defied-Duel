@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 public interface IHearSounds
 {
 
-    void InvestigateSound(Vector3 invokingLocation);
+    void ReactToSound(Vector3 invokingLocation);
 
 
 }

@@ -16,23 +16,21 @@ public class DestructibleObstacle : MonoBehaviour, TakesDamage, MakesSound
 
     AudioSource dmgAudio;
 
-    SphereCollider soundSphere;
-
     [SerializeField] float sphereMaxRadius;
 
-    float originalSphereRadius;
-
-    [SerializeField] float sphereExpansionRate;
+    [SerializeField] int investigationRange;
 
     public int HP { get => hp; set => hp = value; }
+
     public Color OrigColor { get => origColor; set => origColor = value; }
+
     public Color DmgColor { get => dmgColor; set => dmgColor = value; }
+
     public Renderer Model { get => model; set => model = value; }
+
     public AudioSource SoundClip { get => dmgAudio; set => dmgAudio = value; }
-    public SphereCollider SoundSphere { get => soundSphere; set => soundSphere = value; }
+
     public float SphereMaxRadius { get => sphereMaxRadius; set => sphereMaxRadius = value; }
-    public float OriginalSphereRadius { get => originalSphereRadius; set => originalSphereRadius = Mathf.Clamp(value, 0.01f, 15.0f); }
-    public float SphereExpansionRate { get => sphereExpansionRate; set => sphereExpansionRate = value; }
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -41,11 +39,7 @@ public class DestructibleObstacle : MonoBehaviour, TakesDamage, MakesSound
         
         origColor = Model.material.color;
 
-        SoundSphere = GetComponent<SphereCollider>();
-
         SoundClip = GetComponent<AudioSource>();
-
-        OriginalSphereRadius = SoundSphere.radius;
 
     }
 
@@ -109,7 +103,7 @@ public class DestructibleObstacle : MonoBehaviour, TakesDamage, MakesSound
 
             IHearSounds hearSounds = collider.gameObject.GetComponent<IHearSounds>();
 
-            hearSounds?.InvestigateSound(transform.position);
+            hearSounds?.ReactToSound((Random.insideUnitSphere * investigationRange) + transform.position);
 
         }
 

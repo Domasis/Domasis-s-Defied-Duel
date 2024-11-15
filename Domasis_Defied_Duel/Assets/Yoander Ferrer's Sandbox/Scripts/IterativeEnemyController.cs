@@ -1,4 +1,5 @@
 using System.Collections;
+using System.IO;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -51,11 +52,16 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
     // Float that tracks the angle from the AI to the player.
     float angleToPlayer;
 
+    [SerializeField] float roamTimer;
+
     // Vector 3 that tracks the original position that the object spawned in at.
     Vector3 origLocation;
 
     // Boolean that tracks whether the AI is currently investing a sound.
-    bool isInvestigating;
+    bool iHeardSomething;
+
+    // Boolean that tracks whether the AI was recently hit.
+    bool someoneHitMe;
 
     // Boolean that tracks whether the AI is currently on high alert and seeking the player directly.
     bool isOnHighAlert;
@@ -63,7 +69,18 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
     // Integer that tracks the stopping distance of the AI.
     float origStoppingDistance;
 
-    bool isGoingBack;
+    Vector3 heardSoundLocation;
+
+    // Integer that tracks the range at which the AI will roam.
+    [SerializeField] int roamDistance;
+
+    // Vector3 that specifies the minimum radius that the AI will roam to.
+    [SerializeField] Vector3 minRoamDist;
+
+    // Boolean that tracks whether the AI is roaming.
+    bool isRoaming;
+
+    bool isAttacking;
 
     // Properties for the above data members and their respective getters and setters.
     public int Hp { get => hp; set => hp = value; }
@@ -98,12 +115,19 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
 
     public Vector3 OrigLocation { get => origLocation; set => origLocation = value; }
 
-    public bool IsInvestigating { get => isInvestigating; set => isInvestigating = value; }
+    public bool IHeardSomething { get => iHeardSomething; set => iHeardSomething = value; }
 
     public bool IsOnHighAlert { get => isOnHighAlert; set => isOnHighAlert = value; }
 
     public float OrigStoppingDistance { get => origStoppingDistance; set => origStoppingDistance = value; }
-    public bool IsGoingBack { get => isGoingBack; set => isGoingBack = value; }
+
+    public bool IsRoaming { get => isRoaming; set => isRoaming = value; }
+
+    public float RoamTimer { get => roamTimer; set => roamTimer = value; }
+
+    public Vector3 MinRoamDist { get => minRoamDist; set => minRoamDist = value; }
+    public int RoamDistance { get => roamDistance; set => roamDistance = value; }
+    public bool SomeoneHitMe { get => someoneHitMe; set => someoneHitMe = value; }
 
 
 
@@ -126,15 +150,32 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
     // Update is called once per frame
     void Update()
     {
+        if (!isOnHighAlert)
+        {
+            if (IHeardSomething)
+            {
+                StartCoroutine(InvestigateSound());
+            }
+            // If our player is in range of the AI, and the AI can see the player:
+            else if (playerInRange && !CanSeePlayer())
+            {
+                if (!isRoaming && !IHeardSomething && agent.remainingDistance < 0.05f)
+                {
+                    StartCoroutine(Roam());
+                }
 
-        if (IsOnHighAlert)
+            }
+            else if (!PlayerInRange)
+            {
+                if (!isRoaming && !IHeardSomething && agent.remainingDistance < 0.05f)
+                {
+                    StartCoroutine(Roam());
+                }
+            }
+        }
+        else
         {
             AttackThePlayer();
-        }
-            // If our player is in range of the AI, and the AI can see the player:
-        else if (playerInRange && CanSeePlayer())
-        {
-
         }
             
     }
@@ -151,22 +192,18 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
         AngleToPlayer = Vector3.Angle(playerDir, transform.forward);
 
         // We then initialize a RaycastHit which will store the object it hits.
-        RaycastHit hit;
 
         // If our raycast hits something:
-        if (Physics.Raycast(headPos.position, playerDir, out hit))
+        if (Physics.Raycast(headPos.position, playerDir, out RaycastHit hit) && hit.collider.CompareTag("Player") && AngleToPlayer <= EnemyViewAngle)
         {
-            // If the object it hit was a player, and the player is within the AI's view angle:
-            if (hit.collider.CompareTag("Player") && AngleToPlayer <= EnemyViewAngle)
-            {
-                // We attack the player.
-                AttackThePlayer();
+            // We attack the player.
+            AttackThePlayer();
 
-                // We then also set playerIsVisible to true.
-                playerIsVisible = true;
-            }
-
+            // We then also set playerIsVisible to true.
+            playerIsVisible = true;
         }
+
+        agent.stoppingDistance = playerIsVisible? OrigStoppingDistance : 0;
 
         // Finally, regardless of the flow of execution, we return our boolean here.
         return playerIsVisible;
@@ -190,6 +227,8 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
         if (other.CompareTag("Player"))
         {
             PlayerInRange = false;
+
+            agent.stoppingDistance = 0;
         }
 
     }
@@ -198,8 +237,9 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
     // Required interface method that must be implemented as a part of the IDamage interface. Adjusts enemyAI HP, and destroys it if it falls to or below 0.
     public void TakeSomeDamage(int amt)
     {
-
         hp -= amt;
+
+        SomeoneHitMe = true;
 
         StartCoroutine(FlashRed());
 
@@ -247,7 +287,6 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
     // Method that is called in Update. Locates the player and fires at them if the AI is not shooting them already.
     void AttackThePlayer()
     {
-
         // We then set the NavMeshAgent's destination to the player's transform position.
         agent.SetDestination(GameManager.instance.player.transform.position);
 
@@ -263,54 +302,51 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
         {
             StartCoroutine(Shoot());
         }
+    }
 
+    public void ReactToSound(Vector3 invokingLocation)
+    {
+        IHeardSomething = true;
+        heardSoundLocation = invokingLocation;
 
     }
 
-    IEnumerator GoBack()
+    IEnumerator Roam()
     {
-        if (!IsGoingBack)
+
+        IsRoaming = true;
+
+        yield return new WaitForSeconds(RoamTimer);
+
+        agent.stoppingDistance = 0;
+
+        Vector3 randomDist = MinRoamDist + (Random.insideUnitSphere * RoamDistance);
+
+        randomDist += OrigLocation;
+
+        NavMeshHit hit;
+
+        NavMesh.SamplePosition(randomDist, out hit, RoamDistance, 1);
+
+        agent.SetDestination(hit.position);
+
+        isRoaming = false;
+
+    }
+
+    IEnumerator InvestigateSound()
+    {
+        agent.stoppingDistance = 0;
+
+        agent.SetDestination(heardSoundLocation);
+
+        while (agent.pathPending)
         {
-
-            IsGoingBack = true;
-
-            yield return new WaitForSeconds(5.0f);
-
-            agent.speed *= 2;
-
-            agent.SetDestination(OrigLocation);
-
-            
-
-            while (agent.pathPending)
-            {
-                agent.stoppingDistance = 0;
-
-                yield return null;
-
-            }
-
-            agent.speed /= 2;
-
-            IsGoingBack = false;
-
+            yield return null;
         }
-        
 
-    }
+        yield return new WaitForSeconds(RoamTimer);
 
-    public void InvestigateSound(Vector3 invokingLocation)
-    {
-
-        IsInvestigating = true;
-
-        agent.stoppingDistance /= 2;
-            
-        agent.stoppingDistance = Mathf.Clamp(agent.stoppingDistance, 4.0f, OrigStoppingDistance);
-
-        agent.SetDestination(invokingLocation);
-
-        StartCoroutine(GoBack());
-
+        IHeardSomething = false;
     }
 }

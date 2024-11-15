@@ -47,11 +47,29 @@ public class EnemyController : MonoBehaviour, TakesDamage
     // Vector3 that stores the player's position in world space.
     Vector3 playerDir;
 
+    // Vector3 that stores the AI's location on spawn.
+    Vector3 origLocation;
+
     // Float that tracks the angle from the AI to the player.
     float angleToPlayer;
 
+    // Bool that stores whether our player is currently roaming.
+    bool isRoaming;
+
+    // Int that tracks the current stopping distance of our AI.
+    float origStoppingDistance;
+
+    // Float that tracks the distance that our AI can roam to.
+    [SerializeField] float roamDistance;
+
+    // Int that tracks how long the AI will wait before roaming again.
+    [SerializeField] int roamTimer;
+
+    // Vector3 that ensures that the AI travels at least a certain distance.
+    [SerializeField] Vector3 minRoamDist;
+
     // Properties for the above data members and their respective getters and setters.
-    public int Hp { get => hp; set => hp = value; }
+    public int HP { get => hp; set => hp = value; }
 
     public Renderer Model { get => model; set => model = value; }
 
@@ -76,8 +94,20 @@ public class EnemyController : MonoBehaviour, TakesDamage
     public bool PlayerInRange { get => playerInRange; set => playerInRange = value; }
 
     public Vector3 PlayerDir { get => playerDir; set => playerDir = value; }
+
     public int EnemyViewAngle { get => enemyViewAngle; set => enemyViewAngle = value; }
+
     public float AngleToPlayer { get => angleToPlayer; set => angleToPlayer = value; }
+
+    public bool IsRoaming { get => isRoaming; set => isRoaming = value; }
+
+    public float OrigStoppingDistance { get => origStoppingDistance; set => origStoppingDistance = value; }
+
+    public float RoamDistance { get => roamDistance; set => roamDistance = value; }
+
+    public int RoamTimer { get => roamTimer; set => roamTimer = value; }
+    public Vector3 OrigLocation { get => origLocation; set => origLocation = value; }
+    public Vector3 MinRoamDist { get => minRoamDist; set => minRoamDist = value; }
 
 
 
@@ -90,15 +120,33 @@ public class EnemyController : MonoBehaviour, TakesDamage
         // We then update the EnemyCount of our PlayerLocator accordingly.
         GameManager.instance.updateGameGoal(1);
 
+        // We get the AI's starting position, so that we can always reference it while roaming.
+        OrigLocation = transform.position;
+
+        OrigStoppingDistance = agent.stoppingDistance;
     }
 
     // Update is called once per frame
     void Update()
     {
         // If our player is in range of the AI, and the AI can see the player:
-        if (playerInRange && CanSeePlayer())
+        if (PlayerInRange && !CanSeePlayer())
         {
+            if (!isRoaming && agent.remainingDistance < 0.05f)
+            {
 
+                StartCoroutine(Roam());
+
+            }
+        }
+        else if (!PlayerInRange)
+        {
+            if (!isRoaming && agent.remainingDistance < 0.05f)
+            {
+
+                StartCoroutine(Roam());
+
+            }
         }
 
 
@@ -110,7 +158,7 @@ public class EnemyController : MonoBehaviour, TakesDamage
         bool playerIsVisible = false;
 
         // We set our playerDir to the Player's transform position, subtracted by the headPos position to get the player's actual location.
-        playerDir = GameManager.instance.player.transform.position - headPos.position;
+        PlayerDir = GameManager.instance.player.transform.position - headPos.position;
 
         // We set our angle to the player to be the angle between the player's vector3 and the model's forward transform.
         AngleToPlayer = Vector3.Angle(playerDir, transform.forward);
@@ -119,7 +167,7 @@ public class EnemyController : MonoBehaviour, TakesDamage
         RaycastHit hit;
 
         // If our raycast hits something:
-        if (Physics.Raycast(headPos.position, playerDir, out hit))
+        if (Physics.Raycast(headPos.position, PlayerDir, out hit))
         {
             // If the object it hit was a player, and the player is within the AI's view angle:
             if (hit.collider.CompareTag("Player") && AngleToPlayer <= EnemyViewAngle)
@@ -132,6 +180,8 @@ public class EnemyController : MonoBehaviour, TakesDamage
             }
             
         }
+
+        agent.stoppingDistance = playerIsVisible ? OrigStoppingDistance : 0;
 
         // Finally, regardless of the flow of execution, we return our boolean here.
         return playerIsVisible;
@@ -155,6 +205,8 @@ public class EnemyController : MonoBehaviour, TakesDamage
         if (other.CompareTag("Player"))
         {
             PlayerInRange = false;
+
+            agent.stoppingDistance = 0;
         }
 
     }
@@ -164,13 +216,13 @@ public class EnemyController : MonoBehaviour, TakesDamage
     public void TakeSomeDamage(int amt)
     {
 
-        hp -= amt;
+        HP -= amt;
 
         StartCoroutine(FlashRed());
 
         agent.SetDestination(GameManager.instance.player.transform.position);
 
-        if (hp <= 0)
+        if (HP <= 0)
         {
             GameManager.instance.updateGameGoal(-1);
             Destroy(gameObject);
@@ -229,6 +281,27 @@ public class EnemyController : MonoBehaviour, TakesDamage
             StartCoroutine(Shoot());
         }
 
+
+    }
+
+    IEnumerator Roam()
+    {
+        
+        isRoaming = true;
+
+        yield return new WaitForSeconds(RoamTimer);
+
+        agent.stoppingDistance = 0;
+
+        Vector3 randomLoc = MinRoamDist + (Random.insideUnitSphere * RoamDistance);
+
+        randomLoc += OrigLocation;
+
+        NavMesh.SamplePosition(randomLoc, out NavMeshHit hit, RoamDistance, 1);
+
+        agent.SetDestination(hit.position);
+
+        isRoaming = false;
 
     }
 }

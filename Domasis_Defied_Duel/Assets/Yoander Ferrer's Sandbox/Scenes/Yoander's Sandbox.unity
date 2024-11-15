@@ -277,7 +277,7 @@ Transform:
   m_GameObject: {fileID: 44159644}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -22.25, y: 1.0000001, z: 0.25}
+  m_LocalPosition: {x: -22.25, y: 1.0000001, z: -33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -721,7 +721,6 @@ GameObject:
   - component: {fileID: 1171060061}
   - component: {fileID: 1171060060}
   - component: {fileID: 1171060059}
-  - component: {fileID: 1171060058}
   - component: {fileID: 1171060065}
   m_Layer: 0
   m_Name: TestSoundCube
@@ -730,27 +729,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!135 &1171060058
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1171060057}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.01
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &1171060059
 AudioSource:
   m_ObjectHideFlags: 0
@@ -864,7 +842,7 @@ MonoBehaviour:
   model: {fileID: 1171060062}
   dmgColor: {r: 0.49056602, g: 0.10335816, b: 0.10335816, a: 0}
   sphereMaxRadius: 15
-  sphereExpansionRate: 5
+  investigationRange: 3
 --- !u!65 &1171060061
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1133,7 +1111,6 @@ GameObject:
   - component: {fileID: 8323362330979513185}
   - component: {fileID: 4219812614649188972}
   - component: {fileID: 8791383545468938764}
-  - component: {fileID: 8791383545468938766}
   - component: {fileID: 8791383545468938765}
   m_Layer: 0
   m_Name: Alterable Breakable Block
@@ -1715,7 +1692,7 @@ MonoBehaviour:
   model: {fileID: 1777944019744753889}
   dmgColor: {r: 0.7106918, g: 0.18102519, b: 0.650911, a: 0}
   sphereMaxRadius: 15
-  sphereExpansionRate: 0
+  investigationRange: 3
 --- !u!1 &4357663532956989942
 GameObject:
   m_ObjectHideFlags: 0
@@ -2200,6 +2177,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9135077480855224784, guid: 0e6a51e5fe0f8ab44854b40d165fc5d0, type: 3}
+      propertyPath: roamTimer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135077480855224784, guid: 0e6a51e5fe0f8ab44854b40d165fc5d0, type: 3}
+      propertyPath: roamDistance
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135077480855224784, guid: 0e6a51e5fe0f8ab44854b40d165fc5d0, type: 3}
+      propertyPath: minRoamDist.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135077480855224784, guid: 0e6a51e5fe0f8ab44854b40d165fc5d0, type: 3}
+      propertyPath: minRoamDist.z
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2263,6 +2256,9 @@ MonoBehaviour:
   shootRate: 1
   bullet: {fileID: 1539372099888597233, guid: a88233b53cfd82c4bbd516ea070ad9be, type: 3}
   enemyViewAngle: 90
+  roamTimer: 3
+  roamDistance: 6
+  minRoamDist: {x: 1.25, y: 0, z: 1.25}
 --- !u!1 &7796704976138076853
 GameObject:
   m_ObjectHideFlags: 0
@@ -2524,27 +2520,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!135 &8791383545468938766
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 576745626935579598}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.01
-  m_Center: {x: 0.000000074505806, y: 0, z: -0.000000044703484}
 --- !u!4 &8898496054263280144
 Transform:
   m_ObjectHideFlags: 0
