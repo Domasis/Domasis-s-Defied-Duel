@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2637e8327a8f943bfa59500d24349499
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 288927
+  packageName: Mesh Demolisher
+  packageVersion: 1.0
+  assetPath: Assets/Hanzzz/MeshDemolisher/Examples/MeshFiles/bracket.txt
+  uploadId: 678850

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b109fe30baa6ae24593d0da3972e0bb6
+timeCreated: 1459899521
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 66384
+  packageName: Sci Fi Space Soldier PolygonR
+  packageVersion: 1.2
+  assetPath: Assets/SciFi_Space_Soldier/Resources/Shaders/SpaceStation_PBR_Basic.shader
+  uploadId: 134425

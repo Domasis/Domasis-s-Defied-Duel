@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 564c12625926642c6ba26cb59cbc8e8b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 288927
+  packageName: Mesh Demolisher
+  packageVersion: 1.0
+  assetPath: Assets/Hanzzz/MeshDemolisher/Scripts/Internal/CDT/CDT_Test.cs
+  uploadId: 678850

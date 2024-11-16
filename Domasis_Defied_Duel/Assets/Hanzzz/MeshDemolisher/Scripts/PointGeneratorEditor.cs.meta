@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: e256e3f42659940769ae4d4c38a58e95
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 288927
+  packageName: Mesh Demolisher
+  packageVersion: 1.0
+  assetPath: Assets/Hanzzz/MeshDemolisher/Scripts/PointGeneratorEditor.cs
+  uploadId: 678850

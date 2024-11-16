@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: da074d3d1bbe24e5aaff379d7afab6fa
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 288927
+  packageName: Mesh Demolisher
+  packageVersion: 1.0
+  assetPath: Assets/Hanzzz/MeshDemolisher/Examples/Materials/White.mat
+  uploadId: 678850

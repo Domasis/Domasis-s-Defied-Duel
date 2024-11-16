@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: aee2a250e1bee10409d88b75d5d91304
+timeCreated: 1449065009
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 66384
+  packageName: Sci Fi Space Soldier PolygonR
+  packageVersion: 1.2
+  assetPath: Assets/SciFi_Space_Soldier/Resources/Space_Soldier/Controller&Masks/TorsoMask.mask
+  uploadId: 134425

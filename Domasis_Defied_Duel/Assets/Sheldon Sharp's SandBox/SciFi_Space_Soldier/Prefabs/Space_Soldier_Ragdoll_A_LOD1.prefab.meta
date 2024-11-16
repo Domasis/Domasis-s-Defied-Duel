@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e7eed3cc0a94151498ee5b22d0a590db
+timeCreated: 1472312806
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 66384
+  packageName: Sci Fi Space Soldier PolygonR
+  packageVersion: 1.2
+  assetPath: Assets/SciFi_Space_Soldier/Prefabs/Space_Soldier_Ragdoll_A_LOD1.prefab
+  uploadId: 134425

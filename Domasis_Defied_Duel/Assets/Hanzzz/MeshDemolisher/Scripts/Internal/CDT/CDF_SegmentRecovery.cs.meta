@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: ff0c183aff3354f829919f02875bf94c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 288927
+  packageName: Mesh Demolisher
+  packageVersion: 1.0
+  assetPath: Assets/Hanzzz/MeshDemolisher/Scripts/Internal/CDT/CDF_SegmentRecovery.cs
+  uploadId: 678850

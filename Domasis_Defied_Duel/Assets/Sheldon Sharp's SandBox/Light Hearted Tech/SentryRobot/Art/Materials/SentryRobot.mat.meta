@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e549524c147e3da43880ec9d8a529ffc
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 222899
+  packageName: Sentry Robot
+  packageVersion: 1.0
+  assetPath: Assets/Light Hearted Tech/SentryRobot/Art/Materials/SentryRobot.mat
+  uploadId: 501784

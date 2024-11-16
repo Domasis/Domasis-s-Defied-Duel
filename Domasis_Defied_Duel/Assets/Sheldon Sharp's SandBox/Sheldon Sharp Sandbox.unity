@@ -1509,9 +1509,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31a9dc14394e7834b8e169edf9280066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resumeButton: {fileID: 0}
-  restartButton: {fileID: 0}
-  quitButton: {fileID: 0}
 --- !u!114 &820881525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1762,12 +1759,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6308890855215284490, guid: 8c9c33b77fc83db4abe24742c47e2271, type: 3}
   m_PrefabInstance: {fileID: 1156659784125504809}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &1039288822 stripped
+--- !u!23 &1039288821 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 8758032540782633787, guid: 8c9c33b77fc83db4abe24742c47e2271, type: 3}
   m_PrefabInstance: {fileID: 1156659784125504809}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1039288825
+--- !u!114 &1039288822
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1776,11 +1773,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1039288819}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4de3e7643d11404b81647c41044818b, type: 3}
+  m_Script: {fileID: 11500000, guid: d7ed9173e5d8b7243a21fa879aaeb2a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 1039288822}
-  enemyHP: 3
+  hp: 3
+  model: {fileID: 1039288821}
+  dmgColor: {r: 0.9748427, g: 0.039851885, b: 0.039851885, a: 0}
+  damageSound: {fileID: 8300000, guid: 74198389e177d0948b63ca9a3fb22801, type: 3}
 --- !u!1 &1103973710
 GameObject:
   m_ObjectHideFlags: 0
@@ -1983,9 +1982,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31a9dc14394e7834b8e169edf9280066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resumeButton: {fileID: 0}
-  restartButton: {fileID: 0}
-  quitButton: {fileID: 0}
 --- !u!1 &1195588938
 GameObject:
   m_ObjectHideFlags: 0
@@ -2501,10 +2497,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1579512977}
   - component: {fileID: 1579512976}
+  - component: {fileID: 1579512979}
+  - component: {fileID: 1579512972}
   - component: {fileID: 1579512975}
   - component: {fileID: 1579512974}
-  - component: {fileID: 1579512973}
-  - component: {fileID: 1579512972}
   - component: {fileID: 1579512978}
   m_Layer: 0
   m_Name: Player
@@ -2538,27 +2534,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1579512973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1579512971}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4cbeab7fe8cd2c489581d8259f4c9ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: {fileID: 1579512972}
-  speed: 5
-  sprintMod: 3
-  jumpMax: 2
-  jumpSpeed: 12
-  gravity: 25
-  shootDamage: 1
-  shootRate: 1
-  shootDistance: 150
 --- !u!136 &1579512974
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2674,6 +2649,33 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1579512979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579512971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0e3dcd47d2847a46bd51ccb7d815eee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ignoreMask:
+    serializedVersion: 2
+    m_Bits: 0
+  controller: {fileID: 1579512972}
+  HP: 3
+  speed: 5
+  sprintMod: 3
+  jumpMax: 2
+  jumpSpeed: 12
+  gravity: 28
+  shootDamage: 1
+  shootRate: 1
+  shootDistance: 150
+  bullet: {fileID: 6604961131242589871, guid: 38ba56e540a08a146abdabd5c6f2adf4, type: 3}
+  shootPos: {fileID: 1579512977}
 --- !u!1 &1639410505
 GameObject:
   m_ObjectHideFlags: 0
@@ -3529,9 +3531,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31a9dc14394e7834b8e169edf9280066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resumeButton: {fileID: 0}
-  restartButton: {fileID: 0}
-  quitButton: {fileID: 0}
 --- !u!114 &1987535146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3699,6 +3698,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4062400708807524723, guid: 8c9c33b77fc83db4abe24742c47e2271, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5376680113282817626, guid: 8c9c33b77fc83db4abe24742c47e2271, type: 3}
       propertyPath: HP
       value: 3
@@ -3758,7 +3761,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6308890855215284490, guid: 8c9c33b77fc83db4abe24742c47e2271, type: 3}
       insertIndex: 2
-      addedObject: {fileID: 1039288825}
+      addedObject: {fileID: 1039288822}
   m_SourcePrefab: {fileID: 100100000, guid: 8c9c33b77fc83db4abe24742c47e2271, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

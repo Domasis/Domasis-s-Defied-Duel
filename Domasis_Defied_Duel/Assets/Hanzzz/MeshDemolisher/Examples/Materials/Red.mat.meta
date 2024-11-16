@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5ed93f0da98104a47b3d2c674c3d1c65
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 288927
+  packageName: Mesh Demolisher
+  packageVersion: 1.0
+  assetPath: Assets/Hanzzz/MeshDemolisher/Examples/Materials/Red.mat
+  uploadId: 678850

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5d748914d02d2ce4d89d3ba044ed20f0
+timeCreated: 1467590614
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 66384
+  packageName: Sci Fi Space Soldier PolygonR
+  packageVersion: 1.2
+  assetPath: Assets/SciFi_Space_Soldier/Resources/Space_Soldier/Controller&Masks/Soldier_Controller.controller
+  uploadId: 134425

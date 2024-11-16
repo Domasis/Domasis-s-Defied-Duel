@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 62c06a202debf4802bb81d351be6027f
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 288927
+  packageName: Mesh Demolisher
+  packageVersion: 1.0
+  assetPath: Assets/Hanzzz/MeshDemolisher/Examples/Prefabs/Target_Cube.prefab
+  uploadId: 678850

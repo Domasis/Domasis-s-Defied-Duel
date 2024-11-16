@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: c58fbb2b9c02f4a02ab9663faed15655
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 288927
+  packageName: Mesh Demolisher
+  packageVersion: 1.0
+  assetPath: Assets/Hanzzz/MeshDemolisher/Examples/Scripts/CameraController.cs
+  uploadId: 678850

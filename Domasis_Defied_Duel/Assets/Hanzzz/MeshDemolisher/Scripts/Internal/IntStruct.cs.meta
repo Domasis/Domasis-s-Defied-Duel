@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 4b4cbaef4e5e348438a617f80058b7b9
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 288927
+  packageName: Mesh Demolisher
+  packageVersion: 1.0
+  assetPath: Assets/Hanzzz/MeshDemolisher/Scripts/Internal/IntStruct.cs
+  uploadId: 678850

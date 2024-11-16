@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c1c5161af951d48b180e152b9466e0c6
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 288927
+  packageName: Mesh Demolisher
+  packageVersion: 1.0
+  assetPath: Assets/Hanzzz/MeshDemolisher/Examples/MeshFiles/boeing_part.txt
+  uploadId: 678850

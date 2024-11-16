@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 //CODY JANDES CREATED THIS SCRIPT 
-public class EnemyAI : MonoBehaviour, TakesDamage
+public class enemyAI : MonoBehaviour, TakesDamage
 {
 
     //CODY JANDES CREATED THIS SCRIPT 

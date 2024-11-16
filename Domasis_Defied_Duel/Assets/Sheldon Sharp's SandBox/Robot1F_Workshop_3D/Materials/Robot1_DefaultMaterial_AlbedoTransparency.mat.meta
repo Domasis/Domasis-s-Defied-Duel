@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: eac569fffc8708e45bfc4d3eb33a7055
+timeCreated: 1517483548
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 65726
+  packageName: Robot 1
+  packageVersion: 1.0
+  assetPath: Assets/Robot1F_Workshop_3D/Materials/Robot1_DefaultMaterial_AlbedoTransparency.mat
+  uploadId: 227775

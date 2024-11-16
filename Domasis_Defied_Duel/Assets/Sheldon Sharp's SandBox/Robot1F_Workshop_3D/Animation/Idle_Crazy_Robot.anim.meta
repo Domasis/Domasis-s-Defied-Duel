@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 052e742626ca29446ac38e0cc935b5f0
+timeCreated: 1517551317
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 65726
+  packageName: Robot 1
+  packageVersion: 1.0
+  assetPath: Assets/Robot1F_Workshop_3D/Animation/Idle_Crazy_Robot.anim
+  uploadId: 227775
