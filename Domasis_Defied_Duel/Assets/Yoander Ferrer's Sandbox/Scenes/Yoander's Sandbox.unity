@@ -2259,6 +2259,8 @@ MonoBehaviour:
   roamTimer: 3
   roamDistance: 6
   minRoamDist: {x: 1.25, y: 0, z: 1.25}
+  enemyAnimator: {fileID: 5826324951048787590}
+  animTransitionSpeed: 6
 --- !u!1 &7796704976138076853
 GameObject:
   m_ObjectHideFlags: 0

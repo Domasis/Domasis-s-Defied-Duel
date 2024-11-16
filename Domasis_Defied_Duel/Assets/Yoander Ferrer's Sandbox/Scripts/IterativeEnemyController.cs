@@ -69,6 +69,7 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
     // Integer that tracks the stopping distance of the AI.
     float origStoppingDistance;
 
+    // Vector3 that tracks where the sound generating object is located.
     Vector3 heardSoundLocation;
 
     // Integer that tracks the range at which the AI will roam.
@@ -77,10 +78,18 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
     // Vector3 that specifies the minimum radius that the AI will roam to.
     [SerializeField] Vector3 minRoamDist;
 
+    [SerializeField] Animator enemyAnimator;
+
+    [SerializeField] int animTransitionSpeed;
+
     // Boolean that tracks whether the AI is roaming.
     bool isRoaming;
 
+    // Boolean that tracks whether the AI is attacking.
     bool isAttacking;
+
+    // Temporary Coroutine variable. This allows us to end the specific instance of Roam() called in the event that our AI needs to stop roaming to respond to other things.
+    Coroutine tempRoam;
 
     // Properties for the above data members and their respective getters and setters.
     public int Hp { get => hp; set => hp = value; }
@@ -150,18 +159,31 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
     // Update is called once per frame
     void Update()
     {
+
+        UpdateAnim();
+
         if (!isOnHighAlert)
         {
-            if (IHeardSomething)
+            if (IsRoaming)
             {
-                StartCoroutine(InvestigateSound());
+                if (IHeardSomething)
+                {
+                    StopCoroutine(tempRoam);
+                    IsRoaming = false;
+                    StartCoroutine(InvestigateSound());
+                }
+                else if (SomeoneHitMe)
+                {
+                    StopCoroutine(tempRoam);
+                    IsRoaming = false;
+                }
             }
             // If our player is in range of the AI, and the AI can see the player:
             else if (playerInRange && !CanSeePlayer())
             {
                 if (!isRoaming && !IHeardSomething && agent.remainingDistance < 0.05f)
                 {
-                    StartCoroutine(Roam());
+                    tempRoam = StartCoroutine(Roam());
                 }
 
             }
@@ -169,7 +191,7 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
             {
                 if (!isRoaming && !IHeardSomething && agent.remainingDistance < 0.05f)
                 {
-                    StartCoroutine(Roam());
+                    tempRoam = StartCoroutine(Roam());
                 }
             }
         }
@@ -239,8 +261,6 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
     {
         hp -= amt;
 
-        SomeoneHitMe = true;
-
         StartCoroutine(FlashRed());
 
         agent.SetDestination(GameManager.instance.player.transform.position);
@@ -260,6 +280,12 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
         model.material.color = DmgColor;
         yield return new WaitForSeconds(0.2f);
         model.material.color = OrigColor;
+
+        while (agent.pathPending)
+        {
+            SomeoneHitMe = true;
+            yield return null;
+        }
     }
 
     // IEnumerator called in a coroutine, enables the enemyAI to shoot at the player.
@@ -267,11 +293,19 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
     {
         IsShooting = true;
 
-        Instantiate(bullet, shootPos.position, transform.rotation);
+        enemyAnimator.SetTrigger("Shoot");
 
         yield return new WaitForSeconds(ShootRate);
 
         IsShooting = false;
+    }
+
+    public void CreateBullet()
+    {
+        if (IsShooting)
+        {
+            Instantiate(bullet, shootPos.position, transform.rotation);
+        }
     }
 
     // Method that rotates the enemyAI towards the player. Called when the NavMeshAgent detects that it is within stopping distance.
@@ -332,6 +366,8 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
 
         isRoaming = false;
 
+        tempRoam = null;
+
     }
 
     IEnumerator InvestigateSound()
@@ -348,5 +384,17 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
         yield return new WaitForSeconds(RoamTimer);
 
         IHeardSomething = false;
+    }
+
+    void UpdateAnim()
+    {
+        // We want to know the absolute value of our character's normalized speed for the purposes of our animator, so we get the normalized magnitude of our velocity.
+        float normAgentSpeed = agent.velocity.normalized.magnitude;
+
+        // We also want to know what the current speed of our animation is.
+        float currAnimSpeed = enemyAnimator.GetFloat("Speed");
+
+        // Now that we have that animation, we now update our Animator's speed float with that agent speed, allowing us to accurately blend the animations.
+        enemyAnimator.SetFloat("Speed", Mathf.Lerp(currAnimSpeed, normAgentSpeed, Time.deltaTime * animTransitionSpeed));
     }
 }

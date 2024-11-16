@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+// Enemy Controller fully created and managed by Yoander Ferrer.
 
 public class EnemyController : MonoBehaviour, TakesDamage
 {
@@ -59,6 +60,9 @@ public class EnemyController : MonoBehaviour, TakesDamage
     // Int that tracks the current stopping distance of our AI.
     float origStoppingDistance;
 
+    // Int that tracks the rate at which our animations will transition between.
+    [SerializeField] int animTransitionSpeed;
+
     // Float that tracks the distance that our AI can roam to.
     [SerializeField] float roamDistance;
 
@@ -67,6 +71,12 @@ public class EnemyController : MonoBehaviour, TakesDamage
 
     // Vector3 that ensures that the AI travels at least a certain distance.
     [SerializeField] Vector3 minRoamDist;
+
+    // Animator reference in our code.
+    [SerializeField] Animator enemyAnimator;
+
+    // Coroutine variable that stores our coroutine for our Roam logic while it is active, so that it can be shut down when other conditions are met.
+    Coroutine tempRoam;
 
     // Properties for the above data members and their respective getters and setters.
     public int HP { get => hp; set => hp = value; }
@@ -108,6 +118,9 @@ public class EnemyController : MonoBehaviour, TakesDamage
     public int RoamTimer { get => roamTimer; set => roamTimer = value; }
     public Vector3 OrigLocation { get => origLocation; set => origLocation = value; }
     public Vector3 MinRoamDist { get => minRoamDist; set => minRoamDist = value; }
+    public Coroutine TempRoam { get => tempRoam; set => tempRoam = value; }
+    public Animator EnemyAnimator { get => enemyAnimator; set => enemyAnimator = value; }
+    public int AnimTransitionSpeed { get => animTransitionSpeed; set => animTransitionSpeed = value; }
 
 
 
@@ -129,6 +142,8 @@ public class EnemyController : MonoBehaviour, TakesDamage
     // Update is called once per frame
     void Update()
     {
+        UpdateAnim();
+
         // If our player is in range of the AI, and the AI can see the player:
         if (PlayerInRange && !CanSeePlayer())
         {
@@ -244,11 +259,21 @@ public class EnemyController : MonoBehaviour, TakesDamage
     {
         IsShooting = true;
 
-        Instantiate(bullet, shootPos.position, transform.rotation);
+        enemyAnimator.SetTrigger("Shoot");
 
         yield return new WaitForSeconds(ShootRate);
 
         IsShooting = false;
+    }
+
+    public void CreateBullet()
+    {
+        if (IsShooting)
+        {
+
+            Instantiate(bullet, shootPos.position, transform.rotation);
+
+        }
     }
 
     // Method that rotates the enemyAI towards the player. Called when the NavMeshAgent detects that it is within stopping distance.
@@ -303,5 +328,19 @@ public class EnemyController : MonoBehaviour, TakesDamage
 
         isRoaming = false;
 
+        TempRoam = null;
+
+    }
+
+    void UpdateAnim()
+    {
+        // We want to know the absolute value of our character's normalized speed for the purposes of our animator, so we get the normalized magnitude of our velocity.
+        float normAgentSpeed = agent.velocity.normalized.magnitude;
+
+        // We also want to know what the current speed of our animation is.
+        float currAnimSpeed = EnemyAnimator.GetFloat("Speed");
+
+        // Now that we have that animation, we now update our Animator's speed float with that agent speed, allowing us to accurately blend the animations.
+        EnemyAnimator.SetFloat("Speed", Mathf.Lerp(currAnimSpeed, normAgentSpeed, Time.deltaTime * AnimTransitionSpeed));
     }
 }
