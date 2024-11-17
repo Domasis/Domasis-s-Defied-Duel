@@ -10,37 +10,45 @@ public class PlayerController : MonoBehaviour, TakesDamage
 {
     //CODY JANDES CREATED THIS SCRIPT 
 
+    [Header("-----Components-----")]
     //ignore player mask 
     [SerializeField] LayerMask ignoreMask;
 
     //Initiale character controller into script
     [SerializeField] CharacterController controller;
 
+    [Header("-----Health Stats-----")]
     //Player HP
-    [SerializeField] int HP;
+    [SerializeField] [Range(1,10)] int HP;
 
+
+    [Header("-----Movement-----")]
     //Player speed
-    [SerializeField] int speed;
+    [SerializeField][Range(1, 10)] int speed;
 
     //Sprint Mod
-    [SerializeField] int sprintMod;
+    [SerializeField][Range(1, 5)] int sprintMod;
 
     //Jump counter (max times you can jump
-    [SerializeField] int jumpMax;
+    [SerializeField][Range(1, 3)] int jumpMax;
 
     //How fast we can jump
-    [SerializeField] int jumpSpeed;
+    [SerializeField][Range(5, 15)] int jumpSpeed;
 
     //Setting gravity value
-    [SerializeField] int gravity;
+    [SerializeField][Range(25, 50)] int gravity;
 
+
+    [Header("-----Combat-----")]
     //Shoot damage amount
-    [SerializeField] int shootDamage;
+    [SerializeField][Range(0, 50)] int shootDamage;
 
     //Rate of fire
-    [SerializeField] float shootRate;
+    [SerializeField][Range(0, 1)] float shootRate;
 
-    [SerializeField] int shootDistance;
+    [SerializeField][Range(1, 1000)] int shootDistance;
+
+    [SerializeField] GameObject gunModel;
 
     //Vector3 to move 
     Vector3 movePlayer;
@@ -147,26 +155,28 @@ public class PlayerController : MonoBehaviour, TakesDamage
         isShooting = true;
 
         //what the raycast collided with
-        //RaycastHit hit;
+        RaycastHit hit;
 
-        ////Raycast from camera position, to the forward direction, optional hit to return info, how far it goes
-        //if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDistance, ~ignoreMask))
-        //{
-        //    //Whenever we hit something, it will tell us what we hit
-        //    Debug.Log(hit.collider.name);
+        //Raycast from camera position, to the forward direction, optional hit to return info, how far it goes
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDistance, ~ignoreMask))
+        {
+            //Whenever we hit something, it will tell us what we hit
+            Debug.Log(hit.collider.name);
 
-        //    //temp variable to return if it can take damage
-        //    TakesDamage damage = hit.collider.GetComponent<TakesDamage>();
+           //temp variable to return if it can take damage
+            TakesDamage damage = hit.collider.GetComponent<TakesDamage>();
 
-        //    //if it does return it can take damage, apply damage
-        //    if (damage != null)
-        //    {
-        //        damage.TakeSomeDamage(shootDamage);
-        //    }
-        //}
+            //if it does return it can take damage, apply damage
+            if (damage != null)
+            {
+               damage.TakeSomeDamage(shootDamage);
+            }
+        }
 
         // Instead of using a raycast, this allows us to fire a projectile right at where our camera is aimed, based on a determined shootPos! - Yoander
-        Instantiate(bullet, shootPos.position, Camera.main.transform.rotation);
+        //REMOVED BULLET SO THAT WE CAN USE EFFECTS FROM LECTURE 6
+
+        //Instantiate(bullet, shootPos.position, Camera.main.transform.rotation);
 
         //Wait for shoot to finish 
         yield return new WaitForSeconds(shootRate);
@@ -197,5 +207,16 @@ public class PlayerController : MonoBehaviour, TakesDamage
         GameManager.instance.playerDamageScreen.SetActive(true);
         yield return new WaitForSeconds(.1f);
         GameManager.instance.playerDamageScreen.SetActive(false);
+    }
+
+    public void getGunStats(GunStats gun)
+    {
+        //Transfer stats to player (Reciever)
+        shootDamage = gun.shootDamage;
+        shootDistance = gun.shootDistance;
+        shootRate = gun.shootRate;
+
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gun.gunModel.GetComponent<MeshFilter>().sharedMesh; //set the model on the player 
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.gunModel.GetComponent<MeshRenderer>().sharedMaterial; //rendered passed next
     }
 }
