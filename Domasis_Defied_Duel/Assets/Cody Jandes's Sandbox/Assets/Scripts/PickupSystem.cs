@@ -14,7 +14,10 @@ public class PickupSystem : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        if(type == pickupType.gun)
+        {
+            gun.ammoCurrent = gun.ammoMax;
+        }
     }
 
     private void OnTriggerEnter(Collider other)

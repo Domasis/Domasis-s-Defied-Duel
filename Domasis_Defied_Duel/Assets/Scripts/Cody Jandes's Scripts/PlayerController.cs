@@ -54,6 +54,8 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
     [SerializeField] GameObject gunModel;
 
+    [SerializeField] GameObject muzzleFlash;
+
     //Vector3 to move 
     Vector3 movePlayer;
 
@@ -99,6 +101,7 @@ public class PlayerController : MonoBehaviour, TakesDamage
         {
             movement();
             selectGun();
+            reload();
         }
 
         sprint();
@@ -132,7 +135,7 @@ public class PlayerController : MonoBehaviour, TakesDamage
         playerVelocity.y -= gravity * Time.deltaTime; //handle gravity into jump pulling down
 
         //if we left button click and we are not shooting
-        if(Input.GetButton("Fire1") && !isShooting)
+        if(Input.GetButton("Fire1") && gunList.Count > 0 && gunList[selectedGun].ammoCurrent > 0 && !isShooting)
         {
             StartCoroutine(shoot()); //how to call ienumerator or coroutine
         }
@@ -166,6 +169,10 @@ public class PlayerController : MonoBehaviour, TakesDamage
     IEnumerator shoot()
     {
         isShooting = true;
+        gunList[selectedGun].ammoCurrent--;
+
+        //Muzzle flash
+        StartCoroutine(flashMuzzle());
 
         //what the raycast collided with
         RaycastHit hit;
@@ -191,9 +198,19 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
         //Instantiate(bullet, shootPos.position, Camera.main.transform.rotation);
 
+        //Add hit effect for gun
+        Instantiate(gunList[selectedGun].hitEffect, hit.point, Quaternion.identity);
+
         //Wait for shoot to finish 
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
+    }
+
+    IEnumerator flashMuzzle()
+    {
+        muzzleFlash.SetActive(true);
+        yield return new WaitForSeconds(0.15f);
+        muzzleFlash.SetActive(false);
     }
 
     public void TakeSomeDamage(int amount)
@@ -263,5 +280,14 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].gunModel.GetComponent<MeshFilter>().sharedMesh; //set the model on the player 
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[selectedGun].gunModel.GetComponent<MeshRenderer>().sharedMaterial; //rendered passed next
+    }
+
+    void reload()
+    {
+        if(Input.GetButtonDown("Reload") && gunList.Count > 0)
+        {
+            //relaod to refill the gun 
+            gunList[selectedGun].ammoCurrent = gunList[selectedGun].ammoMax;
+        }
     }
 }
