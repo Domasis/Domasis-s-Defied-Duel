@@ -1,4 +1,6 @@
+using NUnit.Framework;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -10,37 +12,49 @@ public class PlayerController : MonoBehaviour, TakesDamage
 {
     //CODY JANDES CREATED THIS SCRIPT 
 
+    [Header("-----Components-----")]
     //ignore player mask 
     [SerializeField] LayerMask ignoreMask;
 
     //Initiale character controller into script
     [SerializeField] CharacterController controller;
 
+    [Header("-----Health Stats-----")]
     //Player HP
-    [SerializeField] int HP;
+    [SerializeField] [UnityEngine.Range(1,10)] int HP;
 
+
+    [Header("-----Movement-----")]
     //Player speed
-    [SerializeField] int speed;
+    [SerializeField][UnityEngine.Range(1, 10)] int speed;
 
     //Sprint Mod
-    [SerializeField] int sprintMod;
+    [SerializeField][UnityEngine.Range(1, 5)] int sprintMod;
 
     //Jump counter (max times you can jump
-    [SerializeField] int jumpMax;
+    [SerializeField][UnityEngine.Range(1, 3)] int jumpMax;
 
     //How fast we can jump
-    [SerializeField] int jumpSpeed;
+    [SerializeField][UnityEngine.Range(5, 15)] int jumpSpeed;
 
     //Setting gravity value
-    [SerializeField] int gravity;
+    [SerializeField][UnityEngine.Range(25, 50)] int gravity;
 
+
+    [Header("-----Combat-----")]
+
+    [SerializeField] List<GunStats> gunList = new List<GunStats>();
     //Shoot damage amount
-    [SerializeField] int shootDamage;
+    [SerializeField][UnityEngine.Range(0, 50)] int shootDamage;
 
     //Rate of fire
-    [SerializeField] float shootRate;
+    [SerializeField][UnityEngine.Range(0, 1)] float shootRate;
 
-    [SerializeField] int shootDistance;
+    [SerializeField][UnityEngine.Range(1, 1000)] int shootDistance;
+
+    [SerializeField] GameObject gunModel;
+
+    [SerializeField] GameObject muzzleFlash;
 
     //Vector3 to move 
     Vector3 movePlayer;
@@ -59,6 +73,9 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
     //CHANGE THIS TO GETTER
     int HPOriginal;
+
+    //Int to keep track of where we are in list
+    int selectedGun;
 
     // Editor exposed variable that stores the bullet that the player will fire. - Yoander
     [SerializeField] GameObject bullet;
@@ -79,7 +96,14 @@ public class PlayerController : MonoBehaviour, TakesDamage
     {
 
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.red);
-        movement();
+
+        if(!GameManager.instance.isPaused)
+        {
+            movement();
+            selectGun();
+            reload();
+        }
+
         sprint();
         
     }
@@ -111,7 +135,7 @@ public class PlayerController : MonoBehaviour, TakesDamage
         playerVelocity.y -= gravity * Time.deltaTime; //handle gravity into jump pulling down
 
         //if we left button click and we are not shooting
-        if(Input.GetButton("Fire1") && !isShooting)
+        if(Input.GetButton("Fire1") && gunList.Count > 0 && gunList[selectedGun].ammoCurrent > 0 && !isShooting)
         {
             StartCoroutine(shoot()); //how to call ienumerator or coroutine
         }
@@ -145,32 +169,48 @@ public class PlayerController : MonoBehaviour, TakesDamage
     IEnumerator shoot()
     {
         isShooting = true;
+        gunList[selectedGun].ammoCurrent--;
+
+        //Muzzle flash
+        StartCoroutine(flashMuzzle());
 
         //what the raycast collided with
-        //RaycastHit hit;
+        RaycastHit hit;
 
-        ////Raycast from camera position, to the forward direction, optional hit to return info, how far it goes
-        //if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDistance, ~ignoreMask))
-        //{
-        //    //Whenever we hit something, it will tell us what we hit
-        //    Debug.Log(hit.collider.name);
+        //Raycast from camera position, to the forward direction, optional hit to return info, how far it goes
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDistance, ~ignoreMask))
+        {
+            //Whenever we hit something, it will tell us what we hit
+            Debug.Log(hit.collider.name);
 
-        //    //temp variable to return if it can take damage
-        //    TakesDamage damage = hit.collider.GetComponent<TakesDamage>();
+           //temp variable to return if it can take damage
+            TakesDamage damage = hit.collider.GetComponent<TakesDamage>();
 
-        //    //if it does return it can take damage, apply damage
-        //    if (damage != null)
-        //    {
-        //        damage.TakeSomeDamage(shootDamage);
-        //    }
-        //}
+            //if it does return it can take damage, apply damage
+            if (damage != null)
+            {
+               damage.TakeSomeDamage(shootDamage);
+            }
+        }
 
         // Instead of using a raycast, this allows us to fire a projectile right at where our camera is aimed, based on a determined shootPos! - Yoander
-        Instantiate(bullet, shootPos.position, Camera.main.transform.rotation);
+        //REMOVED BULLET SO THAT WE CAN USE EFFECTS FROM LECTURE 6
+
+        //Instantiate(bullet, shootPos.position, Camera.main.transform.rotation);
+
+        //Add hit effect for gun
+        Instantiate(gunList[selectedGun].hitEffect, hit.point, Quaternion.identity);
 
         //Wait for shoot to finish 
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
+    }
+
+    IEnumerator flashMuzzle()
+    {
+        muzzleFlash.SetActive(true);
+        yield return new WaitForSeconds(0.15f);
+        muzzleFlash.SetActive(false);
     }
 
     public void TakeSomeDamage(int amount)
@@ -197,5 +237,57 @@ public class PlayerController : MonoBehaviour, TakesDamage
         GameManager.instance.playerDamageScreen.SetActive(true);
         yield return new WaitForSeconds(.1f);
         GameManager.instance.playerDamageScreen.SetActive(false);
+    }
+
+    public void getGunStats(GunStats gun)
+    {
+
+        //Add gun to list
+        gunList.Add(gun);
+
+        //when we pick up a gun its now not at the end
+        selectedGun = gunList.Count - 1;
+
+        //Transfer stats to player (Reciever)
+        shootDamage = gun.shootDamage;
+        shootDistance = gun.shootDistance;
+        shootRate = gun.shootRate;
+
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gun.gunModel.GetComponent<MeshFilter>().sharedMesh; //set the model on the player 
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.gunModel.GetComponent<MeshRenderer>().sharedMaterial; //rendered passed next
+    }
+
+    void selectGun()
+    {
+        //use scrollwheel to flip through guns
+        if(Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count -1)
+        {
+            selectedGun++;
+            changeGun();
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedGun > 0)
+        {
+            selectedGun--;
+            changeGun();
+        }
+    }
+
+    void changeGun()
+    {
+        shootDamage = gunList[selectedGun].shootDamage;
+        shootDistance = gunList[selectedGun].shootDistance;
+        shootRate = gunList[selectedGun].shootRate;
+
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].gunModel.GetComponent<MeshFilter>().sharedMesh; //set the model on the player 
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[selectedGun].gunModel.GetComponent<MeshRenderer>().sharedMaterial; //rendered passed next
+    }
+
+    void reload()
+    {
+        if(Input.GetButtonDown("Reload") && gunList.Count > 0)
+        {
+            //relaod to refill the gun 
+            gunList[selectedGun].ammoCurrent = gunList[selectedGun].ammoMax;
+        }
     }
 }

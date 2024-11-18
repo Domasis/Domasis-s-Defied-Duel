@@ -6,10 +6,10 @@ public class CameraController : MonoBehaviour
     //CODY JANDES CREATED THIS SCRIPT 
 
     //Look sensitivity
-    [SerializeField] int sensitivity;
+    [SerializeField] [Range(1,500)] int sensitivity;
 
     //Lovking the vertical min and max
-    [SerializeField] int lockVertMin, lockVertMax;
+    [SerializeField] [Range(-180,180)] int lockVertMin, lockVertMax;
 
     //Look inversion
     [SerializeField] bool invertY;
