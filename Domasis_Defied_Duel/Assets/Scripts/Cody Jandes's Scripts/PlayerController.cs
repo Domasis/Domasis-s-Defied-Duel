@@ -1,4 +1,6 @@
+using NUnit.Framework;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -19,34 +21,36 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
     [Header("-----Health Stats-----")]
     //Player HP
-    [SerializeField] [Range(1,10)] int HP;
+    [SerializeField] [UnityEngine.Range(1,10)] int HP;
 
 
     [Header("-----Movement-----")]
     //Player speed
-    [SerializeField][Range(1, 10)] int speed;
+    [SerializeField][UnityEngine.Range(1, 10)] int speed;
 
     //Sprint Mod
-    [SerializeField][Range(1, 5)] int sprintMod;
+    [SerializeField][UnityEngine.Range(1, 5)] int sprintMod;
 
     //Jump counter (max times you can jump
-    [SerializeField][Range(1, 3)] int jumpMax;
+    [SerializeField][UnityEngine.Range(1, 3)] int jumpMax;
 
     //How fast we can jump
-    [SerializeField][Range(5, 15)] int jumpSpeed;
+    [SerializeField][UnityEngine.Range(5, 15)] int jumpSpeed;
 
     //Setting gravity value
-    [SerializeField][Range(25, 50)] int gravity;
+    [SerializeField][UnityEngine.Range(25, 50)] int gravity;
 
 
     [Header("-----Combat-----")]
+
+    [SerializeField] List<GunStats> gunList = new List<GunStats>();
     //Shoot damage amount
-    [SerializeField][Range(0, 50)] int shootDamage;
+    [SerializeField][UnityEngine.Range(0, 50)] int shootDamage;
 
     //Rate of fire
-    [SerializeField][Range(0, 1)] float shootRate;
+    [SerializeField][UnityEngine.Range(0, 1)] float shootRate;
 
-    [SerializeField][Range(1, 1000)] int shootDistance;
+    [SerializeField][UnityEngine.Range(1, 1000)] int shootDistance;
 
     [SerializeField] GameObject gunModel;
 
@@ -68,6 +72,9 @@ public class PlayerController : MonoBehaviour, TakesDamage
     //CHANGE THIS TO GETTER
     int HPOriginal;
 
+    //Int to keep track of where we are in list
+    int selectedGun;
+
     // Editor exposed variable that stores the bullet that the player will fire. - Yoander
     [SerializeField] GameObject bullet;
 
@@ -87,7 +94,13 @@ public class PlayerController : MonoBehaviour, TakesDamage
     {
 
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.red);
-        movement();
+
+        if(!GameManager.instance.isPaused)
+        {
+            movement();
+            selectGun();
+        }
+
         sprint();
         
     }
@@ -211,6 +224,13 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
     public void getGunStats(GunStats gun)
     {
+
+        //Add gun to list
+        gunList.Add(gun);
+
+        //when we pick up a gun its now not at the end
+        selectedGun = gunList.Count - 1;
+
         //Transfer stats to player (Reciever)
         shootDamage = gun.shootDamage;
         shootDistance = gun.shootDistance;
@@ -218,5 +238,30 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gun.gunModel.GetComponent<MeshFilter>().sharedMesh; //set the model on the player 
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.gunModel.GetComponent<MeshRenderer>().sharedMaterial; //rendered passed next
+    }
+
+    void selectGun()
+    {
+        //use scrollwheel to flip through guns
+        if(Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count -1)
+        {
+            selectedGun++;
+            changeGun();
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedGun > 0)
+        {
+            selectedGun--;
+            changeGun();
+        }
+    }
+
+    void changeGun()
+    {
+        shootDamage = gunList[selectedGun].shootDamage;
+        shootDistance = gunList[selectedGun].shootDistance;
+        shootRate = gunList[selectedGun].shootRate;
+
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].gunModel.GetComponent<MeshFilter>().sharedMesh; //set the model on the player 
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[selectedGun].gunModel.GetComponent<MeshRenderer>().sharedMaterial; //rendered passed next
     }
 }
