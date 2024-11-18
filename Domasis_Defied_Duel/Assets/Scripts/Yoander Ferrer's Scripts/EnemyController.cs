@@ -6,8 +6,7 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour, TakesDamage
 {
-    // Editor exposed variable that stores the enemy HP.
-    [SerializeField] int hp;
+    [Header("----- Enemy Models and Transforms -----")]
 
     // Editor exposed variable that stores the model of the enemy being hit. Needed to flash damage.
     [SerializeField] Renderer model;
@@ -21,17 +20,40 @@ public class EnemyController : MonoBehaviour, TakesDamage
     // Editor exposed Transform that tracks the head of our enemy, important for rotating the model.
     [SerializeField] Transform headPos;
 
-    // Editor exposed int that tracks the speed at which our enemy rotates towards the player.
-    [SerializeField] int faceTargetSpeed;
+    [Header("----- AI Enemy Stats -----")]
+    // Editor exposed variable that stores the enemy HP.
+    [SerializeField] [Range(3, 20)] int hp;
 
     // Editor exposed float that tracks the AI's rate of fire.
-    [SerializeField] float shootRate;
+    [SerializeField] [Range(0.6f, 2.0f)] float shootRate;
+
+    // Editor exposed variable that stores the maximum angle at which the AI can "see" our player.
+    [SerializeField][Range(75, 160)] int enemyViewAngle;
 
     // Editor exposed GameObject that contains our bullet, which our AI will fire.
     [SerializeField] GameObject bullet;
 
-    // Editor exposed variable that stores the maximum angle at which the AI can "see" our player.
-    [SerializeField] int enemyViewAngle;
+    [Header("----- AI Roam Settings -----")]
+
+    // Editor exposed int that tracks the speed at which our enemy rotates towards the player.
+    [SerializeField][Range(2, 15)] int faceTargetSpeed;
+
+    // Float that tracks the distance that our AI can roam to.
+    [SerializeField] float roamDistance;
+
+    // Int that tracks how long the AI will wait before roaming again.
+    [SerializeField] int roamTimer;
+
+    // Vector3 that ensures that the AI travels at least a certain distance.
+    [SerializeField] Vector3 minRoamDist;
+
+    [Header("----- Animation Settings -----")]
+
+    // Int that tracks the rate at which our animations will transition between.
+    [SerializeField] int animTransitionSpeed;
+
+    // Animator reference in our code. Required to access modifiers to animations.
+    [SerializeField] Animator enemyAnimator;
 
     // Color instance that represents the original model color of our AI.
     Color origColor;
@@ -59,21 +81,6 @@ public class EnemyController : MonoBehaviour, TakesDamage
 
     // Int that tracks the current stopping distance of our AI.
     float origStoppingDistance;
-
-    // Int that tracks the rate at which our animations will transition between.
-    [SerializeField] int animTransitionSpeed;
-
-    // Float that tracks the distance that our AI can roam to.
-    [SerializeField] float roamDistance;
-
-    // Int that tracks how long the AI will wait before roaming again.
-    [SerializeField] int roamTimer;
-
-    // Vector3 that ensures that the AI travels at least a certain distance.
-    [SerializeField] Vector3 minRoamDist;
-
-    // Animator reference in our code.
-    [SerializeField] Animator enemyAnimator;
 
     // Coroutine variable that stores our coroutine for our Roam logic while it is active, so that it can be shut down when other conditions are met.
     Coroutine tempRoam;
@@ -116,10 +123,14 @@ public class EnemyController : MonoBehaviour, TakesDamage
     public float RoamDistance { get => roamDistance; set => roamDistance = value; }
 
     public int RoamTimer { get => roamTimer; set => roamTimer = value; }
+
     public Vector3 OrigLocation { get => origLocation; set => origLocation = value; }
     public Vector3 MinRoamDist { get => minRoamDist; set => minRoamDist = value; }
+
     public Coroutine TempRoam { get => tempRoam; set => tempRoam = value; }
+
     public Animator EnemyAnimator { get => enemyAnimator; set => enemyAnimator = value; }
+
     public int AnimTransitionSpeed { get => animTransitionSpeed; set => animTransitionSpeed = value; }
 
 

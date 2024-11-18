@@ -169,15 +169,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61b5d3dd62b63bb4094de7f11e35ef06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 15
   model: {fileID: 8285429727231952333}
   agent: {fileID: 6015695260962877148}
   shootPos: {fileID: 544470563460800691}
   headPos: {fileID: 582627372789327119}
-  faceTargetSpeed: 15
-  shootRate: 0.4
-  bullet: {fileID: 1539372099888597233, guid: a88233b53cfd82c4bbd516ea070ad9be, type: 3}
+  hp: 15
+  shootRate: 0.6
   enemyViewAngle: 110
+  bullet: {fileID: 1539372099888597233, guid: a88233b53cfd82c4bbd516ea070ad9be, type: 3}
+  faceTargetSpeed: 15
+  roamDistance: 8
+  roamTimer: 2
+  minRoamDist: {x: 1, y: 0, z: 1}
+  animTransitionSpeed: 6
+  enemyAnimator: {fileID: 1769671857279918614}
 --- !u!195 &6015695260962877148
 NavMeshAgent:
   m_ObjectHideFlags: 0

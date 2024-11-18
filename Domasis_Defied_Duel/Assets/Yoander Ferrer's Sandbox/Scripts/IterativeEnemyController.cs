@@ -34,6 +34,9 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
     // Editor exposed variable that stores the maximum angle at which the AI can "see" our player.
     [SerializeField] int enemyViewAngle;
 
+    // Float that stores the timer on which enemies will roam.
+    [SerializeField] float roamTimer;
+
     // Color instance that represents the original model color of our AI.
     Color origColor;
 
@@ -51,8 +54,6 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
 
     // Float that tracks the angle from the AI to the player.
     float angleToPlayer;
-
-    [SerializeField] float roamTimer;
 
     // Vector 3 that tracks the original position that the object spawned in at.
     Vector3 origLocation;
@@ -78,15 +79,14 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
     // Vector3 that specifies the minimum radius that the AI will roam to.
     [SerializeField] Vector3 minRoamDist;
 
+    // Animator reference in our code. Required to access modifiers to animations.
     [SerializeField] Animator enemyAnimator;
 
+    // Integer that tracks the rate at which animations transition between states.
     [SerializeField] int animTransitionSpeed;
 
     // Boolean that tracks whether the AI is roaming.
     bool isRoaming;
-
-    // Boolean that tracks whether the AI is attacking.
-    bool isAttacking;
 
     // Temporary Coroutine variable. This allows us to end the specific instance of Roam() called in the event that our AI needs to stop roaming to respond to other things.
     Coroutine tempRoam;
@@ -135,7 +135,9 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
     public float RoamTimer { get => roamTimer; set => roamTimer = value; }
 
     public Vector3 MinRoamDist { get => minRoamDist; set => minRoamDist = value; }
+
     public int RoamDistance { get => roamDistance; set => roamDistance = value; }
+
     public bool SomeoneHitMe { get => someoneHitMe; set => someoneHitMe = value; }
 
 
