@@ -1,10 +1,11 @@
 using System.Collections;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 // Enemy Controller fully created and managed by Yoander Ferrer.
 
-public class EnemyController : MonoBehaviour, TakesDamage
+public class EnemyController : MonoBehaviour, TakesDamage, IHearSounds
 {
     [Header("----- Enemy Models and Transforms -----")]
 
@@ -67,20 +68,32 @@ public class EnemyController : MonoBehaviour, TakesDamage
     // Boolean that tracks when the player is in range of the enemy.
     bool playerInRange;
 
+    // Bool that stores whether our player is currently roaming.
+    bool isRoaming;
+
+    // Boolean that tracks whether the AI is currently investigating a sound.
+    bool iHeardSomething;
+
+    // Boolean that tracks whether is reacting to taking player damage.
+    bool someoneHitMe;
+
+    // Boolean that tracks whether the enemy is on high alert, overriding their normal functionality.
+    bool onHighAlert;
+
+    // Float that tracks the angle from the AI to the player.
+    float angleToPlayer;
+
+    // Int that tracks the current stopping distance of our AI.
+    float origStoppingDistance;
+
     // Vector3 that stores the player's position in world space.
     Vector3 playerDir;
 
     // Vector3 that stores the AI's location on spawn.
     Vector3 origLocation;
 
-    // Float that tracks the angle from the AI to the player.
-    float angleToPlayer;
-
-    // Bool that stores whether our player is currently roaming.
-    bool isRoaming;
-
-    // Int that tracks the current stopping distance of our AI.
-    float origStoppingDistance;
+    // Vector3 that stores the location from which sound was heard.
+    Vector3 heardSoundLocation;
 
     // Coroutine variable that stores our coroutine for our Roam logic while it is active, so that it can be shut down when other conditions are met.
     Coroutine tempRoam;
@@ -133,6 +146,14 @@ public class EnemyController : MonoBehaviour, TakesDamage
 
     public int AnimTransitionSpeed { get => animTransitionSpeed; set => animTransitionSpeed = value; }
 
+    public bool IHeardSomething { get => iHeardSomething; set => iHeardSomething = value; }
+
+    public bool SomeoneHitMe { get => someoneHitMe; set => someoneHitMe = value; }
+
+    public bool OnHighAlert { get => onHighAlert; set => onHighAlert = value; }
+
+    public Vector3 HeardSoundLocation { get => heardSoundLocation; set => heardSoundLocation = value; }
+
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -153,27 +174,11 @@ public class EnemyController : MonoBehaviour, TakesDamage
     // Update is called once per frame
     void Update()
     {
+        // Every frame, we want to update the AI's animation.
         UpdateAnim();
 
-        // If our player is in range of the AI, and the AI can see the player:
-        if (PlayerInRange && !CanSeePlayer())
-        {
-            if (!isRoaming && agent.remainingDistance < 0.05f)
-            {
-
-                StartCoroutine(Roam());
-
-            }
-        }
-        else if (!PlayerInRange)
-        {
-            if (!isRoaming && agent.remainingDistance < 0.05f)
-            {
-
-                StartCoroutine(Roam());
-
-            }
-        }
+        // We then call our patrol logic, which handles roaming, investigating, and attacking the player, should the AI spot them.
+        PatrolTheArea();
 
 
     }
@@ -237,6 +242,57 @@ public class EnemyController : MonoBehaviour, TakesDamage
 
     }
 
+    // Method called every frame. Handles the AI's game logic.
+    void PatrolTheArea()
+    {
+        // If the enemy is not on high alert, we want them to investigate the area normally.
+        if (!OnHighAlert)
+        {
+            // If this bool is true, we know that they're currently in the Roam() coroutine.
+            if (IsRoaming)
+            {
+                // If they hear something that makes sound (handled by a sphere check), or they got shot by the player.
+                if (IHeardSomething || SomeoneHitMe)
+                {
+                    // They need to stop roaming immediately.
+                    StopCoroutine(TempRoam);
+                    // By setting this variable to false, they can start roaming again, otherwise they'll get stuck where they are without returning to their location.
+                    IsRoaming = false;
+
+                }
+
+            }
+
+            // If our player is in range of the AI, and the AI can see the player:
+            else if (PlayerInRange && !CanSeePlayer())
+            {
+                // If they're not already roaming and their distance is less than 0.05m:
+                if (!isRoaming && agent.remainingDistance < 0.05f)
+                {
+                    // We set our coroutine variable to this instance of our Roam() coroutine.
+                    TempRoam = StartCoroutine(Roam());
+
+                }
+            }
+            // If the AI can't see the player and they're not in range, they still want to roam.
+            else if (!PlayerInRange)
+            {
+                // Same protective check, if they're not already roaming, and their remaining distance to their destination is less than 0.05m:
+                if (!isRoaming && agent.remainingDistance < 0.05f)
+                {
+                    // We set our coroutine variable to this instance of our Roam() coroutine.
+                    TempRoam = StartCoroutine(Roam());
+
+                }
+
+            }
+        }
+        // If they are on high alert, the AI needs to ignore all previous protocols and immediately beeline to the player, as they are carrying a super important object.
+        else
+        {
+            AttackThePlayer();
+        }
+    }
 
     // Required interface method that must be implemented as a part of the IDamage interface. Adjusts enemyAI HP, and destroys it if it falls to or below 0.
     public void TakeSomeDamage(int amt)
@@ -263,6 +319,15 @@ public class EnemyController : MonoBehaviour, TakesDamage
         model.material.color = DmgColor;
         yield return new WaitForSeconds(0.2f);
         model.material.color = OrigColor;
+
+        if (agent.pathPending)
+        {
+            while (agent.pathPending)
+            {
+                SomeoneHitMe = true;
+                yield return null;
+            }
+        }
     }
 
     // IEnumerator called in a coroutine, enables the enemyAI to shoot at the player.
@@ -279,9 +344,10 @@ public class EnemyController : MonoBehaviour, TakesDamage
 
     public void CreateBullet()
     {
+        // If we're not shooting, we don't want to fire a bullet, so:
         if (IsShooting)
         {
-
+            // We create our bullet with our forward velocity.
             Instantiate(bullet, shootPos.position, transform.rotation);
 
         }
@@ -322,24 +388,67 @@ public class EnemyController : MonoBehaviour, TakesDamage
 
     IEnumerator Roam()
     {
-        
+        // We set our roaming bool to true, both to notify our Patrol logic, as well as to ensure we don't roam before the coroutine finishes.
         isRoaming = true;
 
+        // We wait the specified roam timer (this gives the impression that the AI is scanning the area and looking around).
         yield return new WaitForSeconds(RoamTimer);
 
+        // We then set our AI's stopping distance to 0, which will allow them to reach their destination.
         agent.stoppingDistance = 0;
 
+        /* We generate a ramdom location in a unit sphere, multiplied by our roam distance,
+        clamping its size to our minimum roam distance to ensure our AI isn't just moving super small increments occasionally.*/
         Vector3 randomLoc = MinRoamDist + (Random.insideUnitSphere * RoamDistance);
 
+        // We add our original location to our random location, to ensure the AI is roaming around where it spawned.
         randomLoc += OrigLocation;
 
+        // We then sample this position with our NavMesh, making sure that it's a valid position to roam to. If it is, our NavMeshHit will update with that location.
         NavMesh.SamplePosition(randomLoc, out NavMeshHit hit, RoamDistance, 1);
 
+        // Finally, we set our destination to that location.
         agent.SetDestination(hit.position);
 
+        // We then set our roaming bool to false, allowing us to roam again.
         isRoaming = false;
 
+        // We also set our coroutine variable to null, as we don't want to access invalid memory in subsequent calls if we need to stop our coroutine.
         TempRoam = null;
+
+    }
+    
+    public void ReactToSound(Vector3 invokingLocation)
+    {
+        // We want them to only investigate a sound when they weren't just hit, or if they didn't already hear something.
+        if (!IHeardSomething && !SomeoneHitMe)
+        {
+            // We update the sound location accordingly.
+            HeardSoundLocation = invokingLocation;
+            // We then call our investigation coroutine, which is the only way our IHeardSomething bool can be turned off.
+            StartCoroutine(InvestigateSound());
+
+        }
+
+    }
+
+    IEnumerator InvestigateSound()
+    {
+        // Like with any investigation, we set our stoppingDistance to 0 to ensure our AI doesn't get caught up on trying to reach their destination.
+        agent.stoppingDistance = 0;
+        // We then set our destination to our determined location.
+        agent.SetDestination(HeardSoundLocation);
+        // We want this coroutine to last while we're still investigating our sound, so this will allow us to stay in the coroutine until we arrive.
+        while (agent.pathPending)
+        {
+            yield return null;
+        }
+
+        // Finally, we wait for the time specified by our RoamTimer. This results in double the waiting period compared to roaming normally. This is deliberate.
+        yield return new WaitForSeconds(RoamTimer);
+
+        IHeardSomething = false;
+
 
     }
 
