@@ -108,7 +108,10 @@ public class PlayerController : MonoBehaviour, TakesDamage
     void Start()
     {
         HPOriginal = HP;
-        updatePlayerUI();
+
+        spawnPlayer();
+
+        //updatePlayerUI(); took this out as we now call in spawn player
         
     }
 
@@ -127,6 +130,16 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
         sprint();
         
+    }
+
+    public void spawnPlayer()
+    {
+        controller.enabled = false; //disbale controller
+        transform.position = GameManager.instance.GetPlayerSpawnPoint().transform.position;
+        controller.enabled = true;
+
+        HP = HPOriginal;
+        updatePlayerUI();
     }
 
     void movement()

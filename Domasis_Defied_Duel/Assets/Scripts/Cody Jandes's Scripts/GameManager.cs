@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
         //single instance of singleton 
         instance = this;
         timeScaleOriginal = Time.timeScale; //use getter and setter here
-        GetPlayerSpawnPoint(); //POTENTIAL REMOVE///////////////////////////////////////////////////////////////////////////////////
+        SetPlayerSpawnPoint(GameObject.FindWithTag("Player Spawn Position")); //POTENTIAL REMOVE///////////////////////////////////////////////////////////////////////////////////
         player = GameObject.FindWithTag("Player"); //allows us to find player
         playerScript = player.GetComponent<PlayerController>(); //pull player controller after located
 

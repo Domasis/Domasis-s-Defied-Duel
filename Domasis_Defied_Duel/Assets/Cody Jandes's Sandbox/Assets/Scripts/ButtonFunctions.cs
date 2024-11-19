@@ -16,6 +16,13 @@ public class ButtonFunctions : MonoBehaviour
         GameManager.instance.stateUnpause();
     }
 
+    //Add in respawn for lose menu
+    public void respawn()
+    {
+        GameManager.instance.playerScript.spawnPlayer();
+        GameManager.instance.stateUnpause();
+    }
+
     public void quit()
     {
     #if UNITY_EDITOR
