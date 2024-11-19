@@ -56,6 +56,16 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
     [SerializeField] GameObject muzzleFlash;
 
+    //Added in audio just in case we cant figure out how to use singleton
+
+    [Header("-----Audio-----")]
+
+    [SerializeField] AudioSource aud; //source
+
+    [SerializeField] AudioClip[] audJump; //the array of sounds
+
+    [SerializeField] [UnityEngine.Range(0, 1)] float audJumpVolume; //volume we want it to play at -- added range to keep normalized between 0 and 1
+
     //Vector3 to move 
     Vector3 movePlayer;
 
@@ -148,6 +158,9 @@ public class PlayerController : MonoBehaviour, TakesDamage
         {
             jumpCount++; //increment jump
             playerVelocity.y = jumpSpeed; //how fast we can jump and move on y axis
+
+            //audio lines
+            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVolume); //random clip from array, from 0 to the length of array, volume we want it to play at
         }
     }
 
