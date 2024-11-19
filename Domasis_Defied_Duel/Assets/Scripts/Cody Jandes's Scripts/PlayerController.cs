@@ -66,6 +66,14 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
     [SerializeField] [UnityEngine.Range(0, 1)] float audJumpVolume; //volume we want it to play at -- added range to keep normalized between 0 and 1
 
+    [SerializeField] AudioClip[] audHurt;
+
+    [SerializeField] [UnityEngine.Range(0, 1)] float audHurtVolume;
+
+    [SerializeField] AudioClip[] audFootsteps;
+
+    [SerializeField] [UnityEngine.Range(0, 1)] float audFootstepVolume;
+
     //Vector3 to move 
     Vector3 movePlayer;
 
@@ -77,6 +85,9 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
     //Is or is not shooting
     bool isShooting;
+
+    //Is or is not playing footsteps
+    bool isPlayingSteps;
 
     //Jump counter
     int jumpCount;
@@ -149,6 +160,11 @@ public class PlayerController : MonoBehaviour, TakesDamage
         {
             StartCoroutine(shoot()); //how to call ienumerator or coroutine
         }
+
+        if (controller.isGrounded && movePlayer.magnitude > 0.3f && !isPlayingSteps)
+        {
+            StartCoroutine(playFootsteps());
+        }
     }
 
     void jump()
@@ -178,11 +194,35 @@ public class PlayerController : MonoBehaviour, TakesDamage
         }
     }
 
+    //Create timer for footsteps
+    IEnumerator playFootsteps()
+    { 
+        isPlayingSteps = true;
+
+        aud.PlayOneShot(audFootsteps[Random.Range(0, audFootsteps.Length)], audFootstepVolume);
+
+        if (!isSprinting)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.25f);
+        }
+
+        isPlayingSteps = false;
+
+    }
+
+
     //iEnumerators are timer
     IEnumerator shoot()
     {
         isShooting = true;
         gunList[selectedGun].ammoCurrent--;
+
+        //Gun shot
+        aud.PlayOneShot(gunList[selectedGun].shootSound[Random.Range(0, gunList[selectedGun].shootSound.Length)], gunList[selectedGun].shootVolume);
 
         //Muzzle flash
         StartCoroutine(flashMuzzle());
@@ -229,6 +269,7 @@ public class PlayerController : MonoBehaviour, TakesDamage
     public void TakeSomeDamage(int amount)
     {
         HP -= amount;
+        aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVolume); //AUDIO FOR PLAYER TAKING DAMAGE
         updatePlayerUI();
         StartCoroutine(flashDamage());
 
