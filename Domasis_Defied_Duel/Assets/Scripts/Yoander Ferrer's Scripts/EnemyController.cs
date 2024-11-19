@@ -337,6 +337,8 @@ public class EnemyController : MonoBehaviour, TakesDamage, IHearSounds
 
         enemyAnimator.SetTrigger("Shoot");
 
+        CreateBullet();
+
         yield return new WaitForSeconds(ShootRate);
 
         IsShooting = false;

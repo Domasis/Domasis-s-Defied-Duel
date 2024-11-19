@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
     [Header("-----Health Stats-----")]
     //Player HP
-    [SerializeField] [UnityEngine.Range(1,10)] int HP;
+    [SerializeField] [UnityEngine.Range(0,10)] int HP;
 
 
     [Header("-----Movement-----")]
