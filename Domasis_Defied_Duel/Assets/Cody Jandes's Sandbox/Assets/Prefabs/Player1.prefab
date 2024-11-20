@@ -209,16 +209,25 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   controller: {fileID: 8488755429572724595}
-  HP: 3
+  HP: 5
   speed: 5
   sprintMod: 2
   jumpMax: 1
   jumpSpeed: 10
   gravity: 30
+  gunList: []
   shootDamage: 0
   shootRate: 0
   shootDistance: 1
   gunModel: {fileID: 7557571301225235152}
+  muzzleFlash: {fileID: 0}
+  aud: {fileID: 0}
+  audJump: []
+  audJumpVolume: 0
+  audHurt: []
+  audHurtVolume: 0
+  audFootsteps: []
+  audFootstepVolume: 0
   bullet: {fileID: 0}
   shootPos: {fileID: 0}
 --- !u!143 &8488755429572724595
