@@ -57,9 +57,10 @@ public class Checkpoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && PlayerSpawnPos != null && transform.position != PlayerSpawnPos.position)
+        if (other.CompareTag("Player") && transform.position != GameManager.instance.GetPlayerSpawnPoint().transform.position)
         {
-            PlayerSpawnPos.position = transform.position;
+            GameManager.instance.GetPlayerSpawnPoint().transform.position = transform.position;
+
             StartCoroutine(FlashColor());
         }
     }
