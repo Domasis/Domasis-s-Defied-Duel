@@ -17,8 +17,27 @@ public class GameManager : MonoBehaviour
     //Count for enemy 
     [SerializeField] TMP_Text enemyCountText;
 
+    //Count for objective
+    [SerializeField] TMP_Text objectiveCountText;
+
     //Checkpoint popup
     [SerializeField] GameObject checkpointPopup;
+
+    //Alertable Enemies
+    [SerializeField] GameObject[] alertableEnemies;
+
+    //Track objective
+    int objectiveCount; 
+
+    public int GetObjectiveCount()
+    {
+        return objectiveCount;
+    }
+    public void SetObjectiveCount(int newCount)
+    {
+        objectiveCount += newCount;
+    }
+    
 
     public GameObject GetCheckpointPopup()
     {
@@ -119,13 +138,21 @@ public class GameManager : MonoBehaviour
     {
         enemyCount += amount;
         enemyCountText.text = enemyCount.ToString("F0");
-
+        
         if (enemyCount <= 0)
         {
-            //Pause and pull win menu
-            statePause();
-            menuActive = menuWin;
-            menuActive.SetActive(true);
+            youWin();
+        }
+    }
+
+    public void updateSecondaryGameGoal(int amount)
+    {
+        objectiveCount += amount;
+        objectiveCountText.text = objectiveCount.ToString("F0");
+
+        if (objectiveCount <= 0)
+        {
+            youWin();
         }
     }
 
@@ -133,6 +160,14 @@ public class GameManager : MonoBehaviour
     {
         statePause();
         menuActive = menuLose;
+        menuActive.SetActive(true);
+    }
+
+    public void youWin()
+    {
+        //Pause and pull win menu
+        statePause();
+        menuActive = menuWin;
         menuActive.SetActive(true);
     }
 }

@@ -9,8 +9,6 @@ public class PickupSystem : MonoBehaviour
 
     [SerializeField] GunStats gun;
 
-     //pauseeeee
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -27,6 +25,7 @@ public class PickupSystem : MonoBehaviour
             GameManager.instance.playerScript.getGunStats(gun);
             Destroy(gameObject);
         }
+       
     }
 }
 
