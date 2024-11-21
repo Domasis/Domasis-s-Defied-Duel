@@ -102,15 +102,20 @@ public class DestructibleObstacle1 : MonoBehaviour, TakesDamage, IAlert
         }
     }
 
+    // AlertEnemies implementation done by Yoander Ferrer.
+    // Public interface method that alerts nearby enemies to this object's location, causing them to investigate.
     public void AlertEnemies()
     {
+        // We need to get the location of every enemy in range. To do this, we populate an array of colliders using an OverlapSphere call.
         Collider[] hitObjects = Physics.OverlapSphere(transform.position, alertRadius, 7);
 
+        // We then iterate through each collider:
         foreach (Collider hitObject in hitObjects)
         {
-
+            // We attempt to get an IHearSounds component from that collider.
             IHearSounds heardSomething = hitObject.GetComponent<IHearSounds>();
 
+            // If that collider is valid (the ? operator is the same as saying if (obj != null)), we call its ReactToSound method.
             heardSomething?.ReactToSound((Random.insideUnitSphere * investigationRange) + transform.position);
 
         }

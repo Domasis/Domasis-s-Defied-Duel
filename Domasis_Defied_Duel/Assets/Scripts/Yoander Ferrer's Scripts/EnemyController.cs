@@ -58,6 +58,8 @@ public class EnemyController : MonoBehaviour, TakesDamage, IHearSounds, IAlert
 
     [Header("----- On Death Investigation Radius -----")]
 
+    // Sets a range around the object's transform position that enemies can roam within.
+
     [SerializeField] [Range(1, 3)] int investigationRadius;
 
     // Color instance that represents the original model color of our AI.
@@ -142,6 +144,7 @@ public class EnemyController : MonoBehaviour, TakesDamage, IHearSounds, IAlert
     public int RoamTimer { get => roamTimer; set => roamTimer = value; }
 
     public Vector3 OrigLocation { get => origLocation; set => origLocation = value; }
+
     public Vector3 MinRoamDist { get => minRoamDist; set => minRoamDist = value; }
 
     public Coroutine TempRoam { get => tempRoam; set => tempRoam = value; }
@@ -169,6 +172,7 @@ public class EnemyController : MonoBehaviour, TakesDamage, IHearSounds, IAlert
         // We get the AI's starting position, so that we can always reference it while roaming.
         OrigLocation = transform.position;
 
+        // We set the original stopping distance to the editor exposed stopping distance inside of our NavMeshAgent component.
         OrigStoppingDistance = agent.stoppingDistance;
     }
 
@@ -222,9 +226,10 @@ public class EnemyController : MonoBehaviour, TakesDamage, IHearSounds, IAlert
     // Private method called when the player enters the sphere collider. Sets our PlayerInRange to true for our AttackThePlayer method.
     private void OnTriggerEnter(Collider other)
     {
-        
+        // If the object that enter our collider is a player:
         if (other.CompareTag("Player"))
         {
+            // We set our bool to true.
             PlayerInRange = true;
         }
 
@@ -233,11 +238,13 @@ public class EnemyController : MonoBehaviour, TakesDamage, IHearSounds, IAlert
     // Private method called whenever the player exits the AI's sphere collider. Sets our PlayerInRange to false for our AttackThePlayer method.
     private void OnTriggerExit(Collider other)
     {
-        
+        // If the object that exited the collision was a player:
         if (other.CompareTag("Player"))
         {
+            // We set our bool to false.
             PlayerInRange = false;
 
+            // We then also set the stopping distance back to 0 to ensure that the enemy does not get hung up pathing to a location they won't reach.
             agent.stoppingDistance = 0;
         }
 
@@ -298,17 +305,25 @@ public class EnemyController : MonoBehaviour, TakesDamage, IHearSounds, IAlert
     // Required interface method that must be implemented as a part of the IDamage interface. Adjusts enemyAI HP, and destroys it if it falls to or below 0.
     public void TakeSomeDamage(int amt)
     {
-
+        // We reduce the enemy's health by the damage amount passed in.
         HP -= amt;
 
+        // We then start the coroutine responsible for flashing the enemy's model.
         StartCoroutine(FlashRed());
 
+        // We then set the AI's location to the last location where the player shot the AI from.
         agent.SetDestination(GameManager.instance.player.transform.position);
 
+        // If the enemy has no HP left:
         if (HP <= 0)
         {
+            // The enemy will alert all nearby enemies in range, which will cause them to investigate the area.
             AlertEnemies();
+            
+            // It will then decrement the game goal.
             GameManager.instance.updateGameGoal(-1);
+
+            // Finally, we destroy the game object.
             Destroy(gameObject);
 
         }    
@@ -335,14 +350,19 @@ public class EnemyController : MonoBehaviour, TakesDamage, IHearSounds, IAlert
     // IEnumerator called in a coroutine, enables the enemyAI to shoot at the player.
     IEnumerator Shoot()
     {
+        // To prevent entering this coroutine prematurely, we set IsShooting to true, which locks it out in Update.
         IsShooting = true;
 
+        // We set our animator's shoot trigger, which causes the enemy to play the shoot animation.
         enemyAnimator.SetTrigger("Shoot");
 
+        // We then call CreateBullet(), which creates a bullet that flies from its spawn location.
         CreateBullet();
 
+        // We then wait for a duration equal to our firerate.
         yield return new WaitForSeconds(ShootRate);
 
+        // We then set IsShooting to false, which allows Update to call the coroutine again.
         IsShooting = false;
     }
 
@@ -438,6 +458,7 @@ public class EnemyController : MonoBehaviour, TakesDamage, IHearSounds, IAlert
 
     IEnumerator InvestigateSound()
     {
+        // To ensure we don't investigate multiple sounds at once, we set this to true.
         IHeardSomething = true;
 
         // Like with any investigation, we set our stoppingDistance to 0 to ensure our AI doesn't get caught up on trying to reach their destination.
@@ -458,6 +479,7 @@ public class EnemyController : MonoBehaviour, TakesDamage, IHearSounds, IAlert
 
     }
 
+    // Method that handles updating the animation of the AI.
     void UpdateAnim()
     {
         // We want to know the absolute value of our character's normalized speed for the purposes of our animator, so we get the normalized magnitude of our velocity.
@@ -470,14 +492,21 @@ public class EnemyController : MonoBehaviour, TakesDamage, IHearSounds, IAlert
         EnemyAnimator.SetFloat("Speed", Mathf.Lerp(currAnimSpeed, normAgentSpeed, Time.deltaTime * AnimTransitionSpeed));
     }
 
+    // Public Interface method that notifies enemies to this object's location.
     public void AlertEnemies()
     {
+        /* We need to find all of the enemies in this object's range. Because this is an enemy, we want it to notify enemies in a much larger radius.
+           To do this, we create a Collider array that is populated from an OverlapSphere.*/
         Collider[] hitObjects = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius * 2, 7);
 
+        // For each collider in the array we've generated:
         foreach (Collider collider in hitObjects)
         {
+            // We check for an IHearSounds component.
             IHearSounds heardSomething = collider.GetComponent<IHearSounds>();
 
+            /* If the component exists, we call its ReactToSound method, passing in a random location around the object that was destroyed.
+            By adding a minimum roam distance, we limit the likelihood that all of the enemies try to path to the same location. */
             heardSomething?.ReactToSound(((Random.insideUnitSphere * investigationRadius) + minRoamDist * 2) + transform.position);
         }
     }
