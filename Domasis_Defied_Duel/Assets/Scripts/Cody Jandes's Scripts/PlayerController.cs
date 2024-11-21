@@ -2,6 +2,8 @@ using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.PlayerLoop;
 
 
 //CODY JANDES CREATED THIS SCRIPT 
@@ -55,6 +57,9 @@ public class PlayerController : MonoBehaviour, TakesDamage
     [SerializeField] GameObject gunModel;
 
     [SerializeField] GameObject muzzleFlash;
+
+    //Ammo  counter
+    [SerializeField] TMP_Text ammoCountText;
 
     //Added in audio just in case we cant figure out how to use singleton
 
@@ -234,6 +239,9 @@ public class PlayerController : MonoBehaviour, TakesDamage
         isShooting = true;
         gunList[selectedGun].ammoCurrent--;
 
+        //Update UI ammo
+        updateAmmoCount();
+
         //Gun shot
         aud.PlayOneShot(gunList[selectedGun].shootSound[Random.Range(0, gunList[selectedGun].shootSound.Length)], gunList[selectedGun].shootVolume);
 
@@ -299,6 +307,12 @@ public class PlayerController : MonoBehaviour, TakesDamage
         GameManager.instance.playerHPBar.fillAmount = (float)HP / HPOriginal;
     }
 
+    public void updateAmmoCount()
+    {
+
+        ammoCountText.text = gunList[selectedGun].ammoCurrent.ToString("F0");
+    }
+
     IEnumerator flashDamage()
     {
         GameManager.instance.playerDamageScreen.SetActive(true);
@@ -322,6 +336,8 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gun.gunModel.GetComponent<MeshFilter>().sharedMesh; //set the model on the player 
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.gunModel.GetComponent<MeshRenderer>().sharedMaterial; //rendered passed next
+
+        updateAmmoCount();
     }
 
     void selectGun()
@@ -331,12 +347,15 @@ public class PlayerController : MonoBehaviour, TakesDamage
         {
             selectedGun++;
             changeGun();
+  
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedGun > 0)
         {
             selectedGun--;
-            changeGun();
+            changeGun(); 
+           
         }
+       
     }
 
     void changeGun()
@@ -347,6 +366,8 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].gunModel.GetComponent<MeshFilter>().sharedMesh; //set the model on the player 
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[selectedGun].gunModel.GetComponent<MeshRenderer>().sharedMaterial; //rendered passed next
+
+        updateAmmoCount();
     }
 
     void reload()
@@ -355,6 +376,7 @@ public class PlayerController : MonoBehaviour, TakesDamage
         {
             //relaod to refill the gun 
             gunList[selectedGun].ammoCurrent = gunList[selectedGun].ammoMax;
+            updateAmmoCount();
         }
     }
 }
