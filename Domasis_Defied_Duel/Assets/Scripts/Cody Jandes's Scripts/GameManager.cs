@@ -17,6 +17,19 @@ public class GameManager : MonoBehaviour
     //Count for enemy 
     [SerializeField] TMP_Text enemyCountText;
 
+    //Checkpoint popup
+    [SerializeField] GameObject checkpointPopup;
+
+    public GameObject GetCheckpointPopup()
+    {
+        return checkpointPopup;
+    }
+
+    public void SetCheckpointPopup(GameObject thisCheckpointPopup)
+    {
+        checkpointPopup = thisCheckpointPopup;
+    }
+
     //Control Health bar
     public Image playerHPBar;
 
