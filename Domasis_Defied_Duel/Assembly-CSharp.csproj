@@ -74,18 +74,17 @@
     <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\Interfaces\GetHitSon.cs" />
     <Compile Include="Assets\Sheldon Sharp&apos;s SandBox\sheldonplayercontroller.cs" />
     <Compile Include="Assets\Cody Jandes&apos;s Sandbox\Assets\Scripts\ButtonFunctions.cs" />
-    <Compile Include="Assets\Sheldon Sharp&apos;s SandBox\breakobjwitsound.cs" />
     <Compile Include="Assets\Hanzzz\MeshDemolisher\Examples\Scripts\CameraController.cs" />
     <Compile Include="Assets\UnityTechnologies\ParticlePack\EffectExamples\Misc Effects\Scripts\SpawnEffect.cs" />
     <Compile Include="Assets\Scripts\Yoander Ferrer&apos;s Scripts\PlayerDamage.cs" />
+    <Compile Include="Assets\Scripts\Sheldon Sharp&apos;s Scripts\Spawner.cs" />
     <Compile Include="Assets\Scripts\Sheldon Sharp&apos;s Scripts\GameManagerone.cs" />
     <Compile Include="Assets\Scripts\Yoander Ferrer&apos;s Scripts\DestructibleObstacle.cs" />
     <Compile Include="Assets\Hanzzz\MeshDemolisher\Scripts\Internal\CDT\CDT_Test.cs" />
-    <Compile Include="Assets\Sheldon Sharp&apos;s SandBox\AudioSing%3beton.cs" />
     <Compile Include="Assets\Hanzzz\MeshDemolisher\Scripts\Internal\CDT\CDT_Utility.cs" />
     <Compile Include="Assets\Hanzzz\MeshDemolisher\Scripts\Internal\GeometricObject.cs" />
     <Compile Include="Assets\Scripts\Yoander Ferrer&apos;s Scripts\Interfaces\IAlert.cs" />
-    <Compile Include="Assets\Sheldon Sharp&apos;s SandBox\Spawner.cs" />
+    <Compile Include="Assets\Scripts\Sheldon Sharp&apos;s Scripts\breakobjwitsound.cs" />
     <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\ThrowableDistraction.cs" />
     <Compile Include="Assets\Hanzzz\MeshDemolisher\Scripts\Internal\CDT\CDF_SegmentRecovery.cs" />
     <Compile Include="Assets\Scripts\Cody Jandes&apos;s Scripts\PlayerController.cs" />
@@ -100,7 +99,6 @@
     <Compile Include="Assets\Cody Jandes&apos;s Sandbox\Assets\Scripts\GunStats.cs" />
     <Compile Include="Assets\Hanzzz\MeshDemolisher\Scripts\Internal\CDT\CDT_Public.cs" />
     <Compile Include="Assets\Scripts\Yoander Ferrer&apos;s Scripts\EnemySpawner.cs" />
-    <Compile Include="Assets\Sheldon Sharp&apos;s SandBox\TurnOnOff.cs" />
     <Compile Include="Assets\Cody Jandes&apos;s Sandbox\Assets\Unity Store Downlaod\Low Poly Guns\Scripts\GunsMenu.cs" />
     <Compile Include="Assets\UnityTechnologies\ParticlePack\Shared\Ramps\Runtime\RampAsset.cs" />
     <Compile Include="Assets\UnityTechnologies\ParticlePack\Shared\Scripts\AdjustTimeScale.cs" />
@@ -129,6 +127,8 @@
     <Compile Include="Assets\Scripts\Cody Jandes&apos;s Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\Yoander Ferrer&apos;s Scripts\EnemyController.cs" />
     <Compile Include="Assets\Hanzzz\MeshDemolisher\Examples\Scripts\MeshDemolisherExample.cs" />
+    <Compile Include="Assets\Scripts\Sheldon Sharp&apos;s Scripts\AudioSing%3beton.cs" />
+    <Compile Include="Assets\Scripts\Sheldon Sharp&apos;s Scripts\TurnOnOff.cs" />
     <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\IterativeEnemyController.cs" />
     <Compile Include="Assets\Hanzzz\MeshDemolisher\Scripts\Internal\CustomComparator.cs" />
   </ItemGroup>
