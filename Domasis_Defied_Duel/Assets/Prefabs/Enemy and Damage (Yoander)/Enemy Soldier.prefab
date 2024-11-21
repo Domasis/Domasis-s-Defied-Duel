@@ -937,6 +937,7 @@ MonoBehaviour:
   minRoamDist: {x: 1, y: 0, z: 1}
   animTransitionSpeed: 6
   enemyAnimator: {fileID: 6825333558746993963}
+  investigationRadius: 3
 --- !u!95 &6825333558746993963
 Animator:
   serializedVersion: 7

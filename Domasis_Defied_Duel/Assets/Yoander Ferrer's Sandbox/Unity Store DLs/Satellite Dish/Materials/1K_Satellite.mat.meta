@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5408edb5065d1d346b201cfbd729f20c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 3703
+  packageName: 'Satellite Comms '
+  packageVersion: 1.0
+  assetPath: Assets/Satellite Dish/Materials/1K_Satellite.mat
+  uploadId: 26568

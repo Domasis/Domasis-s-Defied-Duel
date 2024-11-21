@@ -1,13 +1,15 @@
 using System.Collections;
 using UnityEngine;
 
-public class DestructibleObstacle1 : MonoBehaviour, TakesDamage
+public class DestructibleObstacle1 : MonoBehaviour, TakesDamage, IAlert
 {
     [SerializeField] private int hp;
     [SerializeField] private Renderer model;
     [SerializeField] private Color dmgColor;
     [SerializeField] private AudioClip damageSound;  // The sound played on damage
     [SerializeField][Range(0, 1)] private float damageSoundVolume = 0.5f; // Volume of the damage sound
+    [SerializeField] [Range(15, 60)] int alertRadius;
+    [SerializeField][Range(0, 1)] int investigationRange;
     private AudioSource audioSource;
 
     // Properties
@@ -74,6 +76,8 @@ public class DestructibleObstacle1 : MonoBehaviour, TakesDamage
         // Play the damage sound
         PlayDamageSound();
 
+        AlertEnemies();
+
         // Check if the obstacle is destroyed
         if (HP <= 0)
         {
@@ -95,6 +99,20 @@ public class DestructibleObstacle1 : MonoBehaviour, TakesDamage
         if (AudioSourceComponent != null && DamageSound != null)
         {
             AudioSourceComponent.PlayOneShot(DamageSound, DamageSoundVolume);  // Play the damage sound once
+        }
+    }
+
+    public void AlertEnemies()
+    {
+        Collider[] hitObjects = Physics.OverlapSphere(transform.position, alertRadius, 7);
+
+        foreach (Collider hitObject in hitObjects)
+        {
+
+            IHearSounds heardSomething = hitObject.GetComponent<IHearSounds>();
+
+            heardSomething?.ReactToSound((Random.insideUnitSphere * investigationRange) + transform.position);
+
         }
     }
 }

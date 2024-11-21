@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 // Enemy Controller fully created and managed by Yoander Ferrer.
 
-public class EnemyController : MonoBehaviour, TakesDamage, IHearSounds
+public class EnemyController : MonoBehaviour, TakesDamage, IHearSounds, IAlert
 {
     [Header("----- Enemy Models and Transforms -----")]
 
@@ -40,10 +40,10 @@ public class EnemyController : MonoBehaviour, TakesDamage, IHearSounds
     [SerializeField][Range(2, 15)] int faceTargetSpeed;
 
     // Float that tracks the distance that our AI can roam to.
-    [SerializeField] float roamDistance;
+    [SerializeField] [Range(3, 10)] float roamDistance;
 
     // Int that tracks how long the AI will wait before roaming again.
-    [SerializeField] int roamTimer;
+    [SerializeField] [Range(0, 5)] int roamTimer;
 
     // Vector3 that ensures that the AI travels at least a certain distance.
     [SerializeField] Vector3 minRoamDist;
@@ -55,6 +55,10 @@ public class EnemyController : MonoBehaviour, TakesDamage, IHearSounds
 
     // Animator reference in our code. Required to access modifiers to animations.
     [SerializeField] Animator enemyAnimator;
+
+    [Header("----- On Death Investigation Radius -----")]
+
+    [SerializeField] [Range(1, 3)] int investigationRadius;
 
     // Color instance that represents the original model color of our AI.
     Color origColor;
@@ -161,9 +165,6 @@ public class EnemyController : MonoBehaviour, TakesDamage, IHearSounds
     {
         // We set origColor to the model's color.
         origColor = Model.material.color;
-
-        // We then update the EnemyCount of our PlayerLocator accordingly.
-        GameManager.instance.updateGameGoal(1);
 
         // We get the AI's starting position, so that we can always reference it while roaming.
         OrigLocation = transform.position;
@@ -306,6 +307,7 @@ public class EnemyController : MonoBehaviour, TakesDamage, IHearSounds
 
         if (HP <= 0)
         {
+            AlertEnemies();
             GameManager.instance.updateGameGoal(-1);
             Destroy(gameObject);
 
@@ -436,12 +438,14 @@ public class EnemyController : MonoBehaviour, TakesDamage, IHearSounds
 
     IEnumerator InvestigateSound()
     {
+        IHeardSomething = true;
+
         // Like with any investigation, we set our stoppingDistance to 0 to ensure our AI doesn't get caught up on trying to reach their destination.
         agent.stoppingDistance = 0;
         // We then set our destination to our determined location.
         agent.SetDestination(HeardSoundLocation);
         // We want this coroutine to last while we're still investigating our sound, so this will allow us to stay in the coroutine until we arrive.
-        while (agent.pathPending)
+        while (agent.remainingDistance <= 0.25f)
         {
             yield return null;
         }
@@ -464,5 +468,17 @@ public class EnemyController : MonoBehaviour, TakesDamage, IHearSounds
 
         // Now that we have that animation, we now update our Animator's speed float with that agent speed, allowing us to accurately blend the animations.
         EnemyAnimator.SetFloat("Speed", Mathf.Lerp(currAnimSpeed, normAgentSpeed, Time.deltaTime * AnimTransitionSpeed));
+    }
+
+    public void AlertEnemies()
+    {
+        Collider[] hitObjects = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius * 2, 7);
+
+        foreach (Collider collider in hitObjects)
+        {
+            IHearSounds heardSomething = collider.GetComponent<IHearSounds>();
+
+            heardSomething?.ReactToSound(((Random.insideUnitSphere * investigationRadius) + minRoamDist * 2) + transform.position);
+        }
     }
 }
