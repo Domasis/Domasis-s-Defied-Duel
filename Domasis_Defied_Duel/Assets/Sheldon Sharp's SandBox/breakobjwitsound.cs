@@ -9,7 +9,7 @@ public class DestructibleObstacle1 : MonoBehaviour, TakesDamage, IAlert
     [SerializeField] private AudioClip damageSound;  // The sound played on damage
     [SerializeField][Range(0, 1)] private float damageSoundVolume = 0.5f; // Volume of the damage sound
     [SerializeField] [Range(15, 60)] int alertRadius;
-    [SerializeField][Range(0, 1)] int investigationRange;
+    [SerializeField][Range(1, 3)] int investigationRange;
     private AudioSource audioSource;
 
     // Properties

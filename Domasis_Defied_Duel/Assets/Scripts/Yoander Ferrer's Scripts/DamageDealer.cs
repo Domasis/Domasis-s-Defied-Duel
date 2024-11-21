@@ -51,7 +51,7 @@ public class DamageDealer : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // If the object that collided with it is also a trigger, or is a player, we exit early to avoid triggers setting off other triggers.
-        if (other.isTrigger)
+        if (other.isTrigger || other.CompareTag("Enemy"))
         {
             return;
         }

@@ -183,6 +183,7 @@ MonoBehaviour:
   minRoamDist: {x: 1, y: 0, z: 1}
   animTransitionSpeed: 6
   enemyAnimator: {fileID: 1769671857279918614}
+  investigationRadius: 1
 --- !u!195 &6015695260962877148
 NavMeshAgent:
   m_ObjectHideFlags: 0

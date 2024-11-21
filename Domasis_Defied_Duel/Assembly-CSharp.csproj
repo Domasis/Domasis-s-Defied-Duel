@@ -154,9 +154,11 @@
     <None Include="Assets\UnityTechnologies\ParticlePack\EffectExamples\Magic Effects\Shaders\Ice.shader" />
     <None Include="Assets\Sheldon Sharp&apos;s SandBox\Light Hearted Tech\SentryRobot\Documentation\Readme.txt" />
     <None Include="Assets\UnityTechnologies\ParticlePack\EffectExamples\Misc Effects\Shaders\Respawn.shader" />
+    <None Include="Assets\Unity Store DLs\ToonSoldiers_demo\ToonSoldiers_demo.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\Unity Store DLs\Day-Night Skyboxes\Textures\Readme for Assigning.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
     <None Include="Assets\Yoander Ferrer&apos;s Sandbox\Unity Store DLs\ToonSoldiers_WW2_demo\ToonSoldiers_WW2_demo_README.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
@@ -165,6 +167,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\Yoander Ferrer&apos;s Sandbox\Unity Store DLs\Satellite Dish\Info.txt" />
+    <None Include="Assets\Unity Store DLs\Day-Night Skyboxes\readme.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\UnityTechnologies\ParticlePack\EffectExamples\Misc Effects\Shaders\FireFly.shader" />
     <None Include="Assets\Yoander Ferrer&apos;s Sandbox\Unity Store DLs\SyntyStudios\PolygonPrototype\Shaders\Prototype_Glass_Object.shader" />

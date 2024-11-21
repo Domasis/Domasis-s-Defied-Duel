@@ -7,7 +7,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] GameObject objectToSpawn;
 
     // Editor exposed field that tracks the number of enemies this spawner instance will spawn.
-    [SerializeField] [Range(3, 10)] int numberToSpawn;
+    [SerializeField] [Range(1, 10)] int numberToSpawn;
 
     // Editor exposed variable that tracks the delay between enemy spawns. Set to 0 for instant spawns.
     [SerializeField] [Range(0, 3)] float spawnDelay;
