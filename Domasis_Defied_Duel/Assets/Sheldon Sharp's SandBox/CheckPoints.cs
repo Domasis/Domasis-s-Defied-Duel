@@ -67,27 +67,12 @@ public class Checkpoint : MonoBehaviour
 
     private IEnumerator FlashColor()
     {
-        if (Model != null)
-        {
-            Model.material.color = Color.red;
+       Model.material.color = Color.red; 
+        GameManager.instance.GetCheckpointPopup().SetActive(true);
+        yield return new WaitForSeconds(0.75f);
+        GameManager.instance.GetCheckpointPopup().SetActive(false);
+        Model.material.color = origColor;
 
-            if (CheckpointPopup != null)
-            {
-                CheckpointPopup.SetActive(true);
-            }
-
-            yield return new WaitForSeconds(0.8f);
-
-            if (CheckpointPopup != null)
-            {
-                CheckpointPopup.SetActive(false);
-            }
-
-            Model.material.color = OrigColor;
-        }
-        else
-        {
-            Debug.LogWarning("Model is not assigned, cannot change color.");
-        }
     }
+
 }
