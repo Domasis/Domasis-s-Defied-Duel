@@ -53,15 +53,26 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   controller: {fileID: 5116277474354410553}
-  HP: 5
+  HP: 8
   speed: 5
   sprintMod: 2
   jumpMax: 1
-  jumpSpeed: 10
-  gravity: 30
+  jumpSpeed: 12
+  gravity: 35
+  gunList: []
   shootDamage: 1
   shootRate: 0.5
   shootDistance: 15
+  gunModel: {fileID: 0}
+  muzzleFlash: {fileID: 0}
+  ammoCountText: {fileID: 0}
+  aud: {fileID: 0}
+  audJump: []
+  audJumpVolume: 0
+  audHurt: []
+  audHurtVolume: 0
+  audFootsteps: []
+  audFootstepVolume: 0
   bullet: {fileID: 6604961131242589871, guid: 38ba56e540a08a146abdabd5c6f2adf4, type: 3}
   shootPos: {fileID: 0}
 --- !u!143 &5116277474354410553

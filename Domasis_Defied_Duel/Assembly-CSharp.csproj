@@ -65,6 +65,7 @@
     <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\MiniMapController.cs" />
     <Compile Include="Assets\Hanzzz\MeshDemolisher\Scripts\Internal\CV\ClippedVoronoi.cs" />
     <Compile Include="Assets\Scripts\Sheldon Sharp&apos;s Scripts\BrickBreaker.cs" />
+    <Compile Include="Assets\Scripts\Sheldon Sharp&apos;s Scripts\CheckPoints.cs" />
     <Compile Include="Assets\Hanzzz\MeshDemolisher\Scripts\Internal\CDT\CDT_Field.cs" />
     <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\HeyCharMovePls.cs" />
     <Compile Include="Assets\Hanzzz\MeshDemolisher\Scripts\Internal\CDT\CDT_Filter.cs" />
@@ -110,7 +111,6 @@
     <Compile Include="Assets\Hanzzz\MeshDemolisher\Scripts\MeshDemolisher.cs" />
     <Compile Include="Assets\Movement.cs" />
     <Compile Include="Assets\Hanzzz\MeshDemolisher\Scripts\PointGeneratorEditor.cs" />
-    <Compile Include="Assets\Sheldon Sharp&apos;s SandBox\CheckPoints.cs" />
     <Compile Include="Assets\Scripts\Yoander Ferrer&apos;s Scripts\DamageDealer.cs" />
     <Compile Include="Assets\Hanzzz\MeshDemolisher\Scripts\Internal\CV\CV_Test.cs" />
     <Compile Include="Assets\Sheldon Sharp&apos;s SandBox\ButtonFuctions1.cs" />
