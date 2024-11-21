@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 6178527079875351593}
   - component: {fileID: 7687174634968615976}
   - component: {fileID: 171368039862515050}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Elite Soldier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +275,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: fc980e0b12e237143aec2bdec440d018, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
@@ -307,7 +307,7 @@ MonoBehaviour:
   faceTargetSpeed: 8
   roamDistance: 8
   roamTimer: 2
-  minRoamDist: {x: 2, y: 0, z: 2}
+  minRoamDist: {x: 1, y: 0, z: 1}
   animTransitionSpeed: 6
   enemyAnimator: {fileID: 8529816931705747739}
   investigationRadius: 3

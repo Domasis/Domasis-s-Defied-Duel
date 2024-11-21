@@ -934,7 +934,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7030438291723632534, guid: 0e6a51e5fe0f8ab44854b40d165fc5d0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.55443
+      value: -0.75
       objectReference: {fileID: 0}
     - target: {fileID: 7030438291723632534, guid: 0e6a51e5fe0f8ab44854b40d165fc5d0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -942,7 +942,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7030438291723632534, guid: 0e6a51e5fe0f8ab44854b40d165fc5d0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.4938765
+      value: -12.125
       objectReference: {fileID: 0}
     - target: {fileID: 7030438291723632534, guid: 0e6a51e5fe0f8ab44854b40d165fc5d0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -971,6 +971,14 @@ PrefabInstance:
     - target: {fileID: 7030438291723632534, guid: 0e6a51e5fe0f8ab44854b40d165fc5d0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135077480855224784, guid: 0e6a51e5fe0f8ab44854b40d165fc5d0, type: 3}
+      propertyPath: hp
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135077480855224784, guid: 0e6a51e5fe0f8ab44854b40d165fc5d0, type: 3}
+      propertyPath: roamTimer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9135077480855224784, guid: 0e6a51e5fe0f8ab44854b40d165fc5d0, type: 3}
       propertyPath: investigationRadius
@@ -2684,9 +2692,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 171368039862515050, guid: 1e6b0d22d3163ff4c996dd1eba6c159e, type: 3}
+      propertyPath: m_Height
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1429272221814270199, guid: 1e6b0d22d3163ff4c996dd1eba6c159e, type: 3}
+      propertyPath: hp
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1429272221814270199, guid: 1e6b0d22d3163ff4c996dd1eba6c159e, type: 3}
+      propertyPath: investigationRadius
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2307087597251795620, guid: 1e6b0d22d3163ff4c996dd1eba6c159e, type: 3}
       propertyPath: m_Name
       value: Elite Soldier
+      objectReference: {fileID: 0}
+    - target: {fileID: 2307087597251795620, guid: 1e6b0d22d3163ff4c996dd1eba6c159e, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6365769168952181239, guid: 1e6b0d22d3163ff4c996dd1eba6c159e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7950,6 +7974,6 @@ SceneRoots:
   - {fileID: 280751765}
   - {fileID: 115635636}
   - {fileID: 8318521996881968930}
+  - {fileID: 1976824616421625439}
   - {fileID: 1239427174}
   - {fileID: 1550980107}
-  - {fileID: 1976824616421625439}
