@@ -82,6 +82,9 @@ public class GameManager : MonoBehaviour
     //Keep track of enemy count
     int enemyCount;
 
+    //Moved ammo count to game manager so moved text with it
+    [SerializeField] TMP_Text ammoCountText;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -153,6 +156,15 @@ public class GameManager : MonoBehaviour
         if (objectiveCount <= 0)
         {
             youWin();
+        }
+    }
+
+    //Moved ammo counter to game manager
+    public void updateAmmoCounttt(int ammoCurr)
+    {
+        if (ammoCountText != null)
+        {
+            ammoCountText.text = ammoCurr.ToString("F0");
         }
     }
 

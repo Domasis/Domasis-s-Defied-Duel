@@ -58,9 +58,6 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
     [SerializeField] GameObject muzzleFlash;
 
-    //Ammo  counter
-    [SerializeField] TMP_Text ammoCountText;
-
     //Added in audio just in case we cant figure out how to use singleton
 
     [Header("-----Audio-----")]
@@ -240,7 +237,7 @@ public class PlayerController : MonoBehaviour, TakesDamage
         gunList[selectedGun].ammoCurrent--;
 
         //Update UI ammo
-        updateAmmoCount();
+        GameManager.instance.updateAmmoCounttt(gunList[selectedGun].ammoCurrent);
 
         //Gun shot
         aud.PlayOneShot(gunList[selectedGun].shootSound[Random.Range(0, gunList[selectedGun].shootSound.Length)], gunList[selectedGun].shootVolume);
@@ -307,11 +304,6 @@ public class PlayerController : MonoBehaviour, TakesDamage
         GameManager.instance.playerHPBar.fillAmount = (float)HP / HPOriginal;
     }
 
-    public void updateAmmoCount()
-    {
-
-        ammoCountText.text = gunList[selectedGun].ammoCurrent.ToString("F0");
-    }
 
     IEnumerator flashDamage()
     {
@@ -337,7 +329,7 @@ public class PlayerController : MonoBehaviour, TakesDamage
         gunModel.GetComponent<MeshFilter>().sharedMesh = gun.gunModel.GetComponent<MeshFilter>().sharedMesh; //set the model on the player 
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.gunModel.GetComponent<MeshRenderer>().sharedMaterial; //rendered passed next
 
-        updateAmmoCount();
+        GameManager.instance.updateAmmoCounttt(gunList[selectedGun].ammoCurrent);
     }
 
     void selectGun()
@@ -367,7 +359,7 @@ public class PlayerController : MonoBehaviour, TakesDamage
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].gunModel.GetComponent<MeshFilter>().sharedMesh; //set the model on the player 
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[selectedGun].gunModel.GetComponent<MeshRenderer>().sharedMaterial; //rendered passed next
 
-        updateAmmoCount();
+        GameManager.instance.updateAmmoCounttt(gunList[selectedGun].ammoCurrent);
     }
 
     void reload()
@@ -376,7 +368,7 @@ public class PlayerController : MonoBehaviour, TakesDamage
         {
             //relaod to refill the gun 
             gunList[selectedGun].ammoCurrent = gunList[selectedGun].ammoMax;
-            updateAmmoCount();
+            GameManager.instance.updateAmmoCounttt(gunList[selectedGun].ammoCurrent);
         }
     }
 }
