@@ -25,6 +25,7 @@ public class ButtonFunctions : MonoBehaviour
 
     public void quit()
     {
+        //CHANGE THIS TO QUIT TO MAIN MENU
     #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
     #else
