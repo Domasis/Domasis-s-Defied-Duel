@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: c7bd2981425ee914c9bf8b1c61132df2
+timeCreated: 1513628469
+licenseType: Store
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 21813
+  packageName: Sci-Fi Door
+  packageVersion: 1.1
+  assetPath: Assets/SciFi_Door/Demo.unity
+  uploadId: 219246

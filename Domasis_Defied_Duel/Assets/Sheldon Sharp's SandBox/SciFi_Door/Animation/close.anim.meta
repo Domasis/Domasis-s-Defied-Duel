@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 54882b8bbe843b2409afc26438a4d290
+timeCreated: 18446744011573954816
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 21813
+  packageName: Sci-Fi Door
+  packageVersion: 1.1
+  assetPath: Assets/SciFi_Door/Animation/close.anim
+  uploadId: 219246

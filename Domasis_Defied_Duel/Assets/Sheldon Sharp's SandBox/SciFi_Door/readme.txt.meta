@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f4ea8e4cbbc94974f8b3cc1066774d0e
+timeCreated: 18446744011573954816
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 21813
+  packageName: Sci-Fi Door
+  packageVersion: 1.1
+  assetPath: Assets/SciFi_Door/readme.txt
+  uploadId: 219246
