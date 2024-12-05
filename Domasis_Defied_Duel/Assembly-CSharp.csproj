@@ -99,7 +99,6 @@
     <Compile Include="Assets\Hanzzz\MeshDemolisher\Scripts\Internal\CDT\CDT_Public.cs" />
     <Compile Include="Assets\Scripts\Yoander Ferrer&apos;s Scripts\EnemySpawner.cs" />
     <Compile Include="Assets\Cody Jandes&apos;s Sandbox\Assets\Unity Store Downlaod\Low Poly Guns\Scripts\GunsMenu.cs" />
-    <Compile Include="Assets\Sheldon Sharp&apos;s SandBox\SciFi_Door\Script\door.cs" />
     <Compile Include="Assets\UnityTechnologies\ParticlePack\Shared\Ramps\Runtime\RampAsset.cs" />
     <Compile Include="Assets\UnityTechnologies\ParticlePack\Shared\Scripts\AdjustTimeScale.cs" />
     <Compile Include="Assets\Cody Jandes&apos;s Sandbox\Assets\Scripts\MainMenuControls.cs" />
@@ -1152,10 +1151,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{568AD2D2-0270-C0BD-D629-83F752CB8C67}</Project>
-      <Name>Assembly-CSharp-firstpass</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.RenderPipelines.Universal.2D.Runtime.csproj">
       <Project>{339E728C-4AD2-2D2C-A0F9-3B41022725E1}</Project>
       <Name>Unity.RenderPipelines.Universal.2D.Runtime</Name>
