@@ -16,17 +16,17 @@ public class LiveActor : MonoBehaviour
     [Header("Player Facing Values")]
 
     // Integer that stores the speed at which the liveActor will turn to rotate towards the player.
-    [SerializeField] int faceTargetSpeed;
+    [SerializeField] [Range(2, 15)] int faceTargetSpeed;
 
-    [SerializeField] float enemyViewConeAngle;
+    [SerializeField] [Range(75, 160)] float enemyViewConeAngle;
 
     float angleToPlayer;
 
     Vector3 playerDir;
 
-    [Header("Base Attributes")]
+    [Header("Enemy Health")]
     // Integer that stores the object's health.
-    [SerializeField] int hp;
+    [SerializeField] [Range(0, 25)] int hp;
 
     // Boolean that stores whether the player is in range.
     bool playerInRange;
@@ -45,7 +45,7 @@ public class LiveActor : MonoBehaviour
     public Transform HeadPos { get => headPos; set => headPos = value; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void Start()
     {
         Model = GetComponent<Renderer>();
 
@@ -59,10 +59,7 @@ public class LiveActor : MonoBehaviour
 
     void Update()
     {
-        if(playerInRange && CanSeePlayer())
-        {
-            FacePlayer();
-        }
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -82,7 +79,7 @@ public class LiveActor : MonoBehaviour
     }
 
     // Public method that handles GameObject rotation towards the player.
-    void FacePlayer()
+    public void FacePlayer()
     {
         // We get a quaternion from the LookRotation of the playerDir.
         Quaternion rot = Quaternion.LookRotation(PlayerDir);
@@ -91,7 +88,7 @@ public class LiveActor : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, FaceTargetSpeed * Time.deltaTime);
     }
 
-    bool CanSeePlayer()
+    public bool CanSeePlayer()
     {
         bool playerIsVisible = false;
 
