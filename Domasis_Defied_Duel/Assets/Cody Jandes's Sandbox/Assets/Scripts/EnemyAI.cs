@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 //CODY JANDES CREATED THIS SCRIPT 
 public class enemyAI : MonoBehaviour, TakesDamage
@@ -14,6 +15,13 @@ public class enemyAI : MonoBehaviour, TakesDamage
     Color colorOriginal;
 
     Color damageOne;
+
+    //Enemy HealthBar Practice TRIAL
+    private float healthGoAwayTimes = 3f;
+    private float timer;
+
+    [SerializeField] Slider healthBarSlider;
+    [SerializeField] Canvas healthBarCanvas;
 
     //Get and Set originalColor
     public Color GetOriginalColor()
@@ -42,18 +50,41 @@ public class enemyAI : MonoBehaviour, TakesDamage
         SetDamageOneColor(Color.red);
         GameManager.instance.updateGameGoal(1);
         
+        //TRIAL
+        if (healthBarSlider != null)
+        {
+            healthBarSlider.maxValue = enemyHP; //make sure to adjust in unity when necesarry
+            healthBarSlider.value = enemyHP;
+            healthBarCanvas.enabled = false;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //TRIAL
+        if (healthBarCanvas.enabled)
+        {
+            timer -=Time.deltaTime;
+            if(timer <= 0)
+            {
+                healthBarCanvas.enabled=false;
+            }
+        }
     }
 
     public void TakeSomeDamage(int amount)
     {
         //take away HP from enemy HP
         enemyHP -= amount;
+
+        //TRIAL
+        if (healthBarSlider != null && healthBarCanvas != null)
+        {
+            healthBarCanvas.enabled = true;
+            healthBarSlider.value = enemyHP;
+            timer = healthGoAwayTimes;
+        }
 
         //Start Coroutine to call flash hit
         StartCoroutine(flashHit());
