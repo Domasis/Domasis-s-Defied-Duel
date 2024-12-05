@@ -3,43 +3,34 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     GameObject theDoor;
-    private bool isPlayerNear = false; // Track if the player is near the door
-    [SerializeField] private KeyCode interactionKey = KeyCode.E; // Key to interact with the door
 
     void Start()
     {
         theDoor = GameObject.FindWithTag("SF_Door");
     }
 
-    void Update()
+    void OnTriggerStay(Collider obj)
     {
-        // Check if the player is near and presses the interaction key
-        if (isPlayerNear && Input.GetKeyDown(interactionKey))
+        // Check if the player is in the trigger and presses the "E" key
+        if (obj.CompareTag("Player") && Input.GetKeyDown(KeyCode.E)) // Use the "E" key for interaction
         {
-            if (theDoor.GetComponent<Animation>().IsPlaying("open"))
+            // Ensure we check if the door animation is playing and toggle between open and close
+            var doorAnimation = theDoor.GetComponent<Animation>();
+
+            // Debug: Print out the current animation playing
+            Debug.Log("Current Animation: " + doorAnimation.clip.name);
+
+            // If the "open" animation is already playing, play "close", otherwise play "open"
+            if (doorAnimation.IsPlaying("open"))
             {
-                theDoor.GetComponent<Animation>().Play("close");
+                Debug.Log("Switching to Close animation");
+                doorAnimation.CrossFade("close", 0.2f); // Smoothly transition to "close"
             }
             else
             {
-                theDoor.GetComponent<Animation>().Play("open");
+                Debug.Log("Switching to Open animation");
+                doorAnimation.CrossFade("open", 0.2f); // Smoothly transition to "open"
             }
-        }
-    }
-
-    void OnTriggerEnter(Collider obj)
-    {
-        if (obj.CompareTag("Player")) // Ensure only the player can interact
-        {
-            isPlayerNear = true; // Player is in range
-        }
-    }
-
-    void OnTriggerExit(Collider obj)
-    {
-        if (obj.CompareTag("Player")) // Ensure only the player can interact
-        {
-            isPlayerNear = false; // Player is out of range
         }
     }
 }
