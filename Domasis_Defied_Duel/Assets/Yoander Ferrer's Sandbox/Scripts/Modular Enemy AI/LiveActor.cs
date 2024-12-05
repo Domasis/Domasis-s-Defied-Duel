@@ -11,6 +11,10 @@ public class LiveActor : MonoBehaviour
     // Sphere collider, required for interactions between the player and other objects.
     SphereCollider actorCollider;
 
+    // Color instance that represents the original model color of our AI.
+    public Color origColor;
+
+    // Transform that stores where the object's "head" is, required in order to handle facing logic.
     [SerializeField] Transform headPos;
 
     [Header("Player Facing Values")]
@@ -18,10 +22,13 @@ public class LiveActor : MonoBehaviour
     // Integer that stores the speed at which the liveActor will turn to rotate towards the player.
     [SerializeField] [Range(2, 15)] int faceTargetSpeed;
 
+    // Editor exposed variable that stores the maximum angle at which the AI can "see" our player.
     [SerializeField] [Range(75, 160)] float enemyViewConeAngle;
 
+    // Float that tracks the angle from the AI to the player.
     float angleToPlayer;
 
+    // Vector3 that stores the player's position in world space.
     Vector3 playerDir;
 
     [Header("Enemy Health")]
@@ -43,6 +50,7 @@ public class LiveActor : MonoBehaviour
     public float EnemyViewConeAngle { get => enemyViewConeAngle; set => enemyViewConeAngle = value; }
     public bool PlayerInRange { get => playerInRange; set => playerInRange = value; }
     public Transform HeadPos { get => headPos; set => headPos = value; }
+    public Color OrigColor { get => origColor; set => origColor = value; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Start()
@@ -55,6 +63,8 @@ public class LiveActor : MonoBehaviour
         {
             ActorCollider.isTrigger = true;
         }
+
+        origColor = Model.material.color;
     }
 
     void Update()

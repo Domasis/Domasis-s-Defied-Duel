@@ -442,7 +442,7 @@ public class EnemyController : MonoBehaviour, TakesDamage, IHearSounds, IAlert
 
     }
     
-    public void ReactToSound(Vector3 invokingLocation)
+    public void React(Vector3 invokingLocation)
     {
         // We want them to only investigate a sound when they weren't just hit, or if they didn't already hear something.
         if (!IHeardSomething && !SomeoneHitMe)
@@ -471,7 +471,7 @@ public class EnemyController : MonoBehaviour, TakesDamage, IHearSounds, IAlert
             yield return null;
         }
 
-        // Finally, we wait for the time specified by our RoamTimer. This results in double the waiting period compared to roaming normally. This is deliberate.
+        // Finally, we wait for the time specified by our RoamTimer. This results in double the waiting period compared to roaming normally. This is deliberate, as investigations should take longer.
         yield return new WaitForSeconds(RoamTimer);
 
         IHeardSomething = false;
@@ -497,7 +497,7 @@ public class EnemyController : MonoBehaviour, TakesDamage, IHearSounds, IAlert
     {
         /* We need to find all of the enemies in this object's range. Because this is an enemy, we want it to notify enemies in a much larger radius.
            To do this, we create a Collider array that is populated from an OverlapSphere.*/
-        Collider[] hitObjects = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius * 2, 7);
+        Collider[] hitObjects = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius * 2);
 
         // For each collider in the array we've generated:
         foreach (Collider collider in hitObjects)
@@ -507,7 +507,7 @@ public class EnemyController : MonoBehaviour, TakesDamage, IHearSounds, IAlert
 
             /* If the component exists, we call its ReactToSound method, passing in a random location around the object that was destroyed.
             By adding a minimum roam distance, we limit the likelihood that all of the enemies try to path to the same location. */
-            heardSomething?.ReactToSound(((Random.insideUnitSphere * investigationRadius) + minRoamDist * 2) + transform.position);
+            heardSomething?.React(((Random.insideUnitSphere * investigationRadius) + minRoamDist * 2) + transform.position);
         }
     }
 }

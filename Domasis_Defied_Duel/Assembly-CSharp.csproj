@@ -73,7 +73,6 @@
     <Compile Include="Assets\Hanzzz\MeshDemolisher\Scripts\Internal\CDT\CDT_Filter.cs" />
     <Compile Include="Assets\Scripts\Yoander Ferrer&apos;s Scripts\Interfaces\IHearSounds.cs" />
     <Compile Include="Assets\Sheldon Sharp&apos;s SandBox\BrickBreakersound.cs" />
-    <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\Modular Enemy AI\EnemyStateManager.cs" />
     <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\Interfaces\GetHitSon.cs" />
     <Compile Include="Assets\Sheldon Sharp&apos;s SandBox\sheldonplayercontroller.cs" />
     <Compile Include="Assets\Cody Jandes&apos;s Sandbox\Assets\Scripts\ButtonFunctions.cs" />
