@@ -11,22 +11,29 @@ public class LiveActor : MonoBehaviour
     // Sphere collider, required for interactions between the player and other objects.
     SphereCollider actorCollider;
 
+    // Color instance that represents the original model color of our AI.
+    public Color origColor;
+
+    // Transform that stores where the object's "head" is, required in order to handle facing logic.
     [SerializeField] Transform headPos;
 
     [Header("Player Facing Values")]
 
     // Integer that stores the speed at which the liveActor will turn to rotate towards the player.
-    [SerializeField] int faceTargetSpeed;
+    [SerializeField] [Range(2, 15)] int faceTargetSpeed;
 
-    [SerializeField] float enemyViewConeAngle;
+    // Editor exposed variable that stores the maximum angle at which the AI can "see" our player.
+    [SerializeField] [Range(75, 160)] float enemyViewConeAngle;
 
+    // Float that tracks the angle from the AI to the player.
     float angleToPlayer;
 
+    // Vector3 that stores the player's position in world space.
     Vector3 playerDir;
 
-    [Header("Base Attributes")]
+    [Header("Enemy Health")]
     // Integer that stores the object's health.
-    [SerializeField] int hp;
+    [SerializeField] [Range(0, 25)] int hp;
 
     // Boolean that stores whether the player is in range.
     bool playerInRange;
@@ -43,9 +50,10 @@ public class LiveActor : MonoBehaviour
     public float EnemyViewConeAngle { get => enemyViewConeAngle; set => enemyViewConeAngle = value; }
     public bool PlayerInRange { get => playerInRange; set => playerInRange = value; }
     public Transform HeadPos { get => headPos; set => headPos = value; }
+    public Color OrigColor { get => origColor; set => origColor = value; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void Start()
     {
         Model = GetComponent<Renderer>();
 
@@ -55,14 +63,13 @@ public class LiveActor : MonoBehaviour
         {
             ActorCollider.isTrigger = true;
         }
+
+        origColor = Model.material.color;
     }
 
     void Update()
     {
-        if(playerInRange && CanSeePlayer())
-        {
-            FacePlayer();
-        }
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -82,7 +89,7 @@ public class LiveActor : MonoBehaviour
     }
 
     // Public method that handles GameObject rotation towards the player.
-    void FacePlayer()
+    public void FacePlayer()
     {
         // We get a quaternion from the LookRotation of the playerDir.
         Quaternion rot = Quaternion.LookRotation(PlayerDir);
@@ -91,7 +98,7 @@ public class LiveActor : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, FaceTargetSpeed * Time.deltaTime);
     }
 
-    bool CanSeePlayer()
+    public bool CanSeePlayer()
     {
         bool playerIsVisible = false;
 

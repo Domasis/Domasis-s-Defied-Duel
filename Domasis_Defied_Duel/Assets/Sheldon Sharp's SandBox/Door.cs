@@ -2,35 +2,45 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    GameObject theDoor;
+    private Animation doorAnimation; 
+    private bool isDoorOpen = false; 
+    private bool canInteract = true; 
 
     void Start()
     {
-        theDoor = GameObject.FindWithTag("SF_Door");
+        
+        doorAnimation = GetComponent<Animation>();
+
+        
+        if (doorAnimation == null)
+        {
+            Debug.LogError("No Animation component found on " + gameObject.name);
+        }
+        else
+        {
+           
+            doorAnimation.Stop();
+        }
     }
 
     void OnTriggerStay(Collider obj)
     {
-        // Check if the player is in the trigger and presses the "E" key
-        if (obj.CompareTag("Player") && Input.GetKeyDown(KeyCode.E)) // Use the "E" key for interaction
+        
+        if (obj.CompareTag("Player") && Input.GetKeyDown(KeyCode.E) && canInteract)
         {
-            // Ensure we check if the door animation is playing and toggle between open and close
-            var doorAnimation = theDoor.GetComponent<Animation>();
+           
+            doorAnimation.Play("open");
+            isDoorOpen = true; 
+            canInteract = false; 
+        }
+    }
 
-            // Debug: Print out the current animation playing
-            Debug.Log("Current Animation: " + doorAnimation.clip.name);
-
-            // If the "open" animation is already playing, play "close", otherwise play "open"
-            if (doorAnimation.IsPlaying("open"))
-            {
-                Debug.Log("Switching to Close animation");
-                doorAnimation.CrossFade("close", 0.2f); // Smoothly transition to "close"
-            }
-            else
-            {
-                Debug.Log("Switching to Open animation");
-                doorAnimation.CrossFade("open", 0.2f); // Smoothly transition to "open"
-            }
+    void OnTriggerExit(Collider obj)
+    {
+       
+        if (obj.CompareTag("Player"))
+        {
+            
         }
     }
 }

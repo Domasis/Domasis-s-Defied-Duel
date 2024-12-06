@@ -116,7 +116,7 @@ public class DestructibleObstacle1 : MonoBehaviour, TakesDamage, IAlert
             IHearSounds heardSomething = hitObject.GetComponent<IHearSounds>();
 
             // If that collider is valid (the ? operator is the same as saying if (obj != null)), we call its ReactToSound method.
-            heardSomething?.ReactToSound((Random.insideUnitSphere * investigationRange) + transform.position);
+            heardSomething?.React((Random.insideUnitSphere * investigationRange) + transform.position);
 
         }
     }
