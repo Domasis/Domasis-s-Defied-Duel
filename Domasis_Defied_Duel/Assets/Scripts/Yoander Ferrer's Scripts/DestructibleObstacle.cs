@@ -103,7 +103,7 @@ public class DestructibleObstacle : MonoBehaviour, TakesDamage, MakesSound
 
             IHearSounds hearSounds = collider.gameObject.GetComponent<IHearSounds>();
 
-            hearSounds?.ReactToSound((Random.insideUnitSphere * investigationRange) + transform.position);
+            hearSounds?.React((Random.insideUnitSphere * investigationRange) + transform.position);
 
         }
 

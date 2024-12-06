@@ -340,7 +340,7 @@ public class IterativeEnemyController : MonoBehaviour, TakesDamage, IHearSounds
         }
     }
 
-    public void ReactToSound(Vector3 invokingLocation)
+    public void React(Vector3 invokingLocation)
     {
         IHeardSomething = true;
         heardSoundLocation = invokingLocation;
