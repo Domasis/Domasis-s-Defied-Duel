@@ -303,9 +303,18 @@ public class OffensiveEnemyController : LiveActor, TakesDamage, IHearSounds, IAl
         }
 
         // Finally, we wait for the time specified by our RoamTimer. This results in double the waiting period compared to roaming normally. This is deliberate, as investigations should take longer.
-        yield return new WaitForSeconds(RoamTimer);
+        yield return new WaitForSeconds(RoamTimer * 2);
 
-        IsInvestigating = WasHit = HeardSomething = false;
+        IsInvestigating = false;
+
+        if (WasHit)
+        {
+            WasHit = false;
+        }    
+        else if (HeardSomething)
+        {
+            HeardSomething = false;
+        }
 
     }
 
