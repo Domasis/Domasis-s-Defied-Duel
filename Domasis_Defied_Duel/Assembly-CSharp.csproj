@@ -69,7 +69,9 @@
     <Compile Include="Assets\Hanzzz\MeshDemolisher\Scripts\Internal\CDT\CDT_Field.cs" />
     <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\HeyCharMovePls.cs" />
     <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\Modular Enemy AI\LiveActor.cs" />
+    <Compile Include="Assets\Sheldon Sharp&apos;s SandBox\Mountain Terrain rocks and tree\Script\Camera\FlyCameraControl.cs" />
     <Compile Include="Assets\Hanzzz\MeshDemolisher\Scripts\Internal\CDT\CDT_Filter.cs" />
+    <Compile Include="Assets\Sheldon Sharp&apos;s SandBox\Mountain Terrain rocks and tree\Script\Camera\CameraControl.cs" />
     <Compile Include="Assets\Scripts\Yoander Ferrer&apos;s Scripts\Interfaces\IHearSounds.cs" />
     <Compile Include="Assets\Sheldon Sharp&apos;s SandBox\BrickBreakersound.cs" />
     <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\Interfaces\GetHitSon.cs" />
