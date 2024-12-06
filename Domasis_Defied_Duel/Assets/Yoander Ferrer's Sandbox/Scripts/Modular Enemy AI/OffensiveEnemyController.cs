@@ -2,11 +2,12 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(CapsuleCollider))]
-public class OffensiveEnemyController : LiveActor, TakesDamage, IHearSounds
+public class OffensiveEnemyController : LiveActor, TakesDamage, IHearSounds, IAlert
 {
     // IEnemyState derived class instances that contain the logic for each state the enemy is in.
     private static OnAttackState attackState = new();
@@ -28,6 +29,19 @@ public class OffensiveEnemyController : LiveActor, TakesDamage, IHearSounds
 
     // Editor exposed GameObject that contains our bullet, which our AI will fire.
     [SerializeField] GameObject bullet;
+
+    [Header("Enemy Health UI")]
+    // Editor exposed slider that tracks the health of the enemy as it is updated.
+    [SerializeField] Slider healthBarSlider;
+
+    // Editor exposed slider that tracks the canvas that stores the enemy's health.
+    [SerializeField] Canvas healthBarCanvas;
+
+    // Float that tracks lifetime of healthbar visibility.
+    private float healthBarVisibilityTime = 3f;
+
+    // Float that tracks time elapsed.
+    private float timer;
 
     [Header("Animation and Motion")]
     // Editor exposed Navigational Mesh Agent that allows our enemy to intelligently path and roam.
@@ -96,6 +110,10 @@ public class OffensiveEnemyController : LiveActor, TakesDamage, IHearSounds
     public GameObject Bullet { get => bullet; set => bullet = value; }
     public bool IsShooting { get => isShooting; set => isShooting = value; }
     public float OriginalStoppingDistance { get => originalStoppingDistance; set => originalStoppingDistance = value; }
+    public Slider HealthBarSlider { get => healthBarSlider; set => healthBarSlider = value; }
+    public Canvas HealthBarCanvas { get => healthBarCanvas; set => healthBarCanvas = value; }
+    public float HealthBarVisibilityTime { get => healthBarVisibilityTime; set => healthBarVisibilityTime = value; }
+    public float Timer { get => timer; set => timer = value; }
 
 
 
@@ -130,6 +148,12 @@ public class OffensiveEnemyController : LiveActor, TakesDamage, IHearSounds
 
         // Finally, we get the object's spawn location as its original location, so that our roam knows what point to roam around from.
         OrigLocation = transform.position;
+
+        if (healthBarSlider != null)
+        {
+            healthBarSlider.maxValue = healthBarSlider.value = HP;
+            healthBarCanvas.enabled = false;
+        }
     }
 
     // Update is called once per frame
@@ -137,15 +161,46 @@ public class OffensiveEnemyController : LiveActor, TakesDamage, IHearSounds
     {
         UpdateAnim();
         ManageState();
+        HealthFacePlayer();
+        DisableHealthbar();
+        
     }
 
     public void TakeSomeDamage(int amount)
     {
         HP -= amount;
+        EnableHealthbar();
         StartCoroutine(FlashRed());
         InvestigationLoc = GameManager.instance.player.transform.position;
         WasHit = true;
+
+        if (HP <= 0)
+        {
+            Destroy(gameObject);
+        }
         
+    }
+
+    private void DisableHealthbar()
+    {
+        if (HealthBarCanvas.enabled)
+        {
+            timer -= Time.deltaTime;
+            if (timer <= 0)
+            {
+                HealthBarCanvas.enabled = false;
+            }
+        }
+    }
+
+    private void EnableHealthbar()
+    {
+        if (HealthBarSlider != null && HealthBarCanvas != null)
+        {
+            HealthBarCanvas.enabled = true;
+            HealthBarSlider.value = HP;
+            timer = healthBarVisibilityTime;
+        }
     }
 
     public void React(Vector3 invokingLocation)
@@ -156,6 +211,11 @@ public class OffensiveEnemyController : LiveActor, TakesDamage, IHearSounds
             InvestigationLoc = invokingLocation;
 
         }
+    }
+
+    private void OnDestroy()
+    {
+        AlertEnemies();
     }
 
     // IEnumerator method that allows our AI to roam around its spawn point.
@@ -275,5 +335,32 @@ public class OffensiveEnemyController : LiveActor, TakesDamage, IHearSounds
             Instantiate(bullet, shootPos.position, transform.rotation);
 
         }
+    }
+
+    public void AlertEnemies()
+    {
+        /* We need to find all of the enemies in this object's range. Because this is an enemy, we want it to notify enemies in a much larger radius.
+           To do this, we create a Collider array that is populated from an OverlapSphere.*/
+        Collider[] hitObjects = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius * 2);
+
+        // For each collider in the array we've generated:
+        foreach (Collider collider in hitObjects)
+        {
+            // We check for an IHearSounds component.
+            IHearSounds heardSomething = collider.GetComponent<IHearSounds>();
+
+            /* If the component exists, we call its ReactToSound method, passing in a random location around the object that was destroyed.
+            By adding a minimum roam distance, we limit the likelihood that all of the enemies try to path to the same location. */
+            heardSomething?.React(((Random.insideUnitSphere * investigationRadius) + minRoamDist * 2) + transform.position);
+        }
+    }
+
+    private void HealthFacePlayer()
+    {
+        // We get a quaternion from the LookRotation of the playerDir.
+        Quaternion rot = Quaternion.LookRotation(PlayerDir);
+
+        // We then rotate the enemy AI using a lerp, which lerps from the model's current rotation to the rot, in deltaTime.
+        HealthBarCanvas.transform.rotation = Quaternion.Lerp(HealthBarCanvas.transform.rotation, rot, FaceTargetSpeed * 100 * Time.deltaTime);
     }
 }
