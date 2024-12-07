@@ -8,11 +8,6 @@ public class MainMenuControls : MonoBehaviour
         SceneManager.LoadScene("DDD_Official_Release"); //load desired starting scene - testing own sandbox for now 
     }
 
-    public void OpenOptions()
-    {
-        SceneManager.LoadScene("OptionsMenuScene"); //load the options
-    }
-
     public void OpenCredits()
     {
         SceneManager.LoadScene("CreditsScene"); //load credits
