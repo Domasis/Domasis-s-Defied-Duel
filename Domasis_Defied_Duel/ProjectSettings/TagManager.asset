@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Player Spawn Position
   - SF_Door
+  - Radar
   layers:
   - Default
   - TransparentFX

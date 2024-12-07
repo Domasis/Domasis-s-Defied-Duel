@@ -110,6 +110,7 @@
     <Compile Include="Assets\UnityTechnologies\ParticlePack\Shared\Scripts\SimpleCharacterMotor.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Hanzzz\MeshDemolisher\Scripts\Internal\FloatStruct.cs" />
+    <Compile Include="Assets\Sheldon Sharp&apos;s SandBox\ArmorPickup.cs" />
     <Compile Include="Assets\Hanzzz\MeshDemolisher\Scripts\PointGenerator.cs" />
     <Compile Include="Assets\Hanzzz\MeshDemolisher\Scripts\MeshDemolisher.cs" />
     <Compile Include="Assets\Movement.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="Assets\Scripts\Cody Jandes&apos;s Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Cody Jandes&apos;s Scripts\PickupSystem.cs" />
     <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\PlayerLocator.cs" />
+    <Compile Include="Assets\Sheldon Sharp&apos;s SandBox\sheldonGameManager.cs" />
     <Compile Include="Assets\Scripts\Cody Jandes&apos;s Scripts\Objective.cs" />
     <Compile Include="Assets\Sheldon Sharp&apos;s SandBox\Door.cs" />
     <Compile Include="Assets\Hanzzz\MeshDemolisher\Scripts\Internal\CDT\CDT_FaceRecovery.cs" />

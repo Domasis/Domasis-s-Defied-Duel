@@ -1,123 +1,116 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-// CODY JANDES CREATED THIS SCRIPT 
-
-// Small modification made by Yoander Ferrer to support projectile shooting.
-
-public class SheldonPlayerController : MonoBehaviour, TakesDamage
+public class sheldonplayercontroller : MonoBehaviour, TakesDamage
 {
-    // CODY JANDES CREATED THIS SCRIPT 
-
-    //ignore player mask 
+    [Header("-----Components-----")]
     [SerializeField] LayerMask ignoreMask;
-
-    //Initiale character controller into script
     [SerializeField] CharacterController controller;
 
-    //Player HP
-    [SerializeField] int HP;
+    [Header("-----Health Stats-----")]
+    [SerializeField][UnityEngine.Range(1, 10)] int HP;
+    [SerializeField][UnityEngine.Range(1, 10)] int armor;
 
-    //Player speed
-    [SerializeField] int speed;
+    [Header("-----Movement-----")]
+    [SerializeField][UnityEngine.Range(1, 10)] int speed;
+    [SerializeField][UnityEngine.Range(1, 5)] int sprintMod;
+    [SerializeField][UnityEngine.Range(1, 3)] int jumpMax;
+    [SerializeField][UnityEngine.Range(5, 15)] int jumpSpeed;
+    [SerializeField][UnityEngine.Range(25, 50)] int gravity;
 
-    //Sprint Mod
-    [SerializeField] int sprintMod;
+    [Header("-----Combat-----")]
+    [SerializeField] List<GunStats> gunList = new List<GunStats>();
+    [SerializeField][UnityEngine.Range(0, 50)] int shootDamage;
+    [SerializeField][UnityEngine.Range(0, 1)] float shootRate;
+    [SerializeField][UnityEngine.Range(1, 1000)] int shootDistance;
+    [SerializeField] GameObject gunModel;
+    [SerializeField] GameObject muzzleFlash;
 
-    //Jump counter (max times you can jump
-    [SerializeField] int jumpMax;
+    [Header("-----Audio-----")]
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioClip[] audJump;
+    [SerializeField][UnityEngine.Range(0, 1)] float audJumpVolume;
+    [SerializeField] AudioClip[] audHurt;
+    [SerializeField][UnityEngine.Range(0, 1)] float audHurtVolume;
+    [SerializeField] AudioClip[] audFootsteps;
+    [SerializeField][UnityEngine.Range(0, 1)] float audFootstepVolume;
 
-    //How fast we can jump
-    [SerializeField] int jumpSpeed;
-
-    //Setting gravity value
-    [SerializeField] int gravity;
-
-    //Shoot damage amount
-    [SerializeField] int shootDamage;
-
-    //Rate of fire
-    [SerializeField] float shootRate;
-
-    [SerializeField] int shootDistance;
-
-    //Vector3 to move 
     Vector3 movePlayer;
-
-    //Gravity and keeping track of jump
     Vector3 playerVelocity;
-
-    //Is or is not sprinting
     bool isSprinting;
-
-    //Is or is not shooting
     bool isShooting;
-
-    //Jump counter
+    bool isPlayingSteps;
     int jumpCount;
-
-    //CHANGE THIS TO GETTER
     int HPOriginal;
+    int armorOriginal;
+    int selectedGun;
 
-    // Editor exposed variable that stores the bullet that the player will fire. - Yoander
     [SerializeField] GameObject bullet;
-
-    // Editor exposed variable that stores the position the bullet will fire from. - Yoander
     [SerializeField] Transform shootPos;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         HPOriginal = HP;
-        // Removed the updatePlayerUI method call
+        armorOriginal = armor;
+        spawnPlayer();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.red);
-        movement();
+        if (!sheldonGameManager.instance.isPaused)
+        {
+            movement();
+            selectGun();
+            reload();
+        }
         sprint();
+    }
+
+    public void spawnPlayer()
+    {
+        controller.enabled = false;
+        transform.position = sheldonGameManager.instance.GetPlayerSpawnPoint().transform.position;
+        controller.enabled = true;
+
+        HP = HPOriginal;
+        armor = armorOriginal;
+        updatePlayerUI();
     }
 
     void movement()
     {
         if (controller.isGrounded)
         {
-            //Make jump count to zero so we can jump again
             jumpCount = 0;
-            //Zero out vector3 to avoid negative numbers, reset number
             playerVelocity = Vector3.zero;
         }
 
-        // Move player with preset axes and focus controls on where player is looking and moving
         movePlayer = (transform.forward * Input.GetAxis("Vertical")) +
                      (transform.right * Input.GetAxis("Horizontal"));
-
-        // Use the move player and the player controller to move the player and the inputs created
         controller.Move(movePlayer * speed * Time.deltaTime);
-
-        // Jump command
         jump();
-
-        // Computations to make character jump 
         controller.Move(playerVelocity * Time.deltaTime);
-        playerVelocity.y -= gravity * Time.deltaTime; // Handle gravity into jump pulling down
+        playerVelocity.y -= gravity * Time.deltaTime;
 
-        // If we left button click and we are not shooting
-        if (Input.GetButton("Fire1") && !isShooting)
+        if (Input.GetButton("Fire1") && gunList.Count > 0 && gunList[selectedGun].ammoCurrent > 0 && !isShooting)
         {
-            StartCoroutine(shoot()); // How to call IEnumerator or coroutine
+            StartCoroutine(shoot());
+        }
+
+        if (controller.isGrounded && movePlayer.magnitude > 0.3f && !isPlayingSteps)
+        {
+            StartCoroutine(playFootsteps());
         }
     }
 
     void jump()
     {
-        // If jump pressed and jump count is less than max
         if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
         {
-            jumpCount++; // Increment jump
-            playerVelocity.y = jumpSpeed; // How fast we can jump and move on y axis
+            jumpCount++;
+            playerVelocity.y = jumpSpeed;
+            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVolume);
         }
     }
 
@@ -135,36 +128,126 @@ public class SheldonPlayerController : MonoBehaviour, TakesDamage
         }
     }
 
-    // iEnumerators are timer
+    IEnumerator playFootsteps()
+    {
+        isPlayingSteps = true;
+        aud.PlayOneShot(audFootsteps[Random.Range(0, audFootsteps.Length)], audFootstepVolume);
+        yield return new WaitForSeconds(isSprinting ? 0.25f : 0.5f);
+        isPlayingSteps = false;
+    }
+
     IEnumerator shoot()
     {
         isShooting = true;
+        gunList[selectedGun].ammoCurrent--;
+        sheldonGameManager.instance.updateAmmoCounttt(gunList[selectedGun].ammoCurrent);
+        aud.PlayOneShot(gunList[selectedGun].shootSound[Random.Range(0, gunList[selectedGun].shootSound.Length)], gunList[selectedGun].shootVolume);
+        StartCoroutine(flashMuzzle());
 
-        // Instantiate bullet at shoot position
-        Instantiate(bullet, shootPos.position, Camera.main.transform.rotation);
+        RaycastHit hit;
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDistance, ~ignoreMask))
+        {
+            TakesDamage damage = hit.collider.GetComponent<TakesDamage>();
+            if (damage != null)
+            {
+                damage.TakeSomeDamage(shootDamage);
+            }
+        }
 
-        // Wait for shoot to finish 
+        Instantiate(gunList[selectedGun].hitEffect, hit.point, Quaternion.identity);
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
 
+    IEnumerator flashMuzzle()
+    {
+        muzzleFlash.SetActive(true);
+        yield return new WaitForSeconds(0.15f);
+        muzzleFlash.SetActive(false);
+    }
+
     public void TakeSomeDamage(int amount)
     {
-        HP -= amount;
-        // Removed the updatePlayerUI call
-        StartCoroutine(flashDamage());
+        if (armor > 0)
+        {
+            int remainingDamage = amount - armor;
+            armor = Mathf.Max(armor - amount, 0);
 
-        // I am Dead
+            if (remainingDamage > 0)
+                HP -= remainingDamage;
+        }
+        else
+        {
+            HP -= amount;
+        }
+
+        aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVolume);
+        updatePlayerUI();
+
         if (HP <= 0)
         {
-            GameManager.instance.youLose();
+            sheldonGameManager.instance.youLose();
         }
     }
 
-    IEnumerator flashDamage()
+    public void updatePlayerUI()
     {
-        GameManager.instance.playerDamageScreen.SetActive(true);
-        yield return new WaitForSeconds(.1f);
-        GameManager.instance.playerDamageScreen.SetActive(false);
+        sheldonGameManager.instance.playerHPBar.fillAmount = (float)HP / HPOriginal;
+        sheldonGameManager.instance.playerArmorBar.fillAmount = (float)armor / armorOriginal; // Add UI update for armor
+    }
+
+    public void PickUpArmor(int armorAmount)
+    {
+        armor = Mathf.Min(armor + armorAmount, armorOriginal);
+        updatePlayerUI();
+    }
+
+    public void getGunStats(GunStats gun)
+    {
+        gunList.Add(gun);
+        selectedGun = gunList.Count - 1;
+        shootDamage = gun.shootDamage;
+        shootDistance = gun.shootDistance;
+        shootRate = gun.shootRate;
+
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gun.gunModel.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.gunModel.GetComponent<MeshRenderer>().sharedMaterial;
+
+        sheldonGameManager.instance.updateAmmoCounttt(gunList[selectedGun].ammoCurrent);
+    }
+
+    void selectGun()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count - 1)
+        {
+            selectedGun++;
+            changeGun();
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedGun > 0)
+        {
+            selectedGun--;
+            changeGun();
+        }
+    }
+
+    void changeGun()
+    {
+        shootDamage = gunList[selectedGun].shootDamage;
+        shootDistance = gunList[selectedGun].shootDistance;
+        shootRate = gunList[selectedGun].shootRate;
+
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].gunModel.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[selectedGun].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
+
+        sheldonGameManager.instance.updateAmmoCounttt(gunList[selectedGun].ammoCurrent);
+    }
+
+    void reload()
+    {
+        if (Input.GetButtonDown("Reload") && gunList.Count > 0)
+        {
+            gunList[selectedGun].ammoCurrent = gunList[selectedGun].ammoMax;
+            sheldonGameManager.instance.updateAmmoCounttt(gunList[selectedGun].ammoCurrent);
+        }
     }
 }
