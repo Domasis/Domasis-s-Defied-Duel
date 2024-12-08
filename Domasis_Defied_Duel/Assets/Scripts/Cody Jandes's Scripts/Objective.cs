@@ -132,6 +132,8 @@ public class Objective : MonoBehaviour, IAlert
 
     private void OnDestroy()
     {
+        GameManager.instance.GetInteractPopup().SetActive(false);
+
         if (GameManager.instance.GetObjectiveCount() > 0)
         AlertEnemies();
     }

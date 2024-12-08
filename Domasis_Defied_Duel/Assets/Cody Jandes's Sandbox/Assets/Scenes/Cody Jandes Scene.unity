@@ -1027,6 +1027,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7619034650225835889, guid: a7f6bceefacfcc448a4d23fedb36c864, type: 3}
+      propertyPath: armor
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7619034650225835889, guid: a7f6bceefacfcc448a4d23fedb36c864, type: 3}
       propertyPath: ammoCountText
       value: 
       objectReference: {fileID: 1958406936}
@@ -1179,6 +1183,10 @@ PrefabInstance:
     - target: {fileID: 701487887845703374, guid: 6bca1ebe21bc4a447978e24bbe93888f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 731148458763132937, guid: 6bca1ebe21bc4a447978e24bbe93888f, type: 3}
+      propertyPath: playerArmorBar
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5239406785399286228, guid: 6bca1ebe21bc4a447978e24bbe93888f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

@@ -66,8 +66,6 @@ public class GameManager : MonoBehaviour
     //Control Health bar
     public Image playerHPBar;
 
-    public Image playerArmorBar;
-
     //Take damage screen
     public GameObject playerDamageScreen;
 
@@ -186,14 +184,6 @@ public class GameManager : MonoBehaviour
         if (ammoCountText != null)
         {
             ammoCountText.text = ammoCurr.ToString("F0");
-        }
-    }
-
-    public void updateArmorUI(int armorCurrent, int armorMax)
-    {
-        if (playerArmorBar != null)
-        {
-            playerArmorBar.fillAmount = (float)armorCurrent / armorMax;
         }
     }
 
