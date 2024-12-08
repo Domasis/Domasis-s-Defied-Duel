@@ -5,7 +5,7 @@ public class MainMenuControls : MonoBehaviour
 {
    public void StartGame()
     {
-        SceneManager.LoadScene("DDD_Official_Release"); //load desired starting scene - testing own sandbox for now 
+        SceneManager.LoadScene("BEL_Level_Tutorial"); //load desired starting scene - testing own sandbox for now 
     }
 
     public void OpenCredits()
