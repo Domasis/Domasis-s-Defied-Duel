@@ -51,6 +51,8 @@ public class InteractiveTooltipObj : MonoBehaviour
         {
             // We disable the interaction popup as the player no longer needs to be reminded on how to interact with the object.
             GameManager.instance.GetInteractPopup().SetActive(false);
+
+            // We also double check if the player is still looking at a tooltip, and disable it.
         }
     }
 }

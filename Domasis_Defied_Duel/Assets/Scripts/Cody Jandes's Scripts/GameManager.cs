@@ -86,11 +86,6 @@ public class GameManager : MonoBehaviour
         playerSpawnPosition = newPlayerSpawn;
     }
 
-    // Armor-related variables
-    [SerializeField] private int currentArmor = 0;
-    [SerializeField] private int maxArmor = 100;
-    [SerializeField] TMP_Text armorCountText;
-
     // Use getters and setters normally
     public bool isPaused;
 
@@ -121,7 +116,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetButtonDown("Cancel") || Input.GetButtonDown("Menu"))
         {
             // To ensure that the game does not attempt to pause while a tooltip is open (as it is already paused), we check here to make sure that the tooltip isn't visible, as well as if our menu isn't active. - Yoander
-            if (menuActive == null && InteractiveTooltipManager.instance.TipCanvas.enabled == false)
+            if (menuActive == null)
             {
                 statePause();
 
@@ -200,21 +195,6 @@ public class GameManager : MonoBehaviour
         statePause();
         menuActive = menuWin;
         menuActive.SetActive(true);
-    }
-
-    // Armor-related methods
-    public void ApplyArmor(int amount)
-    {
-        // Increase the armor but don't exceed the max armor value
-        currentArmor = Mathf.Clamp(currentArmor + amount, 0, maxArmor);
-
-        // Update the armor UI if necessary
-        if (armorCountText != null)
-        {
-            armorCountText.text = $"Armor: {currentArmor}";
-        }
-
-        Debug.Log($"Armor applied. Current Armor: {currentArmor}, Max Armor: {maxArmor}");
     }
 }
 
