@@ -13,6 +13,11 @@ public class MainMenuControls : MonoBehaviour
         SceneManager.LoadScene("CreditsScene"); //load credits
     }
 
+    public void OpenShowcase()
+    {
+        SceneManager.LoadScene("BEL_Level_Showcase"); //load showcase level
+    }
+
     public void QuitGame()
     {
         //Use previous code for quittting the application
