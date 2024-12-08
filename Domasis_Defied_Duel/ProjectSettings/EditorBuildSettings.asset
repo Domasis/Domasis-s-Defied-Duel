@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Levels/DDD_Official_Release.unity
+    path: Assets/Levels/BEL_Level_Final.unity
     guid: 694b1ad55cb9df142a413f7823f2710c
   - enabled: 1
     path: Assets/Cody Jandes's Sandbox/Assets/Scenes/CreditsScene.unity
