@@ -1100,14 +1100,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 241359729104694227, guid: 6bca1ebe21bc4a447978e24bbe93888f, type: 3}
-      propertyPath: m_VerticalAlignment
-      value: 512
-      objectReference: {fileID: 0}
-    - target: {fileID: 241359729104694227, guid: 6bca1ebe21bc4a447978e24bbe93888f, type: 3}
-      propertyPath: m_HorizontalAlignment
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 701487887845703374, guid: 6bca1ebe21bc4a447978e24bbe93888f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1188,82 +1180,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2468377120452457294, guid: 6bca1ebe21bc4a447978e24bbe93888f, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2468377120452457294, guid: 6bca1ebe21bc4a447978e24bbe93888f, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2468377120452457294, guid: 6bca1ebe21bc4a447978e24bbe93888f, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2468377120452457294, guid: 6bca1ebe21bc4a447978e24bbe93888f, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2468377120452457294, guid: 6bca1ebe21bc4a447978e24bbe93888f, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 600
-      objectReference: {fileID: 0}
-    - target: {fileID: 2468377120452457294, guid: 6bca1ebe21bc4a447978e24bbe93888f, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 321
-      objectReference: {fileID: 0}
-    - target: {fileID: 2468377120452457294, guid: 6bca1ebe21bc4a447978e24bbe93888f, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -48
-      objectReference: {fileID: 0}
-    - target: {fileID: 2571782408444008870, guid: 6bca1ebe21bc4a447978e24bbe93888f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5239406785399286228, guid: 6bca1ebe21bc4a447978e24bbe93888f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 795886502}
-    - target: {fileID: 5386538580977552340, guid: 6bca1ebe21bc4a447978e24bbe93888f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8029456497399616665, guid: 6bca1ebe21bc4a447978e24bbe93888f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 795886502}
-    - target: {fileID: 8420239495174042019, guid: 6bca1ebe21bc4a447978e24bbe93888f, type: 3}
-      propertyPath: m_text
-      value: Hackable Objects Remaining
-      objectReference: {fileID: 0}
-    - target: {fileID: 8420239495174042019, guid: 6bca1ebe21bc4a447978e24bbe93888f, type: 3}
-      propertyPath: m_fontColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8420239495174042019, guid: 6bca1ebe21bc4a447978e24bbe93888f, type: 3}
-      propertyPath: m_fontColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8420239495174042019, guid: 6bca1ebe21bc4a447978e24bbe93888f, type: 3}
-      propertyPath: m_fontColor.r
-      value: 0.11855316
-      objectReference: {fileID: 0}
-    - target: {fileID: 8420239495174042019, guid: 6bca1ebe21bc4a447978e24bbe93888f, type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 4278255390
-      objectReference: {fileID: 0}
-    - target: {fileID: 8420239495174042019, guid: 6bca1ebe21bc4a447978e24bbe93888f, type: 3}
-      propertyPath: m_VerticalAlignment
-      value: 512
-      objectReference: {fileID: 0}
-    - target: {fileID: 8420239495174042019, guid: 6bca1ebe21bc4a447978e24bbe93888f, type: 3}
-      propertyPath: m_HorizontalAlignment
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8551511344645416989, guid: 6bca1ebe21bc4a447978e24bbe93888f, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 450
-      objectReference: {fileID: 0}
     - target: {fileID: 9203150968789429096, guid: 6bca1ebe21bc4a447978e24bbe93888f, type: 3}
       propertyPath: m_Name
       value: UI
