@@ -184,6 +184,7 @@ public class GameManager : MonoBehaviour
 
     public void youLose()
     {
+        GetInteractPopup().SetActive(false);
         statePause();
         menuActive = menuLose;
         menuActive.SetActive(true);
@@ -191,6 +192,7 @@ public class GameManager : MonoBehaviour
 
     public void youWin()
     {
+        GetInteractPopup().SetActive(false);
         // Pause and pull win menu
         statePause();
         menuActive = menuWin;

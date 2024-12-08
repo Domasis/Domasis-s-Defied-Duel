@@ -147,6 +147,10 @@ public class Objective : MonoBehaviour, IAlert
         // For each collider in the array we've generated:
         foreach (Collider collider in hitObjects)
         {
+            if (collider.GetComponent<EnemySpawner>() != null)
+            {
+                collider.GetComponent<EnemySpawner>().StartSpawning = true;
+            }
             // We check for an IHearSounds component.
             IHearSounds heardSomething = collider.GetComponent<IHearSounds>();
 
