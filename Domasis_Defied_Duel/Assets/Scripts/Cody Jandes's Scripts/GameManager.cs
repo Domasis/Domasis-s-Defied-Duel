@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 //CODY JANDES CREATED THIS SCRIPT 
 public class GameManager : MonoBehaviour
@@ -22,6 +23,9 @@ public class GameManager : MonoBehaviour
 
     //Checkpoint popup
     [SerializeField] GameObject checkpointPopup;
+
+    //Interactive object popup
+    [SerializeField] GameObject interactPopup;
 
     //Alertable Enemies
     [SerializeField] GameObject[] alertableEnemies;
@@ -47,6 +51,16 @@ public class GameManager : MonoBehaviour
     public void SetCheckpointPopup(GameObject thisCheckpointPopup)
     {
         checkpointPopup = thisCheckpointPopup;
+    }
+
+    public GameObject GetInteractPopup()
+    {
+        return interactPopup;
+    }
+
+    public void SetInteractPopup(GameObject thisInteractPopup)
+    {
+        interactPopup = thisInteractPopup;
     }
 
     //Control Health bar

@@ -12,6 +12,7 @@ public class AudioSettingsController : MonoBehaviour
     [SerializeField] Toggle _toggle;
     private bool _disableToggleEvent;
 
+
     private void Awake()
     {
         _slider.onValueChanged.AddListener(HandleSliderValueChanged);
@@ -54,4 +55,5 @@ public class AudioSettingsController : MonoBehaviour
     {
         _slider.value = PlayerPrefs.GetFloat(_volumeParameter, _slider.value);
     }
+
 }

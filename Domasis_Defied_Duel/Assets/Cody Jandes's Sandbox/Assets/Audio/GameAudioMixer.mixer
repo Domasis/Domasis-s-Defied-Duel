@@ -1,5 +1,57 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!243 &-7700548333680259030
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MouseHover
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 6d4f1777eef184e49a060927cb97f460
+  m_Children: []
+  m_Volume: 26f339e41a6131645b0806546ac0808e
+  m_Pitch: ed461e1c53675a64684dbd49f9fe9241
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: 4745070695487620526}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!243 &-1823282586829128781
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MouseClick
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: ee01e38c55354844e99b94330ab5d5ba
+  m_Children: []
+  m_Volume: 7bd89a6985a5eb849bb2527ac5df338b
+  m_Pitch: ba5ea830e13b5684e85ee8b0368d5eec
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -675473292281888652}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!244 &-675473292281888652
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 175424f17fbcf8b4badb6a9bb1766713
+  m_EffectName: Attenuation
+  m_MixLevel: ce8aa2c97c428ab4fa0a6f37e7c15328
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &-670089560006240809
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -23,7 +75,9 @@ AudioMixerGroupController:
   m_Name: SFX
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: e94b9c4baa746f845905577e55d5333b
-  m_Children: []
+  m_Children:
+  - {fileID: -7700548333680259030}
+  - {fileID: -1823282586829128781}
   m_Volume: 17846b8bd8be28241a646514afc2ab8f
   m_Pitch: caee598ceded7f745b827d72fc0b7daf
   m_Send: 00000000000000000000000000000000
@@ -51,6 +105,10 @@ AudioMixerController:
   m_ExposedParameters:
   - guid: 748a4c169fbe0804a988cefe64398906
     name: MasterVol
+  - guid: 7bd89a6985a5eb849bb2527ac5df338b
+    name: MouseClickVol
+  - guid: 26f339e41a6131645b0806546ac0808e
+    name: MouseHoverVol
   - guid: 76e8c39e94cebdc4b93a85d7f1dc3cbd
     name: MusicVol
   - guid: 17846b8bd8be28241a646514afc2ab8f
@@ -60,6 +118,8 @@ AudioMixerController:
     - 96bf2a6db20bc4b4abf1e805edc01635
     - 1d3dcc3c423f45740a27088cf0559b1a
     - e94b9c4baa746f845905577e55d5333b
+    - 6d4f1777eef184e49a060927cb97f460
+    - ee01e38c55354844e99b94330ab5d5ba
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -110,6 +170,20 @@ AudioMixerSnapshotController:
   m_FloatValues:
     cf3b71b14014b1a48b7e9a6b34dec37f: 1
   m_TransitionOverrides: {}
+--- !u!244 &4745070695487620526
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: b1773fde2470e0a4d867edf013cf16ec
+  m_EffectName: Attenuation
+  m_MixLevel: f1db58bf5eee4444ab5c8fecaec3494f
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!243 &5918286534096148968
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
