@@ -28,4 +28,9 @@ public class ButtonFunctions : MonoBehaviour
         //CHANGE THIS TO QUIT TO MAIN MENU
         SceneManager.LoadScene("MainMenuScene");
     }
+
+    public void OntoLevelTwo()
+    {
+        SceneManager.LoadScene("BEL_Level_Final");
+    }
 }

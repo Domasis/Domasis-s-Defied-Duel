@@ -28,7 +28,7 @@ public class Door : MonoBehaviour
         
         if (obj.CompareTag("Player") && Input.GetKeyDown(KeyCode.E) && canInteract)
         {
-           
+            GameManager.instance.GetInteractPopup().SetActive(true);
             doorAnimation.Play("open");
             isDoorOpen = true; 
             canInteract = false; 
@@ -37,7 +37,7 @@ public class Door : MonoBehaviour
 
     void OnTriggerExit(Collider obj)
     {
-       
+        GameManager.instance.GetInteractPopup().SetActive(false);
         if (obj.CompareTag("Player"))
         {
             

@@ -19,7 +19,7 @@ public class Objective : MonoBehaviour, IAlert
 
     float hackProgress = 0;
 
-    [SerializeField] [Range(10, 100)] float maxHackLimit;
+    [SerializeField] [Range(1, 100)] float maxHackLimit;
 
     float timeBetweenAlerts = 5f;
 
