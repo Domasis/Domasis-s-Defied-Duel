@@ -156,10 +156,10 @@ public class GameManager : MonoBehaviour
         enemyCount += amount;
         enemyCountText.text = enemyCount.ToString("F0");
 
-        if (enemyCount <= 0)
-        {
-            youWin();
-        }
+        //if (enemyCount <= 0)
+        //{
+        //    youWin();
+        //}
     }
 
     public void updateSecondaryGameGoal(int amount)
