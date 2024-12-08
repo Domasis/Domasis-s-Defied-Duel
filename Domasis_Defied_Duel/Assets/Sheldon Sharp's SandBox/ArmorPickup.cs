@@ -14,7 +14,7 @@ public class ArmorPickup : MonoBehaviour
             // Apply the armor to the player through the GameManager
             if (GameManager.instance != null)
             {
-                GameManager.instance.ApplyArmor(armorAmount);
+                //GameManager.instance.ApplyArmor(armorAmount);
             }
             else
             {
