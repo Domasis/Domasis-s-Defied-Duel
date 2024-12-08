@@ -219,14 +219,25 @@ MonoBehaviour:
     m_Bits: 0
   controller: {fileID: 6682245786344828746}
   HP: 3
+  armor: 1
   speed: 5
   sprintMod: 3
   jumpMax: 2
   jumpSpeed: 12
   gravity: 28
+  gunList: []
   shootDamage: 1
   shootRate: 1
   shootDistance: 150
+  gunModel: {fileID: 0}
+  muzzleFlash: {fileID: 0}
+  aud: {fileID: 0}
+  audJump: []
+  audJumpVolume: 0
+  audHurt: []
+  audHurtVolume: 0
+  audFootsteps: []
+  audFootstepVolume: 0
   bullet: {fileID: 6604961131242589871, guid: 38ba56e540a08a146abdabd5c6f2adf4, type: 3}
   shootPos: {fileID: 938460257603395638}
 --- !u!143 &6682245786344828746
