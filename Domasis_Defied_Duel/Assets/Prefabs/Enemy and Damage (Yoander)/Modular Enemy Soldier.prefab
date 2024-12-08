@@ -774,7 +774,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4235105253607494804}
-  - component: {fileID: 4933572306732586999}
   - component: {fileID: 6825333558746993963}
   - component: {fileID: 2884736952185609112}
   - component: {fileID: 1613221217355988119}
@@ -805,33 +804,6 @@ Transform:
   - {fileID: 5700290491613829490}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4933572306732586999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7238185784871369885}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61b5d3dd62b63bb4094de7f11e35ef06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  model: {fileID: 0}
-  agent: {fileID: 6756035449452128713}
-  shootPos: {fileID: 6395711194135975062}
-  headPos: {fileID: 625850062781533598}
-  hp: 3
-  shootRate: 1
-  enemyViewAngle: 90
-  bullet: {fileID: 1539372099888597233, guid: a88233b53cfd82c4bbd516ea070ad9be, type: 3}
-  faceTargetSpeed: 5
-  roamDistance: 8
-  roamTimer: 2
-  minRoamDist: {x: 1, y: 0, z: 1}
-  animTransitionSpeed: 6
-  enemyAnimator: {fileID: 6825333558746993963}
-  investigationRadius: 3
 --- !u!95 &6825333558746993963
 Animator:
   serializedVersion: 7

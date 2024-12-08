@@ -33,6 +33,8 @@ public class PickupSystem : MonoBehaviour
         if(other.CompareTag("Player") && type == pickupType.Health)
         {
             GameManager.instance.playerScript.Health += healthGain;
+            GameManager.instance.playerScript.updatePlayerUI();
+            Destroy(gameObject);
         }
        
     }
