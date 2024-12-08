@@ -3421,11 +3421,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3137958842820036348, guid: 4781c9923f5ac0e4789ce019e8ce0db0, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 3137958842820036348, guid: 4781c9923f5ac0e4789ce019e8ce0db0, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3137958842820036348, guid: 4781c9923f5ac0e4789ce019e8ce0db0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -66.5
       objectReference: {fileID: 0}
     - target: {fileID: 3996959818878383078, guid: 4781c9923f5ac0e4789ce019e8ce0db0, type: 3}
       propertyPath: maxHackLimit
