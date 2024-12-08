@@ -70,6 +70,8 @@ public class Objective : MonoBehaviour, IAlert
         if (other.CompareTag("Player"))
         {
 
+            GameManager.instance.GetInteractPopup().SetActive(true);
+
             if (Input.GetButton("Interact"))
             {
 
@@ -118,6 +120,8 @@ public class Objective : MonoBehaviour, IAlert
     {
         if (other.CompareTag("Player"))
         {
+            GameManager.instance.GetInteractPopup().SetActive(false);
+
             if (hackProgressCanvas.enabled)
             {
                 hackProgressCanvas.enabled = false;

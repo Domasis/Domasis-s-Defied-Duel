@@ -106,10 +106,13 @@ public class PlayerController : MonoBehaviour, TakesDamage
     // Editor exposed variable that stores the postion the bullet will fire from. - Yoander
     [SerializeField] Transform shootPos;
 
+    // YF - Public property that makes health accessible by external classes.
+    public int Health { get => HP; set => HP = value; }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        HPOriginal = HP;
+        HPOriginal = Health;
 
         spawnPlayer();
 
@@ -140,7 +143,7 @@ public class PlayerController : MonoBehaviour, TakesDamage
         transform.position = GameManager.instance.GetPlayerSpawnPoint().transform.position;
         controller.enabled = true;
 
-        HP = HPOriginal;
+        Health = HPOriginal;
         updatePlayerUI();
     }
 
@@ -286,14 +289,14 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
     public void TakeSomeDamage(int amount)
     {
-        HP -= amount;
+        Health -= amount;
         aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVolume); //AUDIO FOR PLAYER TAKING DAMAGE
         updatePlayerUI();
         StartCoroutine(flashDamage());
 
 
         //I am Dead
-        if (HP <= 0)
+        if (Health <= 0)
         {
             GameManager.instance.youLose();
         }
@@ -301,7 +304,7 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
     public void updatePlayerUI()
     {
-        GameManager.instance.playerHPBar.fillAmount = (float)HP / HPOriginal;
+        GameManager.instance.playerHPBar.fillAmount = (float)Health / HPOriginal;
     }
 
 

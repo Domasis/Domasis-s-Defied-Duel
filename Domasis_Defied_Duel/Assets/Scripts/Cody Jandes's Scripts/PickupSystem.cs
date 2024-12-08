@@ -3,11 +3,14 @@ using UnityEngine;
 public class PickupSystem : MonoBehaviour
 {
 
-    enum pickupType { gun, Health, DamageBoost} //enum options
+    enum pickupType { gun, Health, Keycard} //enum options
 
     [SerializeField] pickupType type; //this will give us which type we are getting
 
     [SerializeField] GunStats gun;
+
+    // YF - Health gain added.
+    [SerializeField] [Range(0, 3)] int healthGain;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,10 +23,16 @@ public class PickupSystem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if(other.CompareTag("Player") && type == pickupType.gun)
         {
             GameManager.instance.playerScript.getGunStats(gun);
             Destroy(gameObject);
+        }
+
+        // If it's a health pickup, grabbing it will cause the player to heal for a pre-determined amount.
+        if(other.CompareTag("Player") && type == pickupType.Health)
+        {
+            GameManager.instance.playerScript.Health += healthGain;
         }
        
     }

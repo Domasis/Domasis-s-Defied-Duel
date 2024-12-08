@@ -23,13 +23,9 @@ public class ButtonFunctions : MonoBehaviour
         GameManager.instance.stateUnpause();
     }
 
-    public void quit()
+    public void QuittoMain()
     {
         //CHANGE THIS TO QUIT TO MAIN MENU
-    #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-    #else
-            Application.Quit();
-    #endif
+        SceneManager.LoadScene("MainMenuScene");
     }
 }
