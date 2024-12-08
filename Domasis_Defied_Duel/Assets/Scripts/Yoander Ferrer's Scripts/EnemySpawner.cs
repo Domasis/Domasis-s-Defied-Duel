@@ -19,7 +19,7 @@ public class EnemySpawner : MonoBehaviour
     int spawnCount;
 
     // Boolean that tracks whether the spawner should start spawning enemies.
-    bool startSpawning;
+    public bool startSpawning;
 
     // Bool that tracks if the spawner is actively spawning an enemy.
     bool isSpawning;
