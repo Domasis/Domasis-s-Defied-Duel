@@ -3,35 +3,34 @@ using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
 
-//CODY JANDES CREATED THIS SCRIPT 
 public class GameManager : MonoBehaviour
 {
-    //Singleton
+    // Singleton
     public static GameManager instance;
 
-    //Close down whichever menu is open
+    // Close down whichever menu is open
     [SerializeField] GameObject menuActive;
 
-    //Pause menu , win/lose menu
+    // Pause menu , win/lose menu
     [SerializeField] GameObject menuPause, menuWin, menuLose;
 
-    //Count for enemy 
+    // Count for enemy 
     [SerializeField] TMP_Text enemyCountText;
 
-    //Count for objective
+    // Count for objective
     [SerializeField] TMP_Text objectiveCountText;
 
-    //Checkpoint popup
+    // Checkpoint popup
     [SerializeField] GameObject checkpointPopup;
 
-    //Interactive object popup
+    // Interactive object popup
     [SerializeField] GameObject interactPopup;
 
-    //Alertable Enemies
+    // Alertable Enemies
     [SerializeField] GameObject[] alertableEnemies;
 
-    //Track objective
-    int objectiveCount; 
+    // Track objective
+    int objectiveCount;
 
     public int GetObjectiveCount()
     {
@@ -41,7 +40,6 @@ public class GameManager : MonoBehaviour
     {
         objectiveCount += newCount;
     }
-    
 
     public GameObject GetCheckpointPopup()
     {
@@ -63,19 +61,19 @@ public class GameManager : MonoBehaviour
         interactPopup = thisInteractPopup;
     }
 
-    //Control Health bar
+    // Control Health bar
     public Image playerHPBar;
 
-    //Take damage screen
+    // Take damage screen
     public GameObject playerDamageScreen;
 
-    //Player call
+    // Player call
     public GameObject player;
 
-    //Player script
+    // Player script
     public PlayerController playerScript;
 
-    //Player spawn point (use getter and setter) POTENTIAL REMOVE/////////////////////////////////////////////////////////
+    // Player spawn point (use getter and setter) POTENTIAL REMOVE/////////////////////////////////////////////////////////
     GameObject playerSpawnPosition;
 
     public GameObject GetPlayerSpawnPoint()
@@ -88,15 +86,20 @@ public class GameManager : MonoBehaviour
         playerSpawnPosition = newPlayerSpawn;
     }
 
-    //use getters and setters normally
+    // Armor-related variables
+    [SerializeField] private int currentArmor = 0;
+    [SerializeField] private int maxArmor = 100;
+    [SerializeField] TMP_Text armorCountText;
+
+    // Use getters and setters normally
     public bool isPaused;
 
-    float timeScaleOriginal; //use getter and setter here
+    float timeScaleOriginal; // Use getter and setter here
 
-    //Keep track of enemy count
+    // Keep track of enemy count
     int enemyCount;
 
-    //Moved ammo count to game manager so moved text with it
+    // Moved ammo count to game manager so moved text with it
     [SerializeField] TMP_Text ammoCountText;
 
     public float TimeScaleOriginal { get => timeScaleOriginal; set => timeScaleOriginal = value; }
@@ -104,19 +107,18 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        //single instance of singleton 
+        // Single instance of singleton 
         instance = this;
-        TimeScaleOriginal = Time.timeScale; //use getter and setter here
-        player = GameObject.FindWithTag("Player"); //allows us to find player
-        playerScript = player.GetComponent<PlayerController>(); //pull player controller after located
-        SetPlayerSpawnPoint(GameObject.FindWithTag("Player Spawn Position")); //POTENTIAL REMOVE///////////////////////////////////////////////////////////////////////////////////
-
+        TimeScaleOriginal = Time.timeScale; // Use getter and setter here
+        player = GameObject.FindWithTag("Player"); // Allows us to find player
+        playerScript = player.GetComponent<PlayerController>(); // Pull player controller after located
+        SetPlayerSpawnPoint(GameObject.FindWithTag("Player Spawn Position")); // POTENTIAL REMOVE///////////////////////////////////////////////////////////////////////////////////
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Cancel") || Input.GetButtonDown("Menu"))
+        if (Input.GetButtonDown("Cancel") || Input.GetButtonDown("Menu"))
         {
             // To ensure that the game does not attempt to pause while a tooltip is open (as it is already paused), we check here to make sure that the tooltip isn't visible, as well as if our menu isn't active. - Yoander
             if (menuActive == null && InteractiveTooltipManager.instance.TipCanvas.enabled == false)
@@ -137,30 +139,28 @@ public class GameManager : MonoBehaviour
 
     public void statePause()
     {
-        isPaused=!isPaused; //toggle bool
-        Time.timeScale = 0; //stops everything but game
-        Cursor.visible = true; //see cursor when paused
-        Cursor.lockState = CursorLockMode.Confined; //stuck in window with cursor
+        isPaused = !isPaused; // Toggle bool
+        Time.timeScale = 0; // Stops everything but game
+        Cursor.visible = true; // See cursor when paused
+        Cursor.lockState = CursorLockMode.Confined; // Stuck in window with cursor
     }
 
     public void stateUnpause()
     {
-        isPaused = !isPaused; //toggle bool
-        Time.timeScale = TimeScaleOriginal; //save variable to control this
-        Cursor.visible = false; //don't see cursor when paused
-        Cursor.lockState = CursorLockMode.Locked; //relock cursor
+        isPaused = !isPaused; // Toggle bool
+        Time.timeScale = TimeScaleOriginal; // Save variable to control this
+        Cursor.visible = false; // Don't see cursor when paused
+        Cursor.lockState = CursorLockMode.Locked; // Relock cursor
 
-        
-        menuActive.SetActive(false); //deactivate menu
-        menuActive = null; //unassign the active menu
-        
+        menuActive.SetActive(false); // Deactivate menu
+        menuActive = null; // Unassign the active menu
     }
 
-    public void updateGameGoal (int amount)
+    public void updateGameGoal(int amount)
     {
         enemyCount += amount;
         enemyCountText.text = enemyCount.ToString("F0");
-        
+
         if (enemyCount <= 0)
         {
             youWin();
@@ -178,7 +178,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //Moved ammo counter to game manager
+    // Moved ammo counter to game manager
     public void updateAmmoCounttt(int ammoCurr)
     {
         if (ammoCountText != null)
@@ -196,9 +196,25 @@ public class GameManager : MonoBehaviour
 
     public void youWin()
     {
-        //Pause and pull win menu
+        // Pause and pull win menu
         statePause();
         menuActive = menuWin;
         menuActive.SetActive(true);
     }
+
+    // Armor-related methods
+    public void ApplyArmor(int amount)
+    {
+        // Increase the armor but don't exceed the max armor value
+        currentArmor = Mathf.Clamp(currentArmor + amount, 0, maxArmor);
+
+        // Update the armor UI if necessary
+        if (armorCountText != null)
+        {
+            armorCountText.text = $"Armor: {currentArmor}";
+        }
+
+        Debug.Log($"Armor applied. Current Armor: {currentArmor}, Max Armor: {maxArmor}");
+    }
 }
+
