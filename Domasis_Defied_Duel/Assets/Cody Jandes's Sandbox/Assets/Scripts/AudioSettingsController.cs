@@ -38,9 +38,7 @@ public class AudioSettingsController : MonoBehaviour
     private void HandleToggleValueChanged(bool enableSound)
     {
         if (_disableToggleEvent)
-        {
             return;
-        }
 
         if (enableSound)
         {
