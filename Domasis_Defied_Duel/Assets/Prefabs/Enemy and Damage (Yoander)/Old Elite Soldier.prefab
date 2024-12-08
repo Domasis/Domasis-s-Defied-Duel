@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 7687174634968615976}
   - component: {fileID: 171368039862515050}
   m_Layer: 0
-  m_Name: Elite Soldier
+  m_Name: Old Elite Soldier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

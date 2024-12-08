@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ButtonFunctions : MonoBehaviour
 {
-   public void resume()
+    public void resume()
     {
         GameManager.instance.stateUnpause(); //call singleton to tell it to do its thing
     }

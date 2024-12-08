@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class OnInvestigateState : IEnemyState
 {
-    Coroutine investigate;
+    public Coroutine investigate;
 
     public IEnemyState HandleState(OffensiveEnemyController enemy)
     {
@@ -12,7 +12,11 @@ public class OnInvestigateState : IEnemyState
             if (enemy.HeardSomething)
             {
                 enemy.HeardSomething = false;
-                enemy.StopCoroutine(investigate);
+                if (investigate != null)
+                {
+                    enemy.StopCoroutine(investigate);
+                    investigate = null;
+                }
             }
 
             if (!enemy.IsInvestigating)
@@ -30,14 +34,6 @@ public class OnInvestigateState : IEnemyState
             }
         }
 
-        else if (!enemy.HeardSomething && !enemy.WasHit)
-        {
-            if (investigate != null)
-            {
-                investigate = null;
-            }
-        }
-
         // We create an IEnemyState instance that will store the state our AI will switch to, defaulted to the current state of our enemy.
         IEnemyState stateToChange = enemy.CurrentState;
 
@@ -48,14 +44,20 @@ public class OnInvestigateState : IEnemyState
             enemy.IsInvestigating = 
             enemy.WasHit = 
             enemy.HeardSomething = false;
-            enemy.StopCoroutine(investigate);
+
             if (investigate != null)
             {
+                enemy.StopCoroutine(investigate);
                 investigate = null;
             }
 
             // Finally, we set the AI's state to the AttackState, as we know that it's going to need to start attacking the player.
             stateToChange = OffensiveEnemyController.AttackState;
+        }
+
+        else if (!enemy.CanSeePlayer() && enemy.PlayerInRange && !enemy.IsInvestigating)
+        {
+            stateToChange = OffensiveEnemyController.RoamState;
         }
 
         // If our enemy can't see the player, and the player isn't in range:

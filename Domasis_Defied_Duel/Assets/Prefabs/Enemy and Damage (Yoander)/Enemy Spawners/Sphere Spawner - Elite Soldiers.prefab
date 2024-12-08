@@ -286,7 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bef405eb589f60429fffa992b976f0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToSpawn: {fileID: 2307087597251795620, guid: 1e6b0d22d3163ff4c996dd1eba6c159e, type: 3}
+  objectToSpawn: {fileID: 3201168087023742726, guid: 4167da5d2b4c3684a906113e17b0534a, type: 3}
   numberToSpawn: 4
   spawnDelay: 1.4
   spawnPos:

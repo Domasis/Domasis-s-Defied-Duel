@@ -99,12 +99,14 @@ public class GameManager : MonoBehaviour
     //Moved ammo count to game manager so moved text with it
     [SerializeField] TMP_Text ammoCountText;
 
+    public float TimeScaleOriginal { get => timeScaleOriginal; set => timeScaleOriginal = value; }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         //single instance of singleton 
         instance = this;
-        timeScaleOriginal = Time.timeScale; //use getter and setter here
+        TimeScaleOriginal = Time.timeScale; //use getter and setter here
         player = GameObject.FindWithTag("Player"); //allows us to find player
         playerScript = player.GetComponent<PlayerController>(); //pull player controller after located
         SetPlayerSpawnPoint(GameObject.FindWithTag("Player Spawn Position")); //POTENTIAL REMOVE///////////////////////////////////////////////////////////////////////////////////
@@ -114,9 +116,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Cancel"))
+        if(Input.GetButtonDown("Cancel") || Input.GetButtonDown("Menu"))
         {
-            if (menuActive == null)
+            // To ensure that the game does not attempt to pause while a tooltip is open (as it is already paused), we check here to make sure that the tooltip isn't visible, as well as if our menu isn't active. - Yoander
+            if (menuActive == null && InteractiveTooltipManager.instance.TipCanvas.enabled == false)
             {
                 statePause();
 
@@ -143,12 +146,14 @@ public class GameManager : MonoBehaviour
     public void stateUnpause()
     {
         isPaused = !isPaused; //toggle bool
-        Time.timeScale = timeScaleOriginal; //save variable to control this
+        Time.timeScale = TimeScaleOriginal; //save variable to control this
         Cursor.visible = false; //don't see cursor when paused
         Cursor.lockState = CursorLockMode.Locked; //relock cursor
 
+        
         menuActive.SetActive(false); //deactivate menu
         menuActive = null; //unassign the active menu
+        
     }
 
     public void updateGameGoal (int amount)

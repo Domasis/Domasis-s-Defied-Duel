@@ -296,7 +296,13 @@ public class OffensiveEnemyController : LiveActor, TakesDamage, IHearSounds, IAl
         agent.stoppingDistance = 0;
         // We then set our destination to our determined location.
         agent.SetDestination(InvestigationLoc);
-        // We want this coroutine to last while we're still investigating our sound, so this will allow us to stay in the coroutine until we arrive.
+
+        // If for some reason the AI doesn't set a destination, we force it here again.
+        if (!agent.pathPending)
+        {
+            agent.SetDestination(InvestigationLoc);
+        }
+        // We want this coroutine to last while we're still investigatg, so this will allow us to stay in the coroutine until we arrive.
         while (agent.remainingDistance <= 0.25f)
         {
             yield return null;

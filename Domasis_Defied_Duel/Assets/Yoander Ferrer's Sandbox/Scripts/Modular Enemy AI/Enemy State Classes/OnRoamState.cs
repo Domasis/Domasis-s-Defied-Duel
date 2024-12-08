@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class OnRoamState : IEnemyState
 {
     // Coroutine variable that stores our current instance of our Roam coroutine.
-    Coroutine roam;
+    public Coroutine roam;
 
     // Interface method that performs the state actions, then determines what state needs to be invoked next.
     public IEnemyState HandleState(OffensiveEnemyController enemy)
@@ -28,12 +28,11 @@ public class OnRoamState : IEnemyState
             // We set IsRoaming to false to ensure we can return to roaming after any other actions.
             enemy.IsRoaming = false;
 
-            // We tell our enemy to stop roaming by calling StopCoroutine on the roam Coroutine variable.
-            enemy.StopCoroutine(roam);
-
             // Finally, we null out our roam variable because we are stopping the coroutine before the coroutine naturally sets the variable to null.
             if (roam != null)
             {
+                // We tell our enemy to stop roaming by calling StopCoroutine on the roam Coroutine variable.
+                enemy.StopCoroutine(roam);
                 roam = null;
             }
 
@@ -46,9 +45,10 @@ public class OnRoamState : IEnemyState
         {
             // We stop roaming in the same way we do above, nulling out our roam variable for the same reasons.
             enemy.IsRoaming = false;
-            enemy.StopCoroutine(roam);
+
             if (roam != null)
             {
+                enemy.StopCoroutine(roam);
                 roam = null;
             }
 

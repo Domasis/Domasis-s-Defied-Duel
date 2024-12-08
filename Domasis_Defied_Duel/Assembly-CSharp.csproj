@@ -75,7 +75,6 @@
     <Compile Include="Assets\Cody Jandes&apos;s Sandbox\Assets\Scripts\MenuFeedbackSoundsController.cs" />
     <Compile Include="Assets\Sheldon Sharp&apos;s SandBox\BrickBreakersound.cs" />
     <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\Interfaces\GetHitSon.cs" />
-    <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\Tutorial_Manager.cs" />
     <Compile Include="Assets\Sheldon Sharp&apos;s SandBox\sheldonplayercontroller.cs" />
     <Compile Include="Assets\Cody Jandes&apos;s Sandbox\Assets\Scripts\ButtonFunctions.cs" />
     <Compile Include="Assets\Hanzzz\MeshDemolisher\Examples\Scripts\CameraController.cs" />
@@ -105,7 +104,7 @@
     <Compile Include="Assets\Hanzzz\MeshDemolisher\Scripts\Internal\CDT\CDT_Public.cs" />
     <Compile Include="Assets\Scripts\Yoander Ferrer&apos;s Scripts\EnemySpawner.cs" />
     <Compile Include="Assets\Cody Jandes&apos;s Sandbox\Assets\Unity Store Downlaod\Low Poly Guns\Scripts\GunsMenu.cs" />
-    <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\InteractiveTutorialTooltip.cs" />
+    <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\InteractiveTooltipManager.cs" />
     <Compile Include="Assets\UnityTechnologies\ParticlePack\Shared\Ramps\Runtime\RampAsset.cs" />
     <Compile Include="Assets\UnityTechnologies\ParticlePack\Shared\Scripts\AdjustTimeScale.cs" />
     <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\Modular Enemy AI\Enemy State Classes\EnemyState.cs" />
@@ -119,6 +118,7 @@
     <Compile Include="Assets\Hanzzz\MeshDemolisher\Scripts\MeshDemolisher.cs" />
     <Compile Include="Assets\Movement.cs" />
     <Compile Include="Assets\Hanzzz\MeshDemolisher\Scripts\PointGeneratorEditor.cs" />
+    <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\InteractiveTooltipObj.cs" />
     <Compile Include="Assets\Cody Jandes&apos;s Sandbox\Assets\Scripts\MenuController.cs" />
     <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\Modular Enemy AI\Enemy State Classes\OnInvestigateState.cs" />
     <Compile Include="Assets\Scripts\Yoander Ferrer&apos;s Scripts\DamageDealer.cs" />

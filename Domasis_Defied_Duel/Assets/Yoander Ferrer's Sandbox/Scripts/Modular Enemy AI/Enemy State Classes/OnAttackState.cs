@@ -45,10 +45,15 @@ public class OnAttackState : IEnemyState
             }
 
             // If our enemy can't see the player, and the player isn't in range:
-            else
+            else if (!enemy.CanSeePlayer() && enemy.PlayerInRange)
             {
 
                 // We set the AI's state to the RoamState, as we know that it's going to go back to roaming.
+                stateToChange = OffensiveEnemyController.RoamState;
+            }
+
+            else
+            {
                 stateToChange = OffensiveEnemyController.RoamState;
             }
         }
