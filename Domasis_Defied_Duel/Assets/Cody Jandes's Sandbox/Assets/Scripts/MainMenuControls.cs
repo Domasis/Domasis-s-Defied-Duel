@@ -6,6 +6,7 @@ public class MainMenuControls : MonoBehaviour
    public void StartGame()
     {
         SceneManager.LoadScene("BEL_Level_Tutorial"); //load desired starting scene - testing own sandbox for now 
+        GameManager.instance.stateUnpause();
     }
 
     public void OpenCredits()
@@ -16,6 +17,7 @@ public class MainMenuControls : MonoBehaviour
     public void OpenShowcase()
     {
         SceneManager.LoadScene("BEL_Level_Showcase"); //load showcase level
+        GameManager.instance.stateUnpause();
     }
 
     public void QuitGame()

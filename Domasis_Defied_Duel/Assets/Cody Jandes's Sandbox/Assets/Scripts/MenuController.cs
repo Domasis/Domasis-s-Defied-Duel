@@ -11,6 +11,6 @@ public class MenuController : MonoBehaviour
 
     public void CloseOptionsMenu()
     {
-        optionsMenuPanel?.SetActive(false);
+        optionsMenuPanel.SetActive(false);
     }
 }

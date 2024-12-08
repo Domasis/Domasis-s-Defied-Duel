@@ -97,6 +97,9 @@ public class GameManager : MonoBehaviour
     // Moved ammo count to game manager so moved text with it
     [SerializeField] TMP_Text ammoCountText;
 
+    [Header("Mission UI")]
+    public GameObject missionPanel;
+
     public float TimeScaleOriginal { get => timeScaleOriginal; set => timeScaleOriginal = value; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -108,6 +111,17 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindWithTag("Player"); // Allows us to find player
         playerScript = player.GetComponent<PlayerController>(); // Pull player controller after located
         SetPlayerSpawnPoint(GameObject.FindWithTag("Player Spawn Position")); // POTENTIAL REMOVE///////////////////////////////////////////////////////////////////////////////////
+    }
+
+    private void InitilaizeLevel()
+    {
+        missionPanel.SetActive(true);
+      
+    }
+    public void StartMission()
+    {
+        missionPanel.SetActive(false);
+
     }
 
     // Update is called once per frame

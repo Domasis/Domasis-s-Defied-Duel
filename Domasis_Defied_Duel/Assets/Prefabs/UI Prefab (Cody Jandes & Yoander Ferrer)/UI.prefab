@@ -724,6 +724,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   isPaused: 0
   ammoCountText: {fileID: 8819389270093445821}
+  missionPanel: {fileID: 0}
 --- !u!1 &1798987991128299983
 GameObject:
   m_ObjectHideFlags: 0
