@@ -59,26 +59,6 @@ public class DestructibleObstacle : MonoBehaviour, TakesDamage, MakesSound
 
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.isTrigger)
-        {
-            return; 
-        }
-
-        IHearSounds hearSounds = other.gameObject.GetComponent<IHearSounds>();
-
-        if (hearSounds != null)
-        {
-
-            Debug.Log("An object with IHearSounds was detected!");
-
-        }
-        
-        
-
-    }
-
     IEnumerator FlashDmg()
     {
 
@@ -99,7 +79,6 @@ public class DestructibleObstacle : MonoBehaviour, TakesDamage, MakesSound
 
         foreach (Collider collider in hitObjects)
         {
-            Debug.Log(collider.name);
 
             IHearSounds hearSounds = collider.gameObject.GetComponent<IHearSounds>();
 
