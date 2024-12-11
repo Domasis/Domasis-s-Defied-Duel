@@ -149,7 +149,6 @@
     <Compile Include="Assets\Hanzzz\MeshDemolisher\Scripts\Internal\CustomComparator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Sheldon Sharp&apos;s SandBox\Sheldon Sharp Sandbox\TerrainSampleAssets\ThirdPartyNotices.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\Hanzzz\MeshDemolisher\Examples\MeshFiles\README.txt" />
     <None Include="Assets\Yoander Ferrer&apos;s Sandbox\Unity Store DLs\SyntyStudios\PolygonPrototype\Shaders\Prototype_Glass_Global.shader" />
@@ -193,7 +192,6 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
-    <None Include="Assets\Sheldon Sharp&apos;s SandBox\Sheldon Sharp Sandbox\TerrainSampleAssets\ShaderGraphs\CustomFunctions\CustomLighting.hlsl" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
   </ItemGroup>
   <ItemGroup>
