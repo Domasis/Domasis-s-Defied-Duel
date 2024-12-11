@@ -4247,6 +4247,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2121802937438538162, guid: aa7778b0cdea42d489098f863a67e28f, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: d515c4d85be8cc64b8b3a526abbe6c1b, type: 3}
+    - target: {fileID: 2121802937438538162, guid: aa7778b0cdea42d489098f863a67e28f, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: d515c4d85be8cc64b8b3a526abbe6c1b, type: 3}
     - target: {fileID: 8571604941564648192, guid: aa7778b0cdea42d489098f863a67e28f, type: 3}
       propertyPath: m_Name
       value: PREF - MainMenuMusic
