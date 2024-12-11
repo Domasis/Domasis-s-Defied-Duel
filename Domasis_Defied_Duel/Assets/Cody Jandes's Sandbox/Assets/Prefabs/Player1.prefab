@@ -55,12 +55,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   controller: {fileID: 2358283813422285638}
-  HP: 5
-  speed: 5
+  HP: 10
+  speed: 6
   sprintMod: 2
   jumpMax: 1
-  jumpSpeed: 10
-  gravity: 30
+  jumpSpeed: 12
+  gravity: 35
   gunList: []
   shootDamage: 0
   shootRate: 0
@@ -231,7 +231,7 @@ AudioSource:
   m_GameObject: {fileID: 1625000981981509827}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -75790985317874925, guid: 136a706089bd7db41a4ef768bfb57d4e, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
