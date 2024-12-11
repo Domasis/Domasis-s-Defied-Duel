@@ -14,7 +14,7 @@ public class Door : MonoBehaviour
         
         if (doorAnimation == null)
         {
-            Debug.LogError("No Animation component found on " + gameObject.name);
+           // Debug.LogError("No Animation component found on " + gameObject.name);
         }
         else
         {
