@@ -374,4 +374,9 @@ public class PlayerController : MonoBehaviour, TakesDamage
             GameManager.instance.updateAmmoCounttt(gunList[selectedGun].ammoCurrent);
         }
     }
+
+    public void Drink(AudioClip drinkAud)
+    {
+        aud.PlayOneShot(drinkAud, 1f);
+    }
 }

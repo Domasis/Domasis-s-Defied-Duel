@@ -147,3 +147,4 @@ MonoBehaviour:
   type: 1
   gun: {fileID: 0}
   healthGain: 3
+  drinkSound: {fileID: 8300000, guid: 9669efaa6c0ac3640b8028dfc4d4047b, type: 3}
