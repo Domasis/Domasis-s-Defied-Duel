@@ -41,8 +41,6 @@ public class PlayerDamage : MonoBehaviour
         // We create an IDamage instance based on the collider's IDamage component.
         TakesDamage dmg = other.GetComponent<TakesDamage>();
 
-        Debug.Log(other.gameObject);
-
         // If this was successful, we call that component's TakeDamage method.
         dmg?.TakeSomeDamage(damage);
 

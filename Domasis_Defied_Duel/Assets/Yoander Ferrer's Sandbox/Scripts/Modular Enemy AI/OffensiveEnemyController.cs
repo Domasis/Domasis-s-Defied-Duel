@@ -16,9 +16,6 @@ public class OffensiveEnemyController : LiveActor, TakesDamage, IHearSounds, IAl
 
     [Header("Enemy Offensive Stats and State")]
 
-    // For debug purposes, stores the currentState so that it can be clearly seen in the editor.
-    [SerializeField] private string currentStateName;
-
     // IEnemyState instance variable that stores our current state.
     private IEnemyState currentState;
 
@@ -93,7 +90,6 @@ public class OffensiveEnemyController : LiveActor, TakesDamage, IHearSounds, IAl
     public Vector3 MinRoamDist { get => minRoamDist; set => minRoamDist = value; }
     public NavMeshAgent Agent { get => agent; set => agent = value; }
     public Animator Animator { get => animator; set => animator = value; }
-    public string CurrentStateName { get => currentStateName; set => currentStateName = value; }
     public IEnemyState CurrentState { get => currentState; set => currentState = value; }
     public bool WasHit { get => wasHit; set => wasHit = value; }
     public bool HeardSomething { get => heardSomething; set => heardSomething = value; }
@@ -271,7 +267,6 @@ public class OffensiveEnemyController : LiveActor, TakesDamage, IHearSounds, IAl
     void ManageState()
     {
         CurrentState = CurrentState.HandleState(this);
-        CurrentStateName = CurrentState.ToString();
     }
 
     // Method that handles updating the AI's animation.
