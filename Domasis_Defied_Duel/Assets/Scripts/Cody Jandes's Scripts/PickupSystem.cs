@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(SphereCollider))]
 public class PickupSystem : MonoBehaviour
 {
 
@@ -11,6 +12,8 @@ public class PickupSystem : MonoBehaviour
 
     // YF - Health gain added.
     [SerializeField] [Range(0, 3)] int healthGain;
+
+    [SerializeField] AudioClip drinkSound;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,6 +37,7 @@ public class PickupSystem : MonoBehaviour
         {
             GameManager.instance.playerScript.Health += healthGain;
             GameManager.instance.playerScript.updatePlayerUI();
+            GameManager.instance.playerScript.Drink(drinkSound);
             Destroy(gameObject);
         }
        

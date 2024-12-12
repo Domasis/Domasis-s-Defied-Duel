@@ -92,6 +92,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: eb000b052e0cfcf499d9b6fa749b02d0, type: 3}
   - {fileID: 8300000, guid: e872b502ef0d4624ca3dc9750784c538, type: 3}
   audFootstepVolume: 0.05
+  audReload: {fileID: 8300000, guid: dc6e4a553af53654d9909d5b02147d77, type: 3}
+  audReloadVolume: 0.25
   bullet: {fileID: 0}
   shootPos: {fileID: 0}
 --- !u!143 &2358283813422285638

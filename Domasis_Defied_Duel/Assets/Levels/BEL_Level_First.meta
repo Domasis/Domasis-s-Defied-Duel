@@ -1,8 +1,14 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Domasis_Defied_Duel/Assets/Levels/BEL_Level_First.meta
 guid: b7297c039faa3e548ad3f634133af673
 folderAsset: yes
 DefaultImporter:
+========
+guid: 77c1e7f57a96fa6488eef21e2b637ff6
+NativeFormatImporter:
+>>>>>>>> 445e316b4458ff02a437ed17189fdf16f429a653:Domasis_Defied_Duel/Assets/Yoander Ferrer's Sandbox/Unity Store DLs/SyntyStudios/PolygonCity/Materials/PolygonCity_Nature.mat.meta
   externalObjects: {}
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 

@@ -76,6 +76,10 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
     [SerializeField] [UnityEngine.Range(0, 1)] float audFootstepVolume;
 
+    [SerializeField] AudioClip audReload;
+
+    [SerializeField][UnityEngine.Range(0, 1)] float audReloadVolume; 
+
     //Vector3 to move 
     Vector3 movePlayer;
 
@@ -255,7 +259,7 @@ public class PlayerController : MonoBehaviour, TakesDamage
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDistance, ~ignoreMask))
         {
             //Whenever we hit something, it will tell us what we hit
-            Debug.Log(hit.collider.name);
+            //Debug.Log(hit.collider.name);
 
            //temp variable to return if it can take damage
             TakesDamage damage = hit.collider.GetComponent<TakesDamage>();
@@ -372,6 +376,13 @@ public class PlayerController : MonoBehaviour, TakesDamage
             //relaod to refill the gun 
             gunList[selectedGun].ammoCurrent = gunList[selectedGun].ammoMax;
             GameManager.instance.updateAmmoCounttt(gunList[selectedGun].ammoCurrent);
+
+            aud.PlayOneShot(audReload, audReloadVolume);
         }
+    }
+
+    public void Drink(AudioClip drinkAud)
+    {
+        aud.PlayOneShot(drinkAud, 1f);
     }
 }
