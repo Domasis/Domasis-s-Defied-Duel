@@ -4567,6 +4567,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5049125996234095875, guid: 48718f8b1129763479c9fa2a94c6e267, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b38f6235c8fef3a4a9c95897c482e761, type: 2}
     - target: {fileID: 8424403989868177379, guid: 48718f8b1129763479c9fa2a94c6e267, type: 3}
       propertyPath: m_Name
       value: Destructible Tree (3)
