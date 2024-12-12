@@ -38,6 +38,8 @@ public class LiveActor : MonoBehaviour
     // Boolean that stores whether the player is in range.
     bool playerInRange;
 
+    [SerializeField] public bool roamOnly;
+
 
 
     // Getters and Setters for member properties.
@@ -91,28 +93,36 @@ public class LiveActor : MonoBehaviour
     // Public method that handles GameObject rotation towards the player.
     public void FacePlayer()
     {
-        // We get a quaternion from the LookRotation of the playerDir.
-        Quaternion rot = Quaternion.LookRotation(PlayerDir);
+        if (!roamOnly)
+        {
+            // We get a quaternion from the LookRotation of the playerDir.
+            Quaternion rot = Quaternion.LookRotation(PlayerDir);
 
-        // We then rotate the enemy AI using a lerp, which lerps from the model's current rotation to the rot, in deltaTime.
-        transform.rotation = Quaternion.Lerp(transform.rotation, rot, FaceTargetSpeed * Time.deltaTime);
+            // We then rotate the enemy AI using a lerp, which lerps from the model's current rotation to the rot, in deltaTime.
+            transform.rotation = Quaternion.Lerp(transform.rotation, rot, FaceTargetSpeed * Time.deltaTime);
+        }
+        
     }
 
     public bool CanSeePlayer()
     {
         bool playerIsVisible = false;
 
-        PlayerDir = GameManager.instance.player.transform.position - HeadPos.position;
-
-        AngleToPlayer = Vector3.Angle(PlayerDir, transform.forward);
-
-        if (Physics.Raycast(HeadPos.position, PlayerDir, out RaycastHit hit))
+        if (!roamOnly)
         {
-            if (hit.collider.CompareTag("Player") && AngleToPlayer <= EnemyViewConeAngle)
-            {
-                playerIsVisible = true;
-            }
 
+            PlayerDir = GameManager.instance.player.transform.position - HeadPos.position;
+
+            AngleToPlayer = Vector3.Angle(PlayerDir, transform.forward);
+
+            if (Physics.Raycast(HeadPos.position, PlayerDir, out RaycastHit hit))
+            {
+                if (hit.collider.CompareTag("Player") && AngleToPlayer <= EnemyViewConeAngle)
+                {
+                    playerIsVisible = true;
+                }
+
+            }
         }
 
         return playerIsVisible;
