@@ -76,6 +76,10 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
     [SerializeField] [UnityEngine.Range(0, 1)] float audFootstepVolume;
 
+    [SerializeField] AudioClip audReload;
+
+    [SerializeField][UnityEngine.Range(0, 1)] float audReloadVolume; 
+
     //Vector3 to move 
     Vector3 movePlayer;
 
@@ -372,6 +376,8 @@ public class PlayerController : MonoBehaviour, TakesDamage
             //relaod to refill the gun 
             gunList[selectedGun].ammoCurrent = gunList[selectedGun].ammoMax;
             GameManager.instance.updateAmmoCounttt(gunList[selectedGun].ammoCurrent);
+
+            aud.PlayOneShot(audReload, audReloadVolume);
         }
     }
 
