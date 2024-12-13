@@ -184,6 +184,7 @@ public class OffensiveEnemyController : LiveActor, TakesDamage, IHearSounds, IAl
 
         if (HP <= 0)
         {
+            enemyAudio.PlayOneShot(deathWail, 1f);
             Destroy(gameObject);
         }
         
@@ -223,7 +224,6 @@ public class OffensiveEnemyController : LiveActor, TakesDamage, IHearSounds, IAl
 
     private void OnDestroy()
     {
-        enemyAudio.PlayOneShot(deathWail, 1f);
         AlertEnemies();
     }
 
