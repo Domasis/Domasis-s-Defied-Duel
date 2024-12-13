@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Cancel") || Input.GetButtonDown("Menu"))
+        if (Input.GetButtonDown("Cancel"))
         {
             // To ensure that the game does not attempt to pause while a tooltip is open (as it is already paused), we check here to make sure that the tooltip isn't visible, as well as if our menu isn't active. - Yoander
             if (menuActive == null)
