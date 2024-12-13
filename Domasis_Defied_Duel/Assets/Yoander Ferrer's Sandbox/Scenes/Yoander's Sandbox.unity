@@ -2573,7 +2573,7 @@ MonoBehaviour:
   faceTargetSpeed: 2
   enemyViewConeAngle: 75
   hp: 25
-  currentStateName: 
+  roamOnly: 0
   shootPos: {fileID: 1925415311}
   shootRate: 0.6
   bullet: {fileID: 1539372099888597233, guid: a88233b53cfd82c4bbd516ea070ad9be, type: 3}
@@ -3074,6 +3074,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   isPaused: 0
   ammoCountText: {fileID: 0}
+  missionPanel: {fileID: 0}
 --- !u!224 &736300629897347118
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6533,6 +6534,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: eb000b052e0cfcf499d9b6fa749b02d0, type: 3}
   - {fileID: 8300000, guid: e872b502ef0d4624ca3dc9750784c538, type: 3}
   audFootstepVolume: 0.05
+  audReload: {fileID: 0}
+  audReloadVolume: 0
   bullet: {fileID: 0}
   shootPos: {fileID: 0}
 --- !u!1001 &5959403453512560009
@@ -7604,6 +7607,7 @@ GameObject:
   - component: {fileID: 3191941089019112696}
   - component: {fileID: 4782309659330404933}
   - component: {fileID: 1058453028262356395}
+  - component: {fileID: 9145396097270924880}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -8534,6 +8538,19 @@ Transform:
   - {fileID: 1076753308884995303}
   m_Father: {fileID: 8318521996881968930}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9145396097270924880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7781760081876385447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c0e42c3ee2f4694584f27c7901ed7d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isShaking: 0
 --- !u!1 &9203150968199262380
 GameObject:
   m_ObjectHideFlags: 0

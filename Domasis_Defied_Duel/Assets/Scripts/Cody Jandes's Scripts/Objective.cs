@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +18,12 @@ public class Objective : MonoBehaviour, IAlert
 
     [SerializeField] TMP_Text warningText;
 
+    [SerializeField] AudioSource objectiveAudio;
+
+    [SerializeField] AudioClip warningAudioClip;
+
+    [SerializeField] AudioClip hackAudioClip;
+
     float hackProgress = 0;
 
     [SerializeField] [Range(1, 100)] float maxHackLimit;
@@ -26,6 +33,8 @@ public class Objective : MonoBehaviour, IAlert
     float timer;
 
     int faceTargetSpeed = 8;
+
+    bool hackAudioPlaying;
 
     [SerializeField] [Range(1, 4)] int investigationRadius;
 
@@ -74,6 +83,10 @@ public class Objective : MonoBehaviour, IAlert
 
             if (Input.GetButton("Interact"))
             {
+                if (!hackAudioPlaying)
+                {
+                    StartCoroutine(PlayHackSound());
+                }
 
                 hackProgress += Time.deltaTime;
 
@@ -96,6 +109,8 @@ public class Objective : MonoBehaviour, IAlert
 
                 timer = 0;
 
+                objectiveAudio.PlayOneShot(warningAudioClip, 1f);
+
             }
 
             if (hackProgress >= maxHackLimit)
@@ -110,6 +125,13 @@ public class Objective : MonoBehaviour, IAlert
             {
                 if (hackProgressCanvas.enabled)
                 { hackProgressCanvas.enabled = false; }
+
+                if(hackAudioPlaying)
+                {
+                    hackAudioPlaying = false;
+
+                    objectiveAudio.Stop();
+                }
             }
             
         }
@@ -132,7 +154,8 @@ public class Objective : MonoBehaviour, IAlert
 
     private void OnDestroy()
     {
-        GameManager.instance.GetInteractPopup().SetActive(false);
+        if (GameManager.instance.GetInteractPopup() != null)
+            GameManager.instance.GetInteractPopup().SetActive(false);
 
         if (GameManager.instance.GetObjectiveCount() > 0)
         {
@@ -160,6 +183,16 @@ public class Objective : MonoBehaviour, IAlert
             By adding a minimum roam distance, we limit the likelihood that all of the enemies try to path to the same location. */
             heardSomething?.React(((Random.insideUnitSphere * investigationRadius) + minRoamDist * 2) + transform.position);
         }
+    }
+
+    IEnumerator PlayHackSound()
+    {
+        hackAudioPlaying = true;
+        objectiveAudio.PlayOneShot(hackAudioClip, 1f);
+
+        yield return new WaitForSeconds(9f);
+
+        hackAudioPlaying = false;
     }
 
     private void HackBarFacePlayer()
