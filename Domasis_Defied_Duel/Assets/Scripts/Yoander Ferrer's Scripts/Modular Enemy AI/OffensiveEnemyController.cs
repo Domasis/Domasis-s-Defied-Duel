@@ -1,5 +1,6 @@
 
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -81,6 +82,16 @@ public class OffensiveEnemyController : LiveActor, TakesDamage, IHearSounds, IAl
 
     // Group of booleans that track the various states, statuses, and actions being taken by our AI.
     bool isRoaming, isInvestigating, isAttacking, wasHit, heardSomething, isShooting;
+
+    [Header("----- Audio -----")]
+
+    [SerializeField] AudioSource enemyAudio;
+
+    [SerializeField] AudioClip[] investigateAudio;
+
+    [SerializeField] AudioClip[] hurtAudio;
+
+    [SerializeField] AudioClip deathWail;
 
     public bool IsRoaming { get => isRoaming; set => isRoaming = value; }
     public bool IsInvestigating { get => isInvestigating; set => isInvestigating = value; }
@@ -167,6 +178,7 @@ public class OffensiveEnemyController : LiveActor, TakesDamage, IHearSounds, IAl
         HP -= amount;
         EnableHealthbar();
         StartCoroutine(FlashRed());
+        enemyAudio.PlayOneShot(hurtAudio[Random.Range(0, hurtAudio.Length - 1)], 2f);
         InvestigationLoc = GameManager.instance.player.transform.position;
         WasHit = true;
 
@@ -211,6 +223,7 @@ public class OffensiveEnemyController : LiveActor, TakesDamage, IHearSounds, IAl
 
     private void OnDestroy()
     {
+        enemyAudio.PlayOneShot(deathWail, 1f);
         AlertEnemies();
     }
 
@@ -287,6 +300,8 @@ public class OffensiveEnemyController : LiveActor, TakesDamage, IHearSounds, IAl
         // To ensure we don't investigate multiple things at once, we set both investigation bools to true.
         IsInvestigating = true;
 
+        enemyAudio.PlayOneShot(investigateAudio[(Random.Range(0, investigateAudio.Length - 1))], 1f);
+
         // Like with any investigation, we set our stoppingDistance to 0 to ensure our AI doesn't get caught up on trying to reach their destination.
         agent.stoppingDistance = 0;
         // We then set our destination to our determined location.
@@ -349,6 +364,7 @@ public class OffensiveEnemyController : LiveActor, TakesDamage, IHearSounds, IAl
 
     public void AlertEnemies()
     {
+
         /* We need to find all of the enemies in this object's range. Because this is an enemy, we want it to notify enemies in a much larger radius.
            To do this, we create a Collider array that is populated from an OverlapSphere.*/
         Collider[] hitObjects = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius * 2);
@@ -356,6 +372,10 @@ public class OffensiveEnemyController : LiveActor, TakesDamage, IHearSounds, IAl
         // For each collider in the array we've generated:
         foreach (Collider collider in hitObjects)
         {
+            if (collider.GetComponent<EnemySpawner>() != null)
+            {
+                collider.GetComponent<EnemySpawner>().StartSpawning = true;
+            }
             // We check for an IHearSounds component.
             IHearSounds heardSomething = collider.GetComponent<IHearSounds>();
 

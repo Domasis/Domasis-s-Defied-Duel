@@ -32,7 +32,7 @@ public class Door : MonoBehaviour
         {
             GameManager.instance.GetInteractPopup().SetActive(true);
             doorAnimation.Play("open");
-            GameManager.instance.playerScript.DoorOpen(doorSounds);
+            //GameManager.instance.playerScript.DoorOpen(doorSounds);
             isDoorOpen = true; 
             canInteract = false; 
         }

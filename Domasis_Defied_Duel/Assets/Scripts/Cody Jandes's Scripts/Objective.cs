@@ -5,23 +5,31 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(Renderer))]
 [RequireComponent(typeof(SphereCollider))]
+[RequireComponent(typeof(AudioSource))]
 public class Objective : MonoBehaviour, IAlert
 {
 
     //CODY JANDES CREATED THIS SCRIPT, edits added by Yoander Ferrer
 
+    // Editor exposed Renderer that stores the model of the object the script is attached to.
     [SerializeField] Renderer model;
 
+    // Editor exposed Slider that stores the current hack progress.
     [SerializeField] Slider hackProgressSlider;
 
+    // Editor exposed Canvas that the hackProgressSlider is a child of.
     [SerializeField] Canvas hackProgressCanvas;
 
+    // Text to notify the player when enemies will be warned.
     [SerializeField] TMP_Text warningText;
 
+    // Audio Source that manages the audio being played.
     [SerializeField] AudioSource objectiveAudio;
 
+    // Audio clip played when enemies are notified.
     [SerializeField] AudioClip warningAudioClip;
 
+    // Audio clip played while hacking the object.
     [SerializeField] AudioClip hackAudioClip;
 
     float hackProgress = 0;
@@ -147,6 +155,13 @@ public class Objective : MonoBehaviour, IAlert
             if (hackProgressCanvas.enabled)
             {
                 hackProgressCanvas.enabled = false;
+            }
+
+            if (hackAudioPlaying)
+            {
+                hackAudioPlaying = false;
+
+                objectiveAudio.Stop();
             }
             timer = 0;
         }

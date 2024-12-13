@@ -110,6 +110,8 @@ public class PlayerController : MonoBehaviour, TakesDamage
     // Editor exposed variable that stores the postion the bullet will fire from. - Yoander
     [SerializeField] Transform shootPos;
 
+    [SerializeField] AnimateCamera cameraAnim;
+
     // YF - Public property that makes health accessible by external classes.
     public int Health { get => HP; set => HP = value; }
 
@@ -130,13 +132,6 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.red);
 
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            if (!AnimateCamera.instance.isShaking)
-            {
-
-            }
-        }
         if(!GameManager.instance.isPaused)
         {
             movement();
@@ -300,10 +295,18 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
     public void TakeSomeDamage(int amount)
     {
+        Renderer model = gameObject.GetComponent<Renderer>();
+
         Health -= amount;
         aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVolume); //AUDIO FOR PLAYER TAKING DAMAGE
         updatePlayerUI();
         StartCoroutine(flashDamage());
+
+        if (cameraAnim.isShaking == false)
+        {
+            model.enabled = false;
+            StartCoroutine(cameraAnim.ShakeCamera(Camera.main, model));
+        }
 
 
         //I am Dead
@@ -391,10 +394,5 @@ public class PlayerController : MonoBehaviour, TakesDamage
     public void Drink(AudioClip drinkAud)
     {
         aud.PlayOneShot(drinkAud, 1f);
-    }
-
-    public void DoorOpen(AudioClip doorAud)
-    {
-        aud.PlayOneShot(doorAud, 1f);
     }
 }

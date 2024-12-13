@@ -1,33 +1,35 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AnimateCamera : MonoBehaviour
 {
-    [SerializeField] Camera mainCam;
 
-    float shakeIntensity;
+    [SerializeField] [Range(0.15f, 1f)] float shakeIntensity;
 
-    float duration;
+    [SerializeField] [Range(0.15f, 0.45f)] float duration;
 
-    Vector3 origCamPos;
+    [SerializeField] GameObject CamPos;
 
     public bool isShaking;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        
     }
 
     void Update()
     {
-        
+        if (!isShaking)
+        {
+            Camera.main.transform.position = CamPos.transform.position;
+        }
     }
 
-    public IEnumerator ShakeCamera()
+    public IEnumerator ShakeCamera(Camera cam, Renderer model)
     {
         isShaking = true;
         
-        origCamPos = transform.position;
         float elapsed = 0f;
 
         while (elapsed < duration)
@@ -35,14 +37,15 @@ public class AnimateCamera : MonoBehaviour
             float x = Random.Range(-1f, 1f) * shakeIntensity;
             float y = Random.Range(-1f, 1f) * shakeIntensity;
 
-            transform.position = new Vector3(x, y, -10f);
+            cam.transform.position += new Vector3(x, y, 0);
 
             elapsed += Time.deltaTime;
 
             yield return null;
         }
 
-        transform.position = origCamPos;
+        cam.transform.position = CamPos.transform.position;
+        model.enabled = true;
         isShaking = false;
     }
 }
