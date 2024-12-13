@@ -19,6 +19,11 @@ public class OnRoamState : IEnemyState
             roam = enemy.StartCoroutine(enemy.Roam());
         }
 
+        if (enemy.roamOnly == true)
+        {
+            return OffensiveEnemyController.RoamState;
+        }
+
         // We create an IEnemyState instance that will store the state our AI will switch to, defaulted to the current state of our enemy.
         IEnemyState stateToChange = enemy.CurrentState;
 

@@ -135,7 +135,9 @@ public class Objective : MonoBehaviour, IAlert
         GameManager.instance.GetInteractPopup().SetActive(false);
 
         if (GameManager.instance.GetObjectiveCount() > 0)
-        AlertEnemies();
+        {
+            AlertEnemies();
+        }
     }
 
     public void AlertEnemies()
