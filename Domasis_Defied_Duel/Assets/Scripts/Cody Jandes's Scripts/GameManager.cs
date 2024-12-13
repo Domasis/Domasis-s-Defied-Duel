@@ -99,29 +99,53 @@ public class GameManager : MonoBehaviour
 
     [Header("Mission UI")]
     public GameObject missionPanel;
+    private bool isMissionPanelActive = false;
 
     public float TimeScaleOriginal { get => timeScaleOriginal; set => timeScaleOriginal = value; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        // Single instance of singleton 
-        instance = this;
-        TimeScaleOriginal = Time.timeScale; // Use getter and setter here
-        player = GameObject.FindWithTag("Player"); // Allows us to find player
-        playerScript = player.GetComponent<PlayerController>(); // Pull player controller after located
-        SetPlayerSpawnPoint(GameObject.FindWithTag("Player Spawn Position")); // POTENTIAL REMOVE///////////////////////////////////////////////////////////////////////////////////
+        // Ensure singleton instance
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        // Save the original time scale
+        TimeScaleOriginal = Time.timeScale;
+
+        // Find/initialize the player
+        player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            playerScript = player.GetComponent<PlayerController>();
+            playerScript.enabled = false; // Disable player controls at first
+        }
+
+        // Set the player spawn
+        var spawnPoint = GameObject.FindWithTag("Player Spawn Position");
+        if (spawnPoint != null)
+        {
+            SetPlayerSpawnPoint(spawnPoint);
+        }
+
+        // Initialize level
+        InitializeLevel();
     }
 
-    private void InitilaizeLevel()
+    private void InitializeLevel()
     {
         missionPanel.SetActive(true);
-      
-    }
-    public void StartMission()
-    {
-        missionPanel.SetActive(false);
+        isMissionPanelActive = true;
 
+        LockPlayerControls(true);
+      
     }
 
     // Update is called once per frame
@@ -143,6 +167,30 @@ public class GameManager : MonoBehaviour
             {
                 stateUnpause();
             }
+        }
+
+        if (isMissionPanelActive && Input.GetKeyDown(KeyCode.Return))
+        {
+            StartMission();
+        }
+    }
+
+    public void StartMission()
+    {
+        missionPanel.SetActive(false);
+        isMissionPanelActive = false;
+
+        LockPlayerControls(false);
+    }
+
+    public void LockPlayerControls(bool isLocked)
+    {
+        Cursor.visible = isLocked;
+        Cursor.lockState = isLocked ? CursorLockMode.None : CursorLockMode.Locked;
+
+        if (instance.player != null)
+        {
+            instance.player.GetComponent<PlayerController>().enabled = !isLocked;
         }
     }
 
