@@ -2542,7 +2542,7 @@ PrefabInstance:
       propertyPath: tooltipMsg
       value: Guns have variable ranges. Your sniper has a long distance shot that
         deals immense damage, while your other guns shoot more rapidly, but deal
-        less. Right click to shoot!
+        less. Left click to shoot!
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
