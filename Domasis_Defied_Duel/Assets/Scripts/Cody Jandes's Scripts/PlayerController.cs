@@ -130,6 +130,13 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.red);
 
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            if (!AnimateCamera.instance.isShaking)
+            {
+
+            }
+        }
         if(!GameManager.instance.isPaused)
         {
             movement();
@@ -384,5 +391,10 @@ public class PlayerController : MonoBehaviour, TakesDamage
     public void Drink(AudioClip drinkAud)
     {
         aud.PlayOneShot(drinkAud, 1f);
+    }
+
+    public void DoorOpen(AudioClip doorAud)
+    {
+        aud.PlayOneShot(doorAud, 1f);
     }
 }

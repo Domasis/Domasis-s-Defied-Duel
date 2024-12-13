@@ -4,7 +4,9 @@ public class Door : MonoBehaviour
 {
     private Animation doorAnimation; 
     private bool isDoorOpen = false; 
-    private bool canInteract = true; 
+    private bool canInteract = true;
+
+    [SerializeField] AudioClip doorSounds;
 
     void Start()
     {
@@ -30,6 +32,7 @@ public class Door : MonoBehaviour
         {
             GameManager.instance.GetInteractPopup().SetActive(true);
             doorAnimation.Play("open");
+            GameManager.instance.playerScript.DoorOpen(doorSounds);
             isDoorOpen = true; 
             canInteract = false; 
         }
