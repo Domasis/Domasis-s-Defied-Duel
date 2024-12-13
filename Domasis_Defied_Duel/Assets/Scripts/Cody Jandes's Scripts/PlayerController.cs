@@ -385,4 +385,9 @@ public class PlayerController : MonoBehaviour, TakesDamage
     {
         aud.PlayOneShot(drinkAud, 1f);
     }
+
+    public void DoorOpen(AudioClip doorAud)
+    {
+        aud.PlayOneShot(doorAud, 1f);
+    }
 }

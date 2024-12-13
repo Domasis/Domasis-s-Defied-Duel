@@ -5540,7 +5540,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8839900386060733252, guid: 4167da5d2b4c3684a906113e17b0534a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -66.5
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7799,7 +7799,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1188429653377470142, guid: 6a4562feb52e79045a5abedda79593ee, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -66.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2178968632591453501, guid: 6a4562feb52e79045a5abedda79593ee, type: 3}
       propertyPath: m_Name
@@ -8122,7 +8122,6 @@ RectTransform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 2142267990}
   - {fileID: 738101005}
   - {fileID: 185673058}
   - {fileID: 1568617514}
@@ -8130,6 +8129,7 @@ SceneRoots:
   - {fileID: 102211574}
   - {fileID: 1505646705}
   - {fileID: 487277384}
+  - {fileID: 2142267990}
   - {fileID: 1329268831}
   - {fileID: 797636375}
   - {fileID: 98175876}
