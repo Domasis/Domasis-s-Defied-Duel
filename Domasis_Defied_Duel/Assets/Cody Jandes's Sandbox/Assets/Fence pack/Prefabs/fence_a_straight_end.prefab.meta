@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 71ad279a59e163044b203bde5e353162
+timeCreated: 1428607850
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34359
+  packageName: Modular Fences pack
+  packageVersion: 1.1
+  assetPath: Assets/Fence pack/Prefabs/fence_a_straight_end.prefab
+  uploadId: 60021

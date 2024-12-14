@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3e3dad3c1a0d79544a077b2c9305809f
+timeCreated: 1428605409
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34359
+  packageName: Modular Fences pack
+  packageVersion: 1.1
+  assetPath: Assets/Fence pack/Prefabs/fence_g_gate_broke.prefab
+  uploadId: 60021
