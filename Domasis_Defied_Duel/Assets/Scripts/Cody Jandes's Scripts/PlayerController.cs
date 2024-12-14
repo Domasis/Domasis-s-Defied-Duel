@@ -78,9 +78,44 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
     [SerializeField] AudioClip audReload;
 
-    [SerializeField][UnityEngine.Range(0, 1)] float audReloadVolume; 
+    [SerializeField][UnityEngine.Range(0, 1)] float audReloadVolume;
 
-    //Vector3 to move 
+    [Header("-----Armor Stats-----")]
+    // Player Armor Level (damage resistance the player has)
+    [SerializeField][UnityEngine.Range(0, 100)] int armorLevel; // DONT CHANGE for starting armor
+    [SerializeField] int maxArmor = 100; // Maximum armor level
+
+
+
+    // Method to show the players current armor percentage
+    public float GetArmorPercentage()
+    {
+        return (float)armorLevel / maxArmor;
+    }
+
+    // func to add armor to the player
+    public void AddArmor(int armorAmount)
+    {
+        // Adds the armor to the current armor level
+        armorLevel += armorAmount;
+
+        // clamps armor level so it does not exceed the maximum val
+        armorLevel = Mathf.Clamp(armorLevel, 0, maxArmor);
+
+        // Debugging to check if armor is applied
+        //Debug.Log("Armor Applied: " + armorAmount + ". New Armor Level: " + armorLevel);
+
+        // Optionally, log when armor reaches maximum
+        //if (armorLevel == maxArmor)
+        {
+           // Debug.Log("Armor is at maximum!"); // Log when armor reaches the maximum value
+        }
+
+        // Optionally, play an armor pickup sound here if needed
+    }
+
+    
+     //Vector3 to move 
     Vector3 movePlayer;
 
     //Gravity and keeping track of jump
@@ -295,20 +330,41 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
     public void TakeSomeDamage(int amount)
     {
-        Renderer model = gameObject.GetComponent<Renderer>();
-
-        Health -= amount;
-        aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVolume); //AUDIO FOR PLAYER TAKING DAMAGE
-        updatePlayerUI();
-        StartCoroutine(flashDamage());
-
-        if (cameraAnim.isShaking == false)
+        // If armor is above 0 absorb the damage
+        if (armorLevel > 0)
         {
-            model.enabled = false;
-            StartCoroutine(cameraAnim.ShakeCamera(Camera.main, model));
+            // how much damage will be absorbed by the armor
+            int damageAbsorbed = Mathf.Min(armorLevel, amount); // Armor absorbs damage up to its current level
+            armorLevel -= damageAbsorbed; // Decrease the armor by the absorbed damage
+
+            // minus the absorbed damage from the amount
+            amount -= damageAbsorbed;
         }
 
+        // After armor reaches 0, apply the remaining damage to players health
+        if (amount > 0)
+        {
+            Health -= amount;
+        }
 
+        // Play hurt sound
+        aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVolume);
+
+        // Update the UI with the current health and armor val
+        updatePlayerUI();
+
+        // If health is 0 or less, trigger player death
+        if (Health <= 0)
+        {
+            GameManager.instance.youLose();
+        }
+
+        // Flash damage screen effect (optional)
+        StartCoroutine(flashDamage());
+    
+
+
+    
         //I am Dead
         if (Health <= 0)
         {
@@ -318,8 +374,13 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
     public void updatePlayerUI()
     {
+        // Update the health bar based on current health
         GameManager.instance.playerHPBar.fillAmount = (float)Health / HPOriginal;
+
+        // Update the armor bar based on current armor level
+        GameManager.instance.playerArmorBar.fillAmount = (float)armorLevel / maxArmor;
     }
+
 
 
     IEnumerator flashDamage()

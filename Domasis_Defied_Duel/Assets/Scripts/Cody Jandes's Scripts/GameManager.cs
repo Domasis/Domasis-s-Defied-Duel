@@ -64,6 +64,9 @@ public class GameManager : MonoBehaviour
     // Control Health bar
     public Image playerHPBar;
 
+    // Player Armor bar (new)
+    public Image playerArmorBar;  // Armor bar UI element
+
     // Take damage screen
     public GameObject playerDamageScreen;
 
@@ -145,7 +148,6 @@ public class GameManager : MonoBehaviour
         isMissionPanelActive = true;
 
         LockPlayerControls(true);
-      
     }
 
     // Update is called once per frame
@@ -162,7 +164,6 @@ public class GameManager : MonoBehaviour
 
                 menuActive.SetActive(true);
             }
-
             else if (menuActive == menuPause)
             {
                 stateUnpause();
@@ -173,6 +174,9 @@ public class GameManager : MonoBehaviour
         {
             StartMission();
         }
+
+        // Update the Armor bar
+        UpdateArmorBar();
     }
 
     public void StartMission()
@@ -260,5 +264,14 @@ public class GameManager : MonoBehaviour
         menuActive = menuWin;
         menuActive.SetActive(true);
     }
-}
 
+    // Update the armor bar UI based on the player's armor percentage
+    private void UpdateArmorBar()
+    {
+        if (playerScript != null)
+        {
+            float armorPercentage = playerScript.GetArmorPercentage(); // Get the armor percentage from the PlayerController
+            playerArmorBar.fillAmount = armorPercentage;  // Update armor bar
+        }
+    }
+}
