@@ -366,10 +366,10 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
     
         //I am Dead
-        if (Health <= 0)
-        {
-            GameManager.instance.youLose();
-        }
+        //if (Health <= 0)
+        //{
+        //    GameManager.instance.youLose();
+        //}
     }
 
     public void updatePlayerUI()

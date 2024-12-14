@@ -39,20 +39,20 @@ public class Checkpoint : MonoBehaviour
         {
             OrigColor = Model.material.color;
         }
-        else
-        {
-            Debug.LogWarning("Model is not assigned in the Inspector.");
-        }
+        //else
+        //{
+        //    Debug.LogWarning("Model is not assigned in the Inspector.");
+        //}
 
-        if (PlayerSpawnPos == null)
-        {
-            Debug.LogWarning("PlayerSpawnPos is not assigned in the Inspector.");
-        }
+        //if (PlayerSpawnPos == null)
+        //{
+        //    Debug.LogWarning("PlayerSpawnPos is not assigned in the Inspector.");
+        //}
 
-        if (CheckpointPopup == null)
-        {
-            Debug.LogWarning("CheckpointPopup is not assigned in the Inspector.");
-        }
+        //if (CheckpointPopup == null)
+        //{
+        //    Debug.LogWarning("CheckpointPopup is not assigned in the Inspector.");
+        //}
     }
 
     private void OnTriggerEnter(Collider other)
