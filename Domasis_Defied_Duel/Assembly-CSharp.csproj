@@ -124,6 +124,7 @@
     <Compile Include="Assets\Scripts\Cody Jandes&apos;s Scripts\Objective.cs" />
     <Compile Include="Assets\Cody Jandes&apos;s Sandbox\Assets\Scripts\AudioSettingsController.cs" />
     <Compile Include="Assets\Sheldon Sharp&apos;s SandBox\Door.cs" />
+    <Compile Include="Assets\Scripts\Yoander Ferrer&apos;s Scripts\HelicopterAudioController.cs" />
     <Compile Include="Assets\Scripts\Cody Jandes&apos;s Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\Yoander Ferrer&apos;s Scripts\EnemyController.cs" />
     <Compile Include="Assets\Scripts\Sheldon Sharp&apos;s Scripts\AudioSing%3beton.cs" />
@@ -142,6 +143,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\UnityTechnologies\ParticlePack\EffectExamples\Misc Effects\Prefabs\Readme_Dissolve_Respawn_.txt" />
+    <None Include="Assets\Heli1\Info.txt" />
     <None Include="Assets\Sheldon Sharp&apos;s SandBox\SciFi_Door\readme.txt" />
     <None Include="Assets\Sheldon Sharp&apos;s SandBox\Fantasy Skybox FREE\ReleaseNotes.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />

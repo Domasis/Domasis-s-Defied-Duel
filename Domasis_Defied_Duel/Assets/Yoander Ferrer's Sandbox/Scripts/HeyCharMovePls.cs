@@ -48,9 +48,6 @@ public class HeyCharMovePls : MonoBehaviour, TakesDamage
     // In order to jump, we need a Vector3 that can be used to store the magnitude(direction) of the player's jump!
     Vector3 jumpVelocity;
 
-    // Variable that tracks if the player is sprinting.
-    bool isSprinting;
-
     bool isShooting;
 
     // Variable that tracks the number of times the player has jumped.
@@ -81,7 +78,6 @@ public class HeyCharMovePls : MonoBehaviour, TakesDamage
         {
             // If the sprint button is being held, we multiply our speed by our sprintMod, and set isSprinting to true.
             speed *= sprintMod;
-            isSprinting = true;
 
         }
 
@@ -90,7 +86,6 @@ public class HeyCharMovePls : MonoBehaviour, TakesDamage
         {
             // If the button was released, we reset our speed back to its original value, and set isSprinting to false.
             speed /= sprintMod;
-            isSprinting = false;
 
         }
     }

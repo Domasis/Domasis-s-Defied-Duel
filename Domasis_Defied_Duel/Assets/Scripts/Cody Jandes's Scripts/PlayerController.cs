@@ -330,6 +330,9 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
     public void TakeSomeDamage(int amount)
     {
+        // Need an instance of the model for the purposes of the camera shake.
+        Renderer model = GetComponent<Renderer>();
+
         // If armor is above 0 absorb the damage
         if (armorLevel > 0)
         {
@@ -353,6 +356,8 @@ public class PlayerController : MonoBehaviour, TakesDamage
         // Update the UI with the current health and armor val
         updatePlayerUI();
 
+        cameraAnim.StartCoroutine(cameraAnim.ShakeCamera(Camera.main, model));
+
         // If health is 0 or less, trigger player death
         if (Health <= 0)
         {
@@ -363,13 +368,6 @@ public class PlayerController : MonoBehaviour, TakesDamage
         StartCoroutine(flashDamage());
     
 
-
-    
-        //I am Dead
-        //if (Health <= 0)
-        //{
-        //    GameManager.instance.youLose();
-        //}
     }
 
     public void updatePlayerUI()
