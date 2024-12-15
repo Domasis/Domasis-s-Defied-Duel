@@ -84,7 +84,7 @@ public class EnemyAI : MonoBehaviour, TakesDamage
         }
         else
         {
-            Debug.LogWarning("NavMeshAgent not assigned on " + gameObject.name);
+            //Debug.LogWarning("NavMeshAgent not assigned on " + gameObject.name);
         }
     }
 }

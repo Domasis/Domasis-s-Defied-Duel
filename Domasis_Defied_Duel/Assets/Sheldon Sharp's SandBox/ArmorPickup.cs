@@ -18,7 +18,7 @@ public class ArmorPickup : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("GameManager instance not found. Armor pickup failed.");
+               // Debug.LogWarning("GameManager instance not found. Armor pickup failed.");
             }
 
             // Optionally, destroy the pickup after being collected

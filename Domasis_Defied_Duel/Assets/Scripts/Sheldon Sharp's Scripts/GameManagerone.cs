@@ -90,7 +90,7 @@ public class GameManager1 : MonoBehaviour
     public void UpdateGameGoal(int amount)
     {
         EnemyCount += amount;
-        Debug.Log("Current Enemy Count: " + EnemyCount); // Log the current enemy count for debugging
+       // Debug.Log("Current Enemy Count: " + EnemyCount); // Log the current enemy count for debugging
 
         if (EnemyCount <= 0)
         {
