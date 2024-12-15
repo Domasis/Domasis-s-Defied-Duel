@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Sniper Rifle
   m_EditorClassIdentifier: 
   gunModel: {fileID: 919132149155446097, guid: 60d91f925d8c1e442bb6596dfb94ffff, type: 3}
-  shootDamage: 15
-  shootDistance: 50
-  shootRate: 2
+  shootDamage: 25
+  shootDistance: 75
+  shootRate: 1
   ammoCurrent: 7
   ammoMax: 7
   hitEffect: {fileID: 8460667080445658518, guid: a3e2c3406e02f2c4ba86cfb1604277bd, type: 3}

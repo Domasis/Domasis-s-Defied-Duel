@@ -15,9 +15,21 @@ public class AudioSettingsController : MonoBehaviour
 
     private void Awake()
     {
+        InitializeAudioSettings();
+
         _slider.onValueChanged.AddListener(HandleSliderValueChanged);
         _toggle.onValueChanged.AddListener(HandleToggleValueChanged);
 
+    }
+
+    private void InitializeAudioSettings()
+    {
+        float savedVolume = PlayerPrefs.GetFloat(_volumeParameter, _slider.value);
+
+        _slider.value = savedVolume;
+        _mixer.SetFloat(_volumeParameter, Mathf.Log10(savedVolume) * 20);
+
+        _toggle.isOn = savedVolume > _slider.minValue;
     }
 
     private void OnDisable()
@@ -31,7 +43,7 @@ public class AudioSettingsController : MonoBehaviour
 
         _disableToggleEvent = true;
 
-        _toggle.isOn = _slider.value > _slider.minValue;
+        _toggle.isOn = value > _slider.minValue;
 
         _disableToggleEvent = false;
     }
@@ -51,9 +63,9 @@ public class AudioSettingsController : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        _slider.value = PlayerPrefs.GetFloat(_volumeParameter, _slider.value);
-    }
+    //private void Start()
+    //{
+    //    _slider.value = PlayerPrefs.GetFloat(_volumeParameter, _slider.value);
+    //}
 
 }
