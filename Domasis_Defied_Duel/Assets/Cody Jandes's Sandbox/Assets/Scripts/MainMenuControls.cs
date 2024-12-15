@@ -12,6 +12,8 @@ public class MainMenuControls : MonoBehaviour
     public void OpenCredits()
     {
         SceneManager.LoadScene("CreditsScene"); //load credits
+        GameManager.instance.stateUnpause();
+
     }
 
     public void OpenShowcase()

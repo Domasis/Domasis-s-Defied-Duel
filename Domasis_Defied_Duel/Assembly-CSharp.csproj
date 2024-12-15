@@ -119,6 +119,7 @@
     <Compile Include="Assets\Scripts\Yoander Ferrer&apos;s Scripts\InteractiveTooltipObj.cs" />
     <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\MakesSound.cs" />
     <Compile Include="Assets\Sheldon Sharp&apos;s SandBox\sheldons enemy ai.cs" />
+    <Compile Include="Assets\Cody Jandes&apos;s Sandbox\Assets\Scripts\CreditsRoll.cs" />
     <Compile Include="Assets\Scripts\Cody Jandes&apos;s Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Cody Jandes&apos;s Scripts\PickupSystem.cs" />
     <Compile Include="Assets\Yoander Ferrer&apos;s Sandbox\Scripts\PlayerLocator.cs" />
