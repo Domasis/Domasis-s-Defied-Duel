@@ -3175,6 +3175,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player1
       objectReference: {fileID: 0}
+    - target: {fileID: 4406840404617463261, guid: a7f6bceefacfcc448a4d23fedb36c864, type: 3}
+      propertyPath: shakeIntensity
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 6006182423593781204, guid: a7f6bceefacfcc448a4d23fedb36c864, type: 3}
       propertyPath: m_LocalPosition.x
       value: 73.25

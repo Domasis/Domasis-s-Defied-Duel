@@ -2723,6 +2723,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blast Door
       objectReference: {fileID: 0}
+    - target: {fileID: 4014813390956504976, guid: 99ac1fd8ce31510448942d9bd8e37e3c, type: 3}
+      propertyPath: m_Size.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4014813390956504976, guid: 99ac1fd8ce31510448942d9bd8e37e3c, type: 3}
+      propertyPath: m_Size.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4014813390956504976, guid: 99ac1fd8ce31510448942d9bd8e37e3c, type: 3}
+      propertyPath: m_Size.z
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5319546169369545918, guid: 99ac1fd8ce31510448942d9bd8e37e3c, type: 3}
+      propertyPath: m_Size.x
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5319546169369545918, guid: 99ac1fd8ce31510448942d9bd8e37e3c, type: 3}
+      propertyPath: m_Size.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5319546169369545918, guid: 99ac1fd8ce31510448942d9bd8e37e3c, type: 3}
+      propertyPath: m_Size.z
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8354884707792628135, guid: 99ac1fd8ce31510448942d9bd8e37e3c, type: 3}
       propertyPath: m_LocalScale.y
       value: 1
