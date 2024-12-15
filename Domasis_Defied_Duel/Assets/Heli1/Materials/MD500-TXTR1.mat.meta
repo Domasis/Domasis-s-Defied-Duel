@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b4f767a128cf14e48aac04f11a3dc798
+timeCreated: 1426027433
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 3922
+  packageName: Military Helicopter
+  packageVersion: 1.2
+  assetPath: Assets/Heli1/Materials/MD500-TXTR1.mat
+  uploadId: 54678

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 69e0c30bdee1ae143bf3ba3d95dc4386
+timeCreated: 1426029975
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 3922
+  packageName: Military Helicopter
+  packageVersion: 1.2
+  assetPath: Assets/Heli1/Heli2/Materials/Heli2_Material.mat
+  uploadId: 54678

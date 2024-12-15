@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f783e6c6b9c377c4db4fd4821caa50df
+timeCreated: 1426026447
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 3922
+  packageName: Military Helicopter
+  packageVersion: 1.2
+  assetPath: Assets/Heli1/Materials/Cockpit_Material.mat
+  uploadId: 54678

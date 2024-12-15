@@ -3,7 +3,7 @@ using UnityEngine;
 public class ArmorPickup : MonoBehaviour
 {
     // Amount of armor to apply when the pickup is collected
-    [SerializeField] private int armorAmount = 20;
+    //[SerializeField] private int armorAmount = 20;
 
     // Method to handle the pickup interaction
     private void OnTriggerEnter(Collider other)
