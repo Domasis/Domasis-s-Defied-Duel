@@ -7,7 +7,7 @@ public class DefaultButtonControl : MonoBehaviour
     [SerializeField] private GameObject defaultButton;
 
     private GameObject lastSelected;
-    private bool isUsingMouse = false;
+    //private bool isUsingMouse = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,14 +22,14 @@ public class DefaultButtonControl : MonoBehaviour
         //Handle mouse if clicked
         if (Input.GetMouseButtonDown(0))
         {
-            isUsingMouse = true;
+            //isUsingMouse = true;
         }
 
         //Handle Arrow keys 
         if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
             //turn mouse off
-            isUsingMouse= false;
+            //isUsingMouse = false;
 
             //If no button selected
             if (EventSystem.current.currentSelectedGameObject == null)
