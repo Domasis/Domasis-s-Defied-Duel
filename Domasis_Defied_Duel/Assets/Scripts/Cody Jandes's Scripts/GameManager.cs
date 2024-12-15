@@ -106,6 +106,10 @@ public class GameManager : MonoBehaviour
 
     public float TimeScaleOriginal { get => timeScaleOriginal; set => timeScaleOriginal = value; }
 
+    [SerializeField] private AudioSource winMusicSource;
+    [SerializeField] private AudioClip winMusicClip;
+    [SerializeField] private AudioSource backgroundMusicSource;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -140,6 +144,11 @@ public class GameManager : MonoBehaviour
 
         // Initialize level
         InitializeLevel();
+
+        if (winMusicClip != null)
+        {
+            winMusicSource.clip = winMusicClip;
+        }
     }
 
     private void InitializeLevel()
@@ -259,10 +268,25 @@ public class GameManager : MonoBehaviour
     public void youWin()
     {
         GetInteractPopup().SetActive(false);
+        if (backgroundMusicSource != null && backgroundMusicSource.isPlaying)
+        {
+            backgroundMusicSource.Stop();
+        }
         // Pause and pull win menu
         statePause();
         menuActive = menuWin;
         menuActive.SetActive(true);
+
+        PlayWinMusic();
+    }
+
+    private void PlayWinMusic()
+    {
+        if (winMusicSource != null && winMusicClip != null)
+        {
+            winMusicSource.Stop();
+            winMusicSource.Play();
+        }
     }
 
     // Update the armor bar UI based on the player's armor percentage
