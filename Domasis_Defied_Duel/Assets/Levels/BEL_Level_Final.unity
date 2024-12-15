@@ -63720,7 +63720,8 @@ MonoBehaviour:
     that the rogue faction is preparing to deploy their weapon. Your mission is clear:
     locate the weapon, hack into its core systems, and disable it permanently. Failure
     is not an option. This is our last chance to neutralize the threat before it's
-    too late. Press Enter to start the mission.\r\n"
+    too late. We left you a fresh loadout, grab it and execute. Press Enter to start
+    the mission.\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
