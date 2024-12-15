@@ -2996,6 +2996,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1579307664}
     m_Modifications:
+    - target: {fileID: 289094159795261405, guid: 5e0efcda3fe66784eab968ccf9c1e3af, type: 3}
+      propertyPath: hoverHeight
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 1690650251129161168, guid: 5e0efcda3fe66784eab968ccf9c1e3af, type: 3}
       propertyPath: m_Name
       value: Armor (1)
@@ -3006,7 +3010,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2034982574736727914, guid: 5e0efcda3fe66784eab968ccf9c1e3af, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.9184799
+      value: 1.1684799
       objectReference: {fileID: 0}
     - target: {fileID: 2034982574736727914, guid: 5e0efcda3fe66784eab968ccf9c1e3af, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12976,6 +12980,10 @@ PrefabInstance:
     - target: {fileID: 2206448084360283100, guid: 00ce5e164100fe5459e223a77c266c23, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8046567394533495456, guid: 00ce5e164100fe5459e223a77c266c23, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8549623730128208213, guid: 00ce5e164100fe5459e223a77c266c23, type: 3}
       propertyPath: m_Name
@@ -26211,7 +26219,7 @@ TerrainCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_TerrainData: {fileID: 15600000, guid: 040bc64bc5cda504faf99c45d8718e3e, type: 2}
+  m_TerrainData: {fileID: 15600000, guid: a7f219081fb44bc459ad6490a1e9b85b, type: 2}
   m_EnableTreeColliders: 1
 --- !u!218 &942054606
 Terrain:
@@ -26222,7 +26230,7 @@ Terrain:
   m_GameObject: {fileID: 942054604}
   m_Enabled: 1
   serializedVersion: 6
-  m_TerrainData: {fileID: 0}
+  m_TerrainData: {fileID: 15600000, guid: a7f219081fb44bc459ad6490a1e9b85b, type: 2}
   m_TreeDistance: 5000
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
@@ -30654,11 +30662,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8806288424173149512, guid: 9740923126353844798f6d959ade8873, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -120.72075
+      value: -122.09575
       objectReference: {fileID: 0}
     - target: {fileID: 8806288424173149512, guid: 9740923126353844798f6d959ade8873, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -43.682503
+      value: -42.307503
       objectReference: {fileID: 0}
     - target: {fileID: 8806288424173149512, guid: 9740923126353844798f6d959ade8873, type: 3}
       propertyPath: m_LocalPosition.z
@@ -35504,6 +35512,10 @@ PrefabInstance:
       propertyPath: armorGain
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 289094159795261405, guid: 5e0efcda3fe66784eab968ccf9c1e3af, type: 3}
+      propertyPath: hoverHeight
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 1690650251129161168, guid: 5e0efcda3fe66784eab968ccf9c1e3af, type: 3}
       propertyPath: m_Name
       value: Armor
@@ -35514,7 +35526,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2034982574736727914, guid: 5e0efcda3fe66784eab968ccf9c1e3af, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.16648
+      value: 1.41648
       objectReference: {fileID: 0}
     - target: {fileID: 2034982574736727914, guid: 5e0efcda3fe66784eab968ccf9c1e3af, type: 3}
       propertyPath: m_LocalPosition.z
@@ -47990,7 +48002,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1711116891765866385, guid: d9c6bac99a7dc3a419a36be49348c5d8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -43.932503
+      value: -42.557503
       objectReference: {fileID: 0}
     - target: {fileID: 1711116891765866385, guid: d9c6bac99a7dc3a419a36be49348c5d8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -57158,11 +57170,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4410245547427853784, guid: d112b4aea4a2390499c7d6e10b08808d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -119.01068
+      value: -119.76068
       objectReference: {fileID: 0}
     - target: {fileID: 4410245547427853784, guid: d112b4aea4a2390499c7d6e10b08808d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -44.057503
+      value: -42.682503
       objectReference: {fileID: 0}
     - target: {fileID: 4410245547427853784, guid: d112b4aea4a2390499c7d6e10b08808d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -62299,7 +62311,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2034982574736727914, guid: 5e0efcda3fe66784eab968ccf9c1e3af, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.74648
+      value: 1.99648
       objectReference: {fileID: 0}
     - target: {fileID: 2034982574736727914, guid: 5e0efcda3fe66784eab968ccf9c1e3af, type: 3}
       propertyPath: m_LocalPosition.z
