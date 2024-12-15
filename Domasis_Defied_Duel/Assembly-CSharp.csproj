@@ -136,7 +136,6 @@
     <None Include="Assets\Unity Store DLs\SyntyStudios\PolygonPrototype\Shaders\Prototype_Glass_Global.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile-2-Pass.shader" />
-    <None Include="Assets\Sheldon Sharp&apos;s SandBox\SciFi_Space_Soldier\Resources\Shaders\SpaceStation_PBR_Basic.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\Unity Store DLs\SyntyStudios\PolygonPrototype\Shaders\Prototype_Object.shader" />
     <None Include="Assets\Sheldon Sharp&apos;s SandBox\Fantasy Skybox FREE\Readme.txt" />
@@ -150,7 +149,6 @@
     <None Include="Assets\TextMesh Pro\Shaders\SDFFunctions.hlsl" />
     <None Include="Assets\Unity Store DLs\SyntyStudios\PolygonPrototype\Shaders\Prototype_Global.shader" />
     <None Include="Assets\UnityTechnologies\ParticlePack\EffectExamples\Magic Effects\Shaders\Ice.shader" />
-    <None Include="Assets\Sheldon Sharp&apos;s SandBox\Light Hearted Tech\SentryRobot\Documentation\Readme.txt" />
     <None Include="Assets\UnityTechnologies\ParticlePack\EffectExamples\Misc Effects\Shaders\Respawn.shader" />
     <None Include="Assets\Unity Store DLs\ToonSoldiers_demo\ToonSoldiers_demo.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
