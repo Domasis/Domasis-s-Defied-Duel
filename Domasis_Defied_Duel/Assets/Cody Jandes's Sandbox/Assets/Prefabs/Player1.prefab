@@ -37,6 +37,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6436141214930458672}
+  - {fileID: 2580750852124276545}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &7619034650225835889
@@ -94,8 +95,11 @@ MonoBehaviour:
   audFootstepVolume: 0.05
   audReload: {fileID: 8300000, guid: dc6e4a553af53654d9909d5b02147d77, type: 3}
   audReloadVolume: 0.25
+  armorLevel: 0
+  maxArmor: 100
   bullet: {fileID: 0}
   shootPos: {fileID: 0}
+  cameraAnim: {fileID: 4406840404617463261}
 --- !u!143 &2358283813422285638
 CharacterController:
   m_ObjectHideFlags: 0
@@ -321,6 +325,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &1641873652393857046
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2580750852124276545}
+  m_Layer: 0
+  m_Name: CamPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2580750852124276545
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1641873652393857046}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6006182423593781204}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5710027457532828904
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,6 +369,7 @@ GameObject:
   - component: {fileID: 2547587317560765097}
   - component: {fileID: 9088391692257098087}
   - component: {fileID: 720132114024166755}
+  - component: {fileID: 4406840404617463261}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -476,6 +512,22 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &4406840404617463261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5710027457532828904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c0e42c3ee2f4694584f27c7901ed7d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeIntensity: 0.4
+  duration: 0.25
+  CamPos: {fileID: 1641873652393857046}
+  isShaking: 0
 --- !u!1 &7115593131836552241
 GameObject:
   m_ObjectHideFlags: 0

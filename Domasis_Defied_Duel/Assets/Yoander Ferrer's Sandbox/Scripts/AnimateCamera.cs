@@ -28,8 +28,8 @@ public class AnimateCamera : MonoBehaviour
 
     public IEnumerator ShakeCamera(Camera cam, Renderer model)
     {
-        if (GameManager.instance.playerScript.Health > 0)
-        {
+            model.enabled = false;
+
             isShaking = true;
 
             float elapsed = 0f;
@@ -37,9 +37,8 @@ public class AnimateCamera : MonoBehaviour
             while (elapsed < duration)
             {
                 float x = Random.Range(-1f, 1f) * shakeIntensity;
-                float y = Random.Range(-1f, 1f) * shakeIntensity;
 
-                cam.transform.position += new Vector3(x, y, 0);
+                cam.transform.position += new Vector3(x, 0, 0);
 
                 elapsed += Time.deltaTime;
 
@@ -49,12 +48,5 @@ public class AnimateCamera : MonoBehaviour
             cam.transform.position = CamPos.transform.position;
             model.enabled = true;
             isShaking = false;
-        }
-        else
-        {
-
-            yield return null;
-
-        }
     }
 }

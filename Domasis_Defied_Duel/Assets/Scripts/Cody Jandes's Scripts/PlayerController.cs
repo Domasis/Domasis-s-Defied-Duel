@@ -356,13 +356,13 @@ public class PlayerController : MonoBehaviour, TakesDamage
         // Update the UI with the current health and armor val
         updatePlayerUI();
 
-        cameraAnim.StartCoroutine(cameraAnim.ShakeCamera(Camera.main, model));
-
         // If health is 0 or less, trigger player death
         if (Health <= 0)
         {
             GameManager.instance.youLose();
         }
+
+        cameraAnim.StartCoroutine(cameraAnim.ShakeCamera(Camera.main, model));
 
         // Flash damage screen effect (optional)
         StartCoroutine(flashDamage());
