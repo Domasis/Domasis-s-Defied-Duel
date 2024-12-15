@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem.Utilities;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Renderer))]
@@ -51,6 +52,9 @@ public class Objective : MonoBehaviour, IAlert
     Vector3 playerDir;
 
     Color colorOriginal;
+
+    //Bool to check if hackable object is complete or not
+    private bool isCompleted = false;
 
     //Get and Set originalColor
     public Color GetOriginalColor()
@@ -120,10 +124,10 @@ public class Objective : MonoBehaviour, IAlert
                 objectiveAudio.PlayOneShot(warningAudioClip, 1f);
 
             }
-
-            if (hackProgress >= maxHackLimit)
+            //TMade change to check and mark hackable object as completed
+            if (hackProgress >= maxHackLimit && !isCompleted)
             {
-
+                isCompleted = true;
                 GameManager.instance.updateSecondaryGameGoal(-1);
                 Destroy(gameObject);
 
@@ -171,8 +175,9 @@ public class Objective : MonoBehaviour, IAlert
     {
         if (GameManager.instance.GetInteractPopup() != null)
             GameManager.instance.GetInteractPopup().SetActive(false);
-
-        if (GameManager.instance.GetObjectiveCount() > 0)
+        
+        //Made change to see if hackable object is completed
+        if (!isCompleted && GameManager.instance.GetObjectiveCount() > 0)
         {
             AlertEnemies();
         }
