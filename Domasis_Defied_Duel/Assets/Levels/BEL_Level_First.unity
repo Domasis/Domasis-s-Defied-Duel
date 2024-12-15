@@ -5132,6 +5132,9 @@ MonoBehaviour:
   isPaused: 0
   ammoCountText: {fileID: 8819389270368684544}
   missionPanel: {fileID: 1635876776987101868}
+  winMusicSource: {fileID: 7824016789764413928}
+  winMusicClip: {fileID: 8300000, guid: 793b9dd2c1968cf4c8af8eff856948e4, type: 3}
+  backgroundMusicSource: {fileID: 1941222150}
 --- !u!4 &1446959467 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 413494, guid: c2849fd453abd0445a702a035f04ac60, type: 3}
@@ -6475,6 +6478,11 @@ PrefabInstance:
 --- !u!4 &1941222149 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 764424879775228546, guid: aa7778b0cdea42d489098f863a67e28f, type: 3}
+  m_PrefabInstance: {fileID: 1941222148}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1941222150 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2121802937438538162, guid: aa7778b0cdea42d489098f863a67e28f, type: 3}
   m_PrefabInstance: {fileID: 1941222148}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1964382586 stripped
@@ -9063,6 +9071,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7824016789764413927}
   - component: {fileID: 1437749569}
+  - component: {fileID: 7824016789764413928}
   m_Layer: 5
   m_Name: GameManager
   m_TagString: Untagged
@@ -14912,6 +14921,103 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!82 &7824016789764413928
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459976276874601907}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 5918286534096148968, guid: 136a706089bd7db41a4ef768bfb57d4e, type: 2}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7967759838773332644
 GameObject:
   m_ObjectHideFlags: 0
