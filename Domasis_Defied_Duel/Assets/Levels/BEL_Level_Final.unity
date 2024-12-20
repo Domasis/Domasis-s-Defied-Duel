@@ -19116,6 +19116,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player1
       objectReference: {fileID: 0}
+    - target: {fileID: 2547587317560765097, guid: a7f6bceefacfcc448a4d23fedb36c864, type: 3}
+      propertyPath: near clip plane
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 4406840404617463261, guid: a7f6bceefacfcc448a4d23fedb36c864, type: 3}
       propertyPath: shakeIntensity
       value: 0.15
@@ -27691,15 +27695,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1202118751317002587, guid: 4781c9923f5ac0e4789ce019e8ce0db0, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.02
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 1202118751317002587, guid: 4781c9923f5ac0e4789ce019e8ce0db0, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.02
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 1202118751317002587, guid: 4781c9923f5ac0e4789ce019e8ce0db0, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.02
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 1202118751317002587, guid: 4781c9923f5ac0e4789ce019e8ce0db0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -62061,15 +62065,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6865350874452191567, guid: 6a4562feb52e79045a5abedda79593ee, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.02
+      value: 0.0075
       objectReference: {fileID: 0}
     - target: {fileID: 6865350874452191567, guid: 6a4562feb52e79045a5abedda79593ee, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.02
+      value: 0.0075
       objectReference: {fileID: 0}
     - target: {fileID: 6865350874452191567, guid: 6a4562feb52e79045a5abedda79593ee, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.02
+      value: 0.0075
       objectReference: {fileID: 0}
     - target: {fileID: 6865350874452191567, guid: 6a4562feb52e79045a5abedda79593ee, type: 3}
       propertyPath: m_LocalPosition.x
@@ -69435,7 +69439,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 8, y: 0}
+  m_AnchoredPosition: {x: 8, y: -450}
   m_SizeDelta: {x: 250, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &6365947622894244076
