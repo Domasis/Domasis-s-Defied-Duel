@@ -21,6 +21,8 @@ public class DamageDealer : MonoBehaviour
     // Editor exposed variable that tracks the life of the projectile before it is destroyed.
     [SerializeField] float timeTilDestruction;
 
+    [SerializeField] Vector3 shootPos;
+
     // Properties for each of the above member variables.
     private DamageType Type { get => type; set => type = value; }
     public Rigidbody Rb { get => rb; set => rb = value; }
@@ -37,8 +39,11 @@ public class DamageDealer : MonoBehaviour
         // If the inheriting object is a bullet:
         if (type == DamageType.bullet)
         {
+            Vector3 playerDir = (GameManager.instance.player.transform.position + new Vector3(0, 0.25f, 0)) - transform.position;
+
+            playerDir.Normalize();
             // We give it a forward linear velocity
-            Rb.linearVelocity = transform.forward * speed;
+            Rb.linearVelocity = playerDir * speed;
 
             // After a specified amount of time has passed, we destroy the object.
             Destroy(gameObject, TimeTilDestruction);

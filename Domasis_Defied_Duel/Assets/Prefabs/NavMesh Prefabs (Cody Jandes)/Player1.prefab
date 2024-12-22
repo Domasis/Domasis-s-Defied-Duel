@@ -65,7 +65,6 @@ MonoBehaviour:
   shootDistance: 15
   gunModel: {fileID: 0}
   muzzleFlash: {fileID: 0}
-  ammoCountText: {fileID: 0}
   aud: {fileID: 0}
   audJump: []
   audJumpVolume: 0
@@ -73,8 +72,13 @@ MonoBehaviour:
   audHurtVolume: 0
   audFootsteps: []
   audFootstepVolume: 0
+  audReload: {fileID: 0}
+  audReloadVolume: 0
+  armorLevel: 0
+  maxArmor: 100
   bullet: {fileID: 6604961131242589871, guid: 38ba56e540a08a146abdabd5c6f2adf4, type: 3}
   shootPos: {fileID: 0}
+  cameraAnim: {fileID: 0}
 --- !u!143 &5116277474354410553
 CharacterController:
   m_ObjectHideFlags: 0
@@ -172,8 +176,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.6
+  m_Height: 2.25
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9195899793556912014
