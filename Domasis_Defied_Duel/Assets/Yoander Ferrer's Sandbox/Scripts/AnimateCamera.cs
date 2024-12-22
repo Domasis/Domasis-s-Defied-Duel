@@ -20,10 +20,7 @@ public class AnimateCamera : MonoBehaviour
 
     void Update()
     {
-        if (!isShaking)
-        {
-            Camera.main.transform.position = CamPos.transform.position;
-        }
+        
     }
 
     public IEnumerator ShakeCamera(Camera cam, Renderer model)
@@ -48,5 +45,12 @@ public class AnimateCamera : MonoBehaviour
             cam.transform.position = CamPos.transform.position;
             model.enabled = true;
             isShaking = false;
+    }
+
+    public void stopShake(Camera cam, Renderer model)
+    {
+        isShaking = false;
+        cam.transform.position = CamPos.transform.position;
+        model.enabled = true;
     }
 }

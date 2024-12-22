@@ -80,6 +80,8 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
     [SerializeField][UnityEngine.Range(0, 1)] float audReloadVolume;
 
+    Coroutine currShake;
+
     [Header("-----Armor Stats-----")]
     // Player Armor Level (damage resistance the player has)
     [SerializeField][UnityEngine.Range(0, 100)] int armorLevel; // DONT CHANGE for starting armor
@@ -342,12 +344,17 @@ public class PlayerController : MonoBehaviour, TakesDamage
 
             // minus the absorbed damage from the amount
             amount -= damageAbsorbed;
+            cameraAnim.StartCoroutine(cameraAnim.ShakeCamera(Camera.main, model));
         }
 
         // After armor reaches 0, apply the remaining damage to players health
         if (amount > 0)
         {
             Health -= amount;
+            if (Health > 0)
+            {
+                currShake = cameraAnim.StartCoroutine(cameraAnim.ShakeCamera(Camera.main, model));
+            }
         }
 
         // Play hurt sound
@@ -359,10 +366,13 @@ public class PlayerController : MonoBehaviour, TakesDamage
         // If health is 0 or less, trigger player death
         if (Health <= 0)
         {
+            StopCoroutine(currShake);
+            cameraAnim.stopShake(Camera.main, model);
             GameManager.instance.youLose();
+            
         }
 
-        cameraAnim.StartCoroutine(cameraAnim.ShakeCamera(Camera.main, model));
+        
 
         // Flash damage screen effect (optional)
         StartCoroutine(flashDamage());
