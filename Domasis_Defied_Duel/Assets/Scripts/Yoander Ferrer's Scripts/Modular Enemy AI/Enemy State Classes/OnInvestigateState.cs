@@ -52,12 +52,12 @@ public class OnInvestigateState : IEnemyState
             }
 
             // Finally, we set the AI's state to the AttackState, as we know that it's going to need to start attacking the player.
-            stateToChange = OffensiveEnemyController.AttackState;
+            stateToChange = enemy.AttackState;
         }
 
         else if (!enemy.CanSeePlayer() && enemy.PlayerInRange && !enemy.IsInvestigating)
         {
-            stateToChange = OffensiveEnemyController.RoamState;
+            stateToChange = enemy.RoamState;
         }
 
         // If our enemy can't see the player, and the player isn't in range:
@@ -65,7 +65,7 @@ public class OnInvestigateState : IEnemyState
         {
 
             // We set the AI's state to the RoamState, as we know that it's going to go back to roaming.
-            stateToChange = OffensiveEnemyController.RoamState;
+            stateToChange = enemy.RoamState;
         }
 
         // Finally, regardless of the state of the enemy, we return it here so that our AI knows what state to be in for the next frame.

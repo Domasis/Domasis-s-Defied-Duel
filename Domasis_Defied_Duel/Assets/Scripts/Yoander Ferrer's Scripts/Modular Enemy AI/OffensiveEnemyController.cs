@@ -11,9 +11,9 @@ using UnityEngine.UI;
 public class OffensiveEnemyController : LiveActor, TakesDamage, IHearSounds, IAlert
 {
     // IEnemyState derived class instances that contain the logic for each state the enemy is in.
-    private static OnAttackState attackState = new();
-    private static OnRoamState roamState = new();
-    private static OnInvestigateState investigateState = new();
+    private OnAttackState attackState = new();
+    private OnRoamState roamState = new();
+    private OnInvestigateState investigateState = new();
 
     [Header("Enemy Offensive Stats and State")]
 
@@ -104,9 +104,9 @@ public class OffensiveEnemyController : LiveActor, TakesDamage, IHearSounds, IAl
     public IEnemyState CurrentState { get => currentState; set => currentState = value; }
     public bool WasHit { get => wasHit; set => wasHit = value; }
     public bool HeardSomething { get => heardSomething; set => heardSomething = value; }
-    public static OnAttackState AttackState { get => attackState; set => attackState = value; }
-    public static OnRoamState RoamState { get => roamState; set => roamState = value; }
-    public static OnInvestigateState InvestigateState { get => investigateState; set => investigateState = value; }
+    public OnAttackState AttackState { get => attackState; set => attackState = value; }
+    public OnRoamState RoamState { get => roamState; set => roamState = value; }
+    public OnInvestigateState InvestigateState { get => investigateState; set => investigateState = value; }
     public Vector3 OrigLocation { get => origLocation; set => origLocation = value; }
     public int RoamPrioMax { get => roamPrioMax; set => roamPrioMax = value; }
     public Color DmgColor { get => dmgColor; set => dmgColor = value; }

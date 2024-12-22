@@ -369,7 +369,6 @@ public class PlayerController : MonoBehaviour, TakesDamage
             StopCoroutine(currShake);
             cameraAnim.stopShake(Camera.main, model);
             GameManager.instance.youLose();
-            
         }
 
         

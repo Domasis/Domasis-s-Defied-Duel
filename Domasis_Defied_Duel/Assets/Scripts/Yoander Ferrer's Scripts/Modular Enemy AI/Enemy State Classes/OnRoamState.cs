@@ -21,7 +21,7 @@ public class OnRoamState : IEnemyState
 
         if (enemy.roamOnly == true)
         {
-            return OffensiveEnemyController.RoamState;
+            return enemy.RoamState;
         }
 
         // We create an IEnemyState instance that will store the state our AI will switch to, defaulted to the current state of our enemy.
@@ -42,7 +42,7 @@ public class OnRoamState : IEnemyState
             }
 
             // Finally, we set our state to our enemy's InvestigateState, which lets our AI know in Update to start calling logic from the OnInvestigateState class.
-            stateToChange = OffensiveEnemyController.InvestigateState;
+            stateToChange = enemy.InvestigateState;
         }
 
         // Otherwise, if our enemy can see the player, and the player is in range:
@@ -58,7 +58,7 @@ public class OnRoamState : IEnemyState
             }
 
             // Finally, we set the AI's state to the AttackState, as we know that it's going to need to start attacking the player.
-            stateToChange = OffensiveEnemyController.AttackState;
+            stateToChange = enemy.AttackState;
         }
 
         // Finally, regardless of the state of the enemy, we return it here so that our AI knows what state to be in for the next frame.

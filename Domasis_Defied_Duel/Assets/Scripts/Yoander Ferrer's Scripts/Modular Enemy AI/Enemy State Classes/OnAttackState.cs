@@ -41,7 +41,7 @@ public class OnAttackState : IEnemyState
             {
 
                 // We set our state to our enemy's InvestigateState, which lets our AI know in Update to start calling logic from the OnInvestigateState class.
-                stateToChange = OffensiveEnemyController.InvestigateState;
+                stateToChange = enemy.InvestigateState;
             }
 
             // If our enemy can't see the player, and the player isn't in range:
@@ -49,12 +49,12 @@ public class OnAttackState : IEnemyState
             {
 
                 // We set the AI's state to the RoamState, as we know that it's going to go back to roaming.
-                stateToChange = OffensiveEnemyController.RoamState;
+                stateToChange = enemy.RoamState;
             }
 
             else
             {
-                stateToChange = OffensiveEnemyController.RoamState;
+                stateToChange = enemy.RoamState;
             }
         }
 
