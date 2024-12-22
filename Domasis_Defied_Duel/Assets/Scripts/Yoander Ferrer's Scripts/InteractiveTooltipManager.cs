@@ -43,7 +43,6 @@ public class InteractiveTooltipManager : MonoBehaviour
     {
 
         TipCanvas.enabled = true;
-        GameManager.instance.statePause();
         if (msg != null)
         { TipText.text = msg; }
         else { TipText.text = origErrorMsg; }
@@ -53,11 +52,6 @@ public class InteractiveTooltipManager : MonoBehaviour
 
     public void HideTooltip()
     {
-        GameManager.instance.isPaused = false;
-        Time.timeScale = GameManager.instance.TimeScaleOriginal;
-        Cursor.visible = false; //don't see cursor when paused
-        Cursor.lockState = CursorLockMode.Locked; //relock cursor
-
         TipCanvas.enabled = false;
         TipText.text = OrigErrorMsg;
     }

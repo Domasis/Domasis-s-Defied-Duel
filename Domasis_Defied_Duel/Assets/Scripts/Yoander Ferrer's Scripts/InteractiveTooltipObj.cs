@@ -32,15 +32,8 @@ public class InteractiveTooltipObj : MonoBehaviour
         // We want to make sure that the following logic only occurs when the PLAYER is in the collision.
         if (other.CompareTag("Player"))
         {
-            // We set the interaction popup to active so that we can explain to the player how to interact with the object.
-            GameManager.instance.GetInteractPopup().SetActive(true);
-
-            // If the interact button (default is E) is pressed while in the zone:
-            if (Input.GetButton("Interact"))
-            {
-                // We show the tooltip with this specific instance's message.
-                InteractiveTooltipManager.instance.ShowTip(TooltipMsg);
-            }
+            // We show the tooltip with this specific instance's message.
+            InteractiveTooltipManager.instance.ShowTip(TooltipMsg);
         }
     }
 
@@ -53,6 +46,7 @@ public class InteractiveTooltipObj : MonoBehaviour
             GameManager.instance.GetInteractPopup().SetActive(false);
 
             // We also double check if the player is still looking at a tooltip, and disable it.
+            InteractiveTooltipManager.instance.HideTooltip();
         }
     }
 }

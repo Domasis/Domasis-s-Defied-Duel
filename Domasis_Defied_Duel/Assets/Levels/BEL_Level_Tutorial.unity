@@ -1262,6 +1262,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1053590884023107716, guid: 9e0ba3788e8c68d45914bd9dd103d951, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2420454990341799069, guid: 9e0ba3788e8c68d45914bd9dd103d951, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1347,7 +1351,8 @@ PrefabInstance:
       value: Tooltip_UI
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1028872897566575929, guid: 9e0ba3788e8c68d45914bd9dd103d951, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e0ba3788e8c68d45914bd9dd103d951, type: 3}
@@ -14337,7 +14342,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4000
   m_TargetDisplay: 0
 --- !u!222 &5754151607391267044
 CanvasRenderer:
