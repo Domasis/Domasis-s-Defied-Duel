@@ -3289,9 +3289,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7640676789508482513, guid: 1947e87106bd55d4bb5f01d49c87e5fd, type: 3}
       propertyPath: tooltipMsg
-      value: Welcome to Behind Enemy Lines! Your objective is to raid the various
-        enemy bases and hack the objects at the end! Follow the boxes to learn how
-        to play! (Or don't I can't stop you.)
+      value: 'Welcome to Behind Enemy Lines! Your goal to hack the enemy bases. Controls:
+        WASD to move, mouse to aim, Space to jump, P to pause, and left click to
+        shoot!'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
