@@ -162,20 +162,43 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Cancel"))
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
         {
-            // To ensure that the game does not attempt to pause while a tooltip is open (as it is already paused), we check here to make sure that the tooltip isn't visible, as well as if our menu isn't active. - Yoander
-            if (menuActive == null)
+            if (Input.GetButtonDown("Cancel"))
             {
-                statePause();
+                // To ensure that the game does not attempt to pause while a tooltip is open (as it is already paused), we check here to make sure that the tooltip isn't visible, as well as if our menu isn't active. - Yoander
+                if (menuActive == null)
+                {
+                    statePause();
 
-                menuActive = menuPause;
+                    menuActive = menuPause;
 
-                menuActive.SetActive(true);
+                    menuActive.SetActive(true);
+                }
+                else if (menuActive == menuPause)
+                {
+                    stateUnpause();
+                }
             }
-            else if (menuActive == menuPause)
+        }
+
+        if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape)||Input.GetButtonDown("Cancel"))
             {
-                stateUnpause();
+                // To ensure that the game does not attempt to pause while a tooltip is open (as it is already paused), we check here to make sure that the tooltip isn't visible, as well as if our menu isn't active. - Yoander
+                if (menuActive == null)
+                {
+                    statePause();
+
+                    menuActive = menuPause;
+
+                    menuActive.SetActive(true);
+                }
+                else if (menuActive == menuPause)
+                {
+                    stateUnpause();
+                }
             }
         }
 

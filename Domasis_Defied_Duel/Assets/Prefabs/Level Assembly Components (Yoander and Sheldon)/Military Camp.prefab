@@ -393,18 +393,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5281466501015233099, guid: 9bd0c49911175104198e571b1a1f61e4, type: 3}
-      propertyPath: spawnDelay
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281466501015233099, guid: 9bd0c49911175104198e571b1a1f61e4, type: 3}
-      propertyPath: numberToSpawn
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281466501015233099, guid: 9bd0c49911175104198e571b1a1f61e4, type: 3}
-      propertyPath: objectToSpawn
-      value: 
-      objectReference: {fileID: 1591454947136231253, guid: 0e6a51e5fe0f8ab44854b40d165fc5d0, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -467,18 +455,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5281466501015233099, guid: 9bd0c49911175104198e571b1a1f61e4, type: 3}
-      propertyPath: spawnDelay
-      value: 1.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281466501015233099, guid: 9bd0c49911175104198e571b1a1f61e4, type: 3}
-      propertyPath: numberToSpawn
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281466501015233099, guid: 9bd0c49911175104198e571b1a1f61e4, type: 3}
-      propertyPath: objectToSpawn
-      value: 
-      objectReference: {fileID: 3201168087023742726, guid: 4167da5d2b4c3684a906113e17b0534a, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -681,18 +657,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5281466501015233099, guid: 9bd0c49911175104198e571b1a1f61e4, type: 3}
-      propertyPath: spawnDelay
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281466501015233099, guid: 9bd0c49911175104198e571b1a1f61e4, type: 3}
-      propertyPath: numberToSpawn
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281466501015233099, guid: 9bd0c49911175104198e571b1a1f61e4, type: 3}
-      propertyPath: objectToSpawn
-      value: 
-      objectReference: {fileID: 7238185784871369885, guid: e9c3bf337492ec64e8bbc45ebf7fe22b, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

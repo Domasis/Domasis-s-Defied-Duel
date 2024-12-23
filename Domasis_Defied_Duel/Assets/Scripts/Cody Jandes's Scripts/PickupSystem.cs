@@ -55,7 +55,11 @@ public class PickupSystem : MonoBehaviour
                     break;
 
                 case PickupType.Health:
-                    GameManager.instance.playerScript.Health += healthGain;
+                    if (GameManager.instance.playerScript.Health < 10)
+                    {
+                        healthGain = Mathf.Clamp(healthGain, healthGain - (10 - GameManager.instance.playerScript.Health), healthGain);
+                        GameManager.instance.playerScript.Health += healthGain;
+                    }
                     GameManager.instance.playerScript.updatePlayerUI();
                     GameManager.instance.playerScript.Drink(drinkSound);
                     Destroy(gameObject);
