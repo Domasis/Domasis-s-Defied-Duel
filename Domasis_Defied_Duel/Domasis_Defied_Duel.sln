@@ -169,6 +169,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.PerformanceTesting", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.TextMeshPro", "Unity.TextMeshPro.Player.csproj", "{3FEBCFFB-9C75-5F9D-45C2-11C595FF9392}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Rendering.LightTransport.Runtime", "Unity.Rendering.LightTransport.Runtime.Player.csproj", "{AAD68A9C-8233-990D-E459-49335F044D15}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.VisualScripting.State", "Unity.VisualScripting.State.Player.csproj", "{8B6ED278-599A-E04C-ACC2-DF908B3F97D6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Multiplayer.Center.Common", "Unity.Multiplayer.Center.Common.Player.csproj", "{F4A68097-7712-DCF6-A866-93260B814F87}"
@@ -535,6 +537,10 @@ Global
 		{3FEBCFFB-9C75-5F9D-45C2-11C595FF9392}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FEBCFFB-9C75-5F9D-45C2-11C595FF9392}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FEBCFFB-9C75-5F9D-45C2-11C595FF9392}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAD68A9C-8233-990D-E459-49335F044D15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAD68A9C-8233-990D-E459-49335F044D15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAD68A9C-8233-990D-E459-49335F044D15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAD68A9C-8233-990D-E459-49335F044D15}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8B6ED278-599A-E04C-ACC2-DF908B3F97D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8B6ED278-599A-E04C-ACC2-DF908B3F97D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B6ED278-599A-E04C-ACC2-DF908B3F97D6}.Release|Any CPU.ActiveCfg = Release|Any CPU

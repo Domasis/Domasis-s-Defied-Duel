@@ -19,10 +19,7 @@ public class OnInvestigateState : IEnemyState
                 }
             }
 
-            if (!enemy.IsInvestigating)
-            {
                 investigate = enemy.StartCoroutine(enemy.Investigate());
-            }
 
         }
 
